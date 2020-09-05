@@ -1,0 +1,15 @@
+.months {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 100px 0;
+
+  a {
+    margin: 0 5px;
+    width: 6%;
+  }
+
+  .active {
+    background-color: #66bb6a;
+    color: #eeeeee;
+  }
+}
