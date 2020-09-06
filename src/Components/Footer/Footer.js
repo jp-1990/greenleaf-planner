@@ -1,37 +1,52 @@
 import React from 'react';
+import './Footer.module.scss';
 
 const Footer = () => {
+  const address = () => {
+    return (
+      <p className='grey-text text-lighten-4'>
+        18 Smith Street <br /> Aylsham <br /> NR54 9XQ
+      </p>
+    );
+  };
+
+  const contact = () => {
+    return (
+      <p className='grey-text text-lighten-4'>
+        01263 515673 <br /> lowthers@gmail.com
+      </p>
+    );
+  };
+
   return (
     <footer className='page-footer green darken-4'>
       <div className='container'>
         <div className='row'>
           <div className='col l6 s12'>
-            <h5 className='white-text'>Footer Content</h5>
-            <p className='grey-text text-lighten-4'>
-              You can use rows and columns here to organize your footer content.
-            </p>
+            <h5 className='white-text'>Lowthers Gardening Services Ltd.</h5>
+            {address()}
+            {contact()}
           </div>
           <div className='col l4 offset-l2 s12'>
-            <h5 className='white-text'>Links</h5>
             <ul>
               <li>
                 <a className='grey-text text-lighten-3' href='#!'>
-                  Link 1
+                  <ion-icon name='logo-facebook'></ion-icon>
                 </a>
               </li>
               <li>
                 <a className='grey-text text-lighten-3' href='#!'>
-                  Link 2
+                  <ion-icon name='logo-instagram'></ion-icon>
                 </a>
               </li>
               <li>
                 <a className='grey-text text-lighten-3' href='#!'>
-                  Link 3
+                  <ion-icon name='logo-linkedin'></ion-icon>
                 </a>
               </li>
               <li>
                 <a className='grey-text text-lighten-3' href='#!'>
-                  Link 4
+                  <ion-icon name='logo-twitter'></ion-icon>
                 </a>
               </li>
             </ul>
@@ -39,12 +54,7 @@ const Footer = () => {
         </div>
       </div>
       <div className='footer-copyright'>
-        <div className='container'>
-          © 2014 Copyright Text
-          <a className='grey-text text-lighten-4 right' href='#!'>
-            More Links
-          </a>
-        </div>
+        <div className='container'>© 2020 J.Plummer. All rights reserved.</div>
       </div>
     </footer>
   );

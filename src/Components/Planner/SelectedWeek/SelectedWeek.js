@@ -11,7 +11,7 @@ const SelectedWeek = () => {
   return (
     <div className='container'>
       <div
-        className={`col s12 green lighten-2 green-text text-lighten-5 ${classes.days}`}
+        className={`col s12 green lighten-1 green-text text-lighten-5 ${classes.days}`}
       >
         <p>Monday</p>
         <p className={classes.active}>Tuesday</p>

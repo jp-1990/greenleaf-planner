@@ -7,7 +7,7 @@ const WeekCard = () => {
       <div className='col s12'>
         <div className='card'>
           <div
-            className={`card-content green lighten-2 green-text text-darken-4 ${classes.top}`}
+            className={`card-content green brown-text text-darken-3 ${classes.top}`}
           >
             <h2 className={classes.title}>August</h2>
             <p className={classes.dateSpan}>31st August - 6th Sepember</p>

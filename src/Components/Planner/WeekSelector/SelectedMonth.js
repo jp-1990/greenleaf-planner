@@ -20,21 +20,21 @@ const SelectedMonth = (props) => {
   const monthsList = months.map((el, index) => {
     if (props.active === index) {
       return (
-        <a
+        <button
           key={el}
           className={`waves-effect waves-light btn-small ${classes.active}`}
         >
           {el}
-        </a>
+        </button>
       );
     } else {
       return (
-        <a
+        <button
           key={el}
           className='waves-effect waves-light btn-small grey lighten-2 grey-text'
         >
           {el}
-        </a>
+        </button>
       );
     }
   });
