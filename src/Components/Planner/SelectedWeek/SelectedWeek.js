@@ -1,11 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import M from 'materialize-css';
 import classes from './SelectedWeek.module.scss';
 
 const SelectedWeek = () => {
+  const [day, setDay] = useState(0);
+
+  const days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
   useEffect(() => {
     let elems = document.querySelectorAll('.selectedWeek');
-    M.Carousel.init(elems, { fullWidth: true, indicators: true, noWrap: true });
+    M.Carousel.init(elems, {
+      fullWidth: true,
+      indicators: true,
+      noWrap: true,
+      onCycleTo: () => {
+        const instance = M.Carousel.getInstance(
+          document.querySelector('.selectedWeek')
+        );
+        setDay(instance.center);
+      },
+    });
+  }, []);
+
+  const selectDayHandler = (index) => {
+    setDay(index);
+    M.Carousel.getInstance(document.querySelector('.selectedWeek')).set(index);
+  };
+
+  const daysNav = days.map((el, i) => {
+    if (i === day) {
+      return (
+        <p
+          onClick={() => selectDayHandler(i)}
+          className={`${classes.day} ${classes.active}`}
+        >
+          {el}
+        </p>
+      );
+    }
+    return (
+      <p onClick={() => selectDayHandler(i)} className={classes.day}>
+        {el}
+      </p>
+    );
   });
 
   return (
@@ -13,12 +57,7 @@ const SelectedWeek = () => {
       <div
         className={`col s12 green lighten-1 green-text text-lighten-5 ${classes.days}`}
       >
-        <p>Monday</p>
-        <p className={classes.active}>Tuesday</p>
-        <p>Wednesday</p>
-        <p>Thursday</p>
-        <p>Friday</p>
-        <p>Saturday</p>
+        {daysNav}
       </div>
       <div className='carousel carousel-slider center selectedWeek'>
         <div
