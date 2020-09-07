@@ -21,6 +21,9 @@ const SelectedMonth = (props) => {
     if (props.active === index) {
       return (
         <button
+          onClick={() => {
+            props.activeMonthHandler(index);
+          }}
           key={el}
           className={`waves-effect waves-light btn-small ${classes.active}`}
         >
@@ -30,6 +33,9 @@ const SelectedMonth = (props) => {
     } else {
       return (
         <button
+          onClick={() => {
+            props.activeMonthHandler(index);
+          }}
           key={el}
           className='waves-effect waves-light btn-small grey lighten-2 grey-text'
         >

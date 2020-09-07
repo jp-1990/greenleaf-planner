@@ -8,6 +8,9 @@
 
   i {
     font-size: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .title {
     text-align: center;
@@ -16,4 +19,9 @@
     font-weight: 500;
     color: #1b5e20;
   }
+}
+
+.weekContainer {
+  width: 380px !important;
+  height: 310px !important;
 }
