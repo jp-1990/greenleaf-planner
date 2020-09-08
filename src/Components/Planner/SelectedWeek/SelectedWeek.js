@@ -38,6 +38,7 @@ const SelectedWeek = () => {
     if (i === day) {
       return (
         <p
+          key={el}
           onClick={() => selectDayHandler(i)}
           className={`${classes.day} ${classes.active}`}
         >
@@ -46,7 +47,7 @@ const SelectedWeek = () => {
       );
     }
     return (
-      <p onClick={() => selectDayHandler(i)} className={classes.day}>
+      <p key={el} onClick={() => selectDayHandler(i)} className={classes.day}>
         {el}
       </p>
     );
