@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './WeekCard.module.scss';
+import classes from './WeekSelectorCSS/WeekCard.module.scss';
 
 const WeekCard = (props) => {
   const months = [

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './SelectedMonth.module.scss';
+import classes from './WeekSelectorCSS/SelectedMonth.module.scss';
 
 const SelectedMonth = (props) => {
   const months = [

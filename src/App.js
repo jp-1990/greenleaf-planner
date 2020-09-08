@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import './sass/materialize.scss';
-import Layout from './Components/Layout/Layout';
+import Layout from './Layout/Layout';
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import '../../../sass/materialize.scss';
-import classes from './WeekCarousel.module.scss';
+import classes from './WeekSelectorCSS/WeekCarousel.module.scss';
 import M from 'materialize-css';
 import SelectedMonth from './SelectedMonth';
 import WeekCard from './WeekCard';

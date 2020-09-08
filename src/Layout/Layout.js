@@ -1,9 +1,9 @@
 import React from 'react';
-import Nav from '../Nav/Nav';
-import WeekCarousel from '../Planner/WeekSelector/WeekCarousel';
-import SelectedWeek from '../Planner/SelectedWeek/SelectedWeek';
-import AssignedJobs from '../Planner/AssignedJobs/AssignedJobs';
-import Footer from '../Footer/Footer';
+import Nav from '../Components/Nav/Nav';
+import WeekCarousel from '../Components/Planner/WeekSelector/WeekCarousel';
+import SelectedWeek from '../Components/Planner/SelectedWeek/SelectedWeek';
+import AssignedJobs from '../Components/Planner/AssignedJobs/AssignedJobs';
+import Footer from '../Components/Footer/Footer';
 
 const Layout = () => {
   return (
