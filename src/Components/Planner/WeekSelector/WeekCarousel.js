@@ -18,9 +18,7 @@ const WeekCarousel = () => {
   const [activeMonth, setActiveMonth] = useState(
     new Date(Date.now()).getMonth()
   );
-  const [activeYear, setActiveYear] = useState(
-    new Date(Date.now()).getFullYear()
-  );
+  const activeYear = new Date(Date.now()).getFullYear();
 
   useEffect(() => {
     let elems = document.querySelectorAll('.weeks');
