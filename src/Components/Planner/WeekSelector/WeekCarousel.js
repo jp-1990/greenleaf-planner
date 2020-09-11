@@ -11,10 +11,9 @@ const WeekCarousel = () => {
   const [activeMonth, setActiveMonth] = useState(
     new Date(Date.now()).getMonth()
   );
+
   const activeYear = new Date(Date.now()).getFullYear();
-
   const weeksArray = useWeeks();
-
   const activeWeek = useSelectedWeek()[0];
   const setActiveWeek = useSelectedWeek()[1];
 
@@ -55,12 +54,14 @@ const WeekCarousel = () => {
 
     return result;
   };
+
   const weekCards = generateWeekCards(weeksArray);
 
   const nextWeekHandler = () => {
     const instance = M.Carousel.getInstance(document.querySelector('.weeks'));
     instance.next();
   };
+
   const prevWeekHandler = () => {
     const instance = M.Carousel.getInstance(document.querySelector('.weeks'));
     instance.prev();

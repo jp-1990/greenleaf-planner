@@ -3,6 +3,7 @@ import M from 'materialize-css';
 import classes from './SelectedWeek.module.scss';
 import Day from './Day/Day';
 import { useWeeks, useSelectedWeek } from '../../../Context/WeeksContext';
+import { days } from '../../../DateOperations/dateOperations';
 
 // ==========================================================================
 // test data
@@ -118,15 +119,6 @@ testDays.forEach(() => {
 const SelectedWeek = () => {
   const [day, setDay] = useState(0);
 
-  const days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-
   // init options for materialize carousel
   useEffect(() => {
     let elems = document.querySelectorAll('.selectedWeek');
@@ -172,8 +164,6 @@ const SelectedWeek = () => {
   // import from week context
   const weeksArray = useWeeks();
   const activeWeek = useSelectedWeek()[0];
-
-  console.log(weeksArray[activeWeek]);
 
   // generate day components for mon-sat
   const daysOfWeek = days.map((el, i) => {

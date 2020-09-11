@@ -1,21 +1,9 @@
 import React from 'react';
 import classes from './WeekSelectorCSS/SelectedMonth.module.scss';
+import { monthsAbr } from '../../../DateOperations/dateOperations';
 
 const SelectedMonth = (props) => {
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
+  const months = monthsAbr;
 
   const monthsList = months.map((el, index) => {
     if (props.active === index) {

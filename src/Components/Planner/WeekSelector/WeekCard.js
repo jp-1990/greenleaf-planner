@@ -1,49 +1,22 @@
 import React from 'react';
 import classes from './WeekSelectorCSS/WeekCard.module.scss';
+import {
+  months,
+  daysAbr,
+  suffix,
+  daysInMonth,
+  monthOverflowCheck,
+} from '../../../DateOperations/dateOperations';
 
 const WeekCard = (props) => {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-    'January',
-  ];
+  const days = daysAbr;
 
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-  // add appropriate suffix to date
-  const suffix = (el) => {
-    if (el === 1 || el === 21 || el === 31) {
-      return 'st';
-    } else if (el === 2 || el === 22) {
-      return 'nd';
-    } else if (el === 3 || el === 23) {
-      return 'rd';
-    } else {
-      return 'th';
-    }
-  };
-
-  // get days in props.month
-  const daysInMonth = new Date(props.year, props.month + 1, 0).getDate();
-
-  // handle case where week spans two months
-  const monthOverflowCheck = (el, month) => {
-    if (el > daysInMonth) {
-      const newDay = el - daysInMonth;
-      return `${newDay}${suffix(newDay)} ${months[month + 1]}`;
-    } else {
-      return `${el}${suffix(el)} ${months[month]}`;
-    }
+  const endDate = () => {
+    const date = monthOverflowCheck(props.monday + 6, props.month, props.year)
+      .date;
+    const month = monthOverflowCheck(props.monday + 6, props.month, props.year)
+      .month;
+    return `${date}${suffix(date)} ${months[month]}`;
   };
 
   // populate days in the week on card
@@ -55,9 +28,11 @@ const WeekCard = (props) => {
       <li key={i}>
         <p>{el}</p>
         <p>
-          {props.monday + date > daysInMonth
-            ? `${props.monday + date - daysInMonth}${suffix(
-                props.monday + date - daysInMonth
+          {props.monday + date > daysInMonth(props.year, props.month)
+            ? `${
+                props.monday + date - daysInMonth(props.year, props.month)
+              }${suffix(
+                props.monday + date - daysInMonth(props.year, props.month)
               )}`
             : `${props.monday + date}${suffix(props.monday + date)}`}
         </p>
@@ -76,10 +51,7 @@ const WeekCard = (props) => {
             <h2 className={classes.title}>{months[props.month]}</h2>
             <p className={classes.dateSpan}>{`${props.monday}${suffix(
               props.monday
-            )} ${months[props.month]} - ${monthOverflowCheck(
-              props.monday + 6,
-              props.month
-            )}`}</p>
+            )} ${months[props.month]} - ${endDate()}`}</p>
           </div>
           <div
             className={`card-content grey lighten-2 grey-text text-darken-2 ${classes.bottom}`}
