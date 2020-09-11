@@ -3,14 +3,6 @@ import React, { useContext, useState } from 'react';
 // current year
 const activeYear = new Date(Date.now()).getFullYear();
 
-// current week of the year
-const curWeek = () => {
-  const start = new Date(new Date(Date.now()).getFullYear(), 0, 1);
-  const now = new Date(Date.now());
-  const numberOfDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
-  return Math.ceil(numberOfDays / 7) + 1;
-};
-
 // get first monday of given month in given year
 const getFirstMonday = (year, month) => {
   for (let i = 1; i < 8; i++) {
@@ -18,6 +10,14 @@ const getFirstMonday = (year, month) => {
       return i;
     }
   }
+};
+
+// current week of the year
+const curWeek = () => {
+  const start = new Date(activeYear, 0, getFirstMonday(activeYear, 1));
+  const now = new Date(Date.now());
+  const numberOfDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
+  return Math.ceil(numberOfDays / 7) + 1;
 };
 
 // populate an array of all the weeks in the given year
