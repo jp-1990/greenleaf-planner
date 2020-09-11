@@ -1,6 +1,119 @@
 import React, { useEffect, useState } from 'react';
 import M from 'materialize-css';
 import classes from './SelectedWeek.module.scss';
+import Day from './Day/Day';
+import { useWeeks, useSelectedWeek } from '../../../Context/WeeksContext';
+
+// ==========================================================================
+// test data
+// ==========================================================================
+
+const testVisit = () => {
+  return `${Math.floor(Math.random() * 6) + 7}/09/2020`;
+};
+
+const testCustomers = [
+  {
+    name: 'churchfield green',
+    location: 'norwich',
+    rebook: 7,
+    prevVisit: '01/09/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'spicer',
+    location: 'north walsham',
+    rebook: 7,
+    prevVisit: '01/09/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'mercer',
+    location: 'aylsham',
+    rebook: 12,
+    prevVisit: '26/08/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'kendrick',
+    location: 'mundesley',
+    rebook: 10,
+    prevVisit: '01/09/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'richmond',
+    location: 'overstrand',
+    rebook: 14,
+    prevVisit: '24/08/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'churchfield green',
+    location: 'norwich',
+    rebook: 7,
+    prevVisit: '01/09/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'spicer',
+    location: 'north walsham',
+    rebook: 7,
+    prevVisit: '01/09/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'mercer',
+    location: 'aylsham',
+    rebook: 12,
+    prevVisit: '26/08/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'kendrick',
+    location: 'mundesley',
+    rebook: 10,
+    prevVisit: '01/09/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+  {
+    name: 'richmond',
+    location: 'overstrand',
+    rebook: 14,
+    prevVisit: '24/08/2020',
+    nextVisit: testVisit(),
+    assigned: 0,
+  },
+];
+
+const testDays = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+const testData = [];
+
+testDays.forEach(() => {
+  let i = 0;
+  for (i; i <= Math.floor(Math.random() * 500); i++) {
+    testData.push(testCustomers[Math.floor(Math.random() * 10)]);
+  }
+});
+
+// ==========================================================================
 
 const SelectedWeek = () => {
   const [day, setDay] = useState(0);
@@ -14,6 +127,7 @@ const SelectedWeek = () => {
     'Saturday',
   ];
 
+  // init options for materialize carousel
   useEffect(() => {
     let elems = document.querySelectorAll('.selectedWeek');
     M.Carousel.init(elems, {
@@ -29,11 +143,13 @@ const SelectedWeek = () => {
     });
   }, []);
 
+  // select day of the week
   const selectDayHandler = (index) => {
     setDay(index);
     M.Carousel.getInstance(document.querySelector('.selectedWeek')).set(index);
   };
 
+  // jsx for days nav
   const daysNav = days.map((el, i) => {
     if (i === day) {
       return (
@@ -53,6 +169,17 @@ const SelectedWeek = () => {
     );
   });
 
+  // import from week context
+  const weeksArray = useWeeks();
+  const activeWeek = useSelectedWeek()[0];
+
+  console.log(weeksArray[activeWeek]);
+
+  // generate day components for mon-sat
+  const daysOfWeek = days.map((el, i) => {
+    return <Day key={i} day={el} week={weeksArray[activeWeek]}></Day>;
+  });
+
   return (
     <div className='container'>
       <div
@@ -61,48 +188,7 @@ const SelectedWeek = () => {
         {daysNav}
       </div>
       <div className='carousel carousel-slider center selectedWeek'>
-        <div
-          className='carousel-item grey lighten-3 grey-text text-darken-3'
-          href='#one!'
-        >
-          <h2>Monday</h2>
-          <p className='grey-text text-darken-3'>This is your first panel</p>
-        </div>
-        <div
-          className='carousel-item grey lighten-3 grey-text text-darken-3'
-          href='#two!'
-        >
-          <h2>Tuesday</h2>
-          <p className='grey-text text-darken-3'>This is your second panel</p>
-        </div>
-        <div
-          className='carousel-item grey lighten-3 grey-text text-darken-3'
-          href='#three!'
-        >
-          <h2>Wednesday</h2>
-          <p className='grey-text text-darken-3'>This is your third panel</p>
-        </div>
-        <div
-          className='carousel-item grey lighten-3 grey-text text-darken-3'
-          href='#four!'
-        >
-          <h2>Thursday</h2>
-          <p className='grey-text text-darken-3'>This is your fourth panel</p>
-        </div>
-        <div
-          className='carousel-item grey lighten-3 grey-text text-darken-3'
-          href='#four!'
-        >
-          <h2>Friday</h2>
-          <p className='grey-text text-darken-3'>This is your fourth panel</p>
-        </div>
-        <div
-          className='carousel-item grey lighten-3 grey-text text-darken-3'
-          href='#four!'
-        >
-          <h2>Saturday</h2>
-          <p className='grey-text text-darken-3'>This is your fourth panel</p>
-        </div>
+        {daysOfWeek}
       </div>
     </div>
   );
