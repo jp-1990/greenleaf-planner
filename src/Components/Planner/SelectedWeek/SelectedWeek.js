@@ -3,7 +3,7 @@ import M from 'materialize-css';
 import classes from './SelectedWeek.module.scss';
 import Day from './Day/Day';
 import { useWeeks, useSelectedWeek } from '../../../Context/WeeksContext';
-import { days } from '../../../DateOperations/dateOperations';
+import { days, dateFromString } from '../../../DateOperations/dateOperations';
 
 // ==========================================================================
 // test data
@@ -109,12 +109,77 @@ const testData = [];
 
 testDays.forEach(() => {
   let i = 0;
-  for (i; i <= Math.floor(Math.random() * 500); i++) {
+  for (i; i < Math.floor(Math.random() * 41 + 10); i++) {
     testData.push(testCustomers[Math.floor(Math.random() * 10)]);
   }
 });
 
 // ==========================================================================
+
+class JobList {
+  constructor(jobsArray, date) {
+    this.jobsArray = jobsArray;
+    this.date = date;
+    this.init = (() => {
+      this.findJobs();
+      this.findLocations();
+      this.sortJobsByLocation();
+    })();
+  }
+
+  // get unique locations
+  get locations() {
+    return this.sortedLocations;
+  }
+
+  // get jobs for date
+  get jobs() {
+    return this.jobsForDate;
+  }
+
+  // get jobs sorted by location
+  get sortedJobs() {
+    return this.sortedJobsByLocation;
+  }
+
+  // find list of jobs for given date
+  findJobs() {
+    const output = [];
+    this.jobsArray.forEach((el) => {
+      if (
+        dateFromString(this.date).getTime() ===
+        dateFromString(el.nextVisit).getTime()
+      ) {
+        output.push(el);
+      }
+    });
+    return (this.jobsForDate = output);
+  }
+
+  // find list of unique locations alphabetically
+  findLocations() {
+    const output = this.findJobs().map((el) => {
+      return el.location;
+    });
+    return (this.sortedLocations = [...new Set(output)].sort());
+  }
+
+  // jobs by location
+  sortJobsByLocation() {
+    const sortedArray = this.sortedLocations.map((el) => {
+      return [el];
+    });
+
+    this.jobsForDate.forEach((el) => {
+      sortedArray[
+        sortedArray.findIndex((i) => {
+          return i[0] === el.location;
+        })
+      ].push(el);
+    });
+    return (this.sortedJobsByLocation = sortedArray);
+  }
+}
 
 const SelectedWeek = () => {
   const [day, setDay] = useState(0);
@@ -165,9 +230,27 @@ const SelectedWeek = () => {
   const weeksArray = useWeeks();
   const activeWeek = useSelectedWeek()[0];
 
+  const calcJobsForWeek = Object.values(weeksArray[activeWeek].dates).map(
+    (el) => {
+      return new JobList(
+        testData,
+        `${el}/${weeksArray[activeWeek].month + 1}/${
+          weeksArray[activeWeek].year
+        }`
+      );
+    }
+  );
+
   // generate day components for mon-sat
   const daysOfWeek = days.map((el, i) => {
-    return <Day key={i} day={el} week={weeksArray[activeWeek]}></Day>;
+    return (
+      <Day
+        key={i}
+        day={el}
+        week={weeksArray[activeWeek]}
+        jobs={calcJobsForWeek[i]}
+      ></Day>
+    );
   });
 
   return (
@@ -177,7 +260,10 @@ const SelectedWeek = () => {
       >
         {daysNav}
       </div>
-      <div className='carousel carousel-slider center selectedWeek'>
+      <div
+        className='carousel carousel-slider center selectedWeek'
+        style={{ height: '530px' }}
+      >
         {daysOfWeek}
       </div>
     </div>

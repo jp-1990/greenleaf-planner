@@ -15,7 +15,7 @@ const getFirstMonday = (year, month) => {
 
 // current week of the year
 const curWeek = () => {
-  const start = new Date(activeYear, 0, getFirstMonday(activeYear, 1));
+  const start = new Date(activeYear, 0, getFirstMonday(activeYear, 0));
   const now = new Date(Date.now());
   const numberOfDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
   return Math.ceil(numberOfDays / 7) + 1;
@@ -37,7 +37,7 @@ const weeks = (year) => {
           dates: {
             monday: j,
             tuesday: monthOverflowCheck(j + 1, i, year).date,
-            wedneday: monthOverflowCheck(j + 2, i, year).date,
+            wednesday: monthOverflowCheck(j + 2, i, year).date,
             thursday: monthOverflowCheck(j + 3, i, year).date,
             friday: monthOverflowCheck(j + 4, i, year).date,
             saturday: monthOverflowCheck(j + 5, i, year).date,

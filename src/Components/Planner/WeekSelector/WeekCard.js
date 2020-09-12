@@ -2,39 +2,42 @@ import React from 'react';
 import classes from './WeekSelectorCSS/WeekCard.module.scss';
 import {
   months,
-  daysAbr,
+  days,
   suffix,
   daysInMonth,
   monthOverflowCheck,
 } from '../../../DateOperations/dateOperations';
 
 const WeekCard = (props) => {
-  const days = daysAbr;
-
   const endDate = () => {
-    const date = monthOverflowCheck(props.monday + 6, props.month, props.year)
-      .date;
-    const month = monthOverflowCheck(props.monday + 6, props.month, props.year)
-      .month;
+    const date = monthOverflowCheck(
+      props.dates.monday + 6,
+      props.month,
+      props.year
+    ).date;
+    const month = monthOverflowCheck(
+      props.dates.monday + 6,
+      props.month,
+      props.year
+    ).month;
     return `${date}${suffix(date)} ${months[month]}`;
   };
 
   // populate days in the week on card
-  let count = 0;
   const daysOnCard = days.map((el, i) => {
-    const date = count;
-    count += 1;
     return (
       <li key={i}>
-        <p>{el}</p>
+        <p>{el.substring(0, 3)}</p>
         <p>
-          {props.monday + date > daysInMonth(props.year, props.month)
+          {props.dates[el.toLowerCase()] > daysInMonth(props.year, props.month)
             ? `${
-                props.monday + date - daysInMonth(props.year, props.month)
+                props.dates[el.toLowerCase()] -
+                daysInMonth(props.year, props.month)
               }${suffix(
-                props.monday + date - daysInMonth(props.year, props.month)
+                props.dates[el.toLowerCase()] -
+                  daysInMonth(props.year, props.month)
               )}`
-            : `${props.monday + date}${suffix(props.monday + date)}`}
+            : `${props.dates[el.toLowerCase()]}${suffix(props.dates[el])}`}
         </p>
       </li>
     );
@@ -49,8 +52,8 @@ const WeekCard = (props) => {
           >
             <h6>- {props.year} -</h6>
             <h2 className={classes.title}>{months[props.month]}</h2>
-            <p className={classes.dateSpan}>{`${props.monday}${suffix(
-              props.monday
+            <p className={classes.dateSpan}>{`${props.dates.monday}${suffix(
+              props.dates.monday
             )} ${months[props.month]} - ${endDate()}`}</p>
           </div>
           <div

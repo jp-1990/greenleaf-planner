@@ -14,7 +14,7 @@ const Job = (props) => {
       </div>
       <div className={classes.bottom}>
         <i className={`material-icons ${classes.person}`}>person_add</i>
-        <span>Last visit: x days({props.prevVisit})</span>
+        <span>Last visit: {props.prevVisit}</span>
         <i className={`material-icons ${classes.check}`}>check</i>
       </div>
     </div>

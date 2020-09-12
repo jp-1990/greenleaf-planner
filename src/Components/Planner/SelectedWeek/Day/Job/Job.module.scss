@@ -2,10 +2,14 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 25%;
-  margin: 5px 10px;
+  width: 100%;
+  margin: 10px 0;
   padding: 0 10px;
   border-radius: 5px;
+
+  i:hover {
+    cursor: pointer;
+  }
 
   .top {
     display: flex;
@@ -20,26 +24,27 @@
       text-align: left;
       margin: 0;
       padding: 0;
-      width: 65%;
+      width: 60%;
       height: 30px;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
+      text-transform: capitalize;
     }
 
     .rebook {
       display: flex;
       position: absolute;
-      right: 13%;
+      right: 14%;
       justify-content: space-between;
       align-content: center;
       background-color: #c8e6c9;
       border-radius: 5px;
-      font-size: 1.2rem;
+      font-size: 1rem;
       padding: 3px 6px;
-      width: 55px;
-      height: 28px;
+      width: 52px;
+      height: 24px;
 
       i {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
       }
 
       span {
@@ -49,7 +54,7 @@
     .clear {
       color: #b71c1c;
       position: absolute;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       right: 0;
     }
   }
@@ -58,28 +63,28 @@
     display: flex;
     align-items: center;
     position: relative;
-    height: 35px;
+    height: 26px;
     width: 100%;
 
     .person {
       color: #000000;
       position: absolute;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       left: 0;
       bottom: 6px;
     }
 
     span {
-      margin-left: 25%;
-      margin-bottom: 5px;
+      margin-left: 30%;
+      margin-bottom: 7px;
       align-self: center;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     .check {
       color: #1b5e20;
       position: absolute;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       right: 0;
     }
   }

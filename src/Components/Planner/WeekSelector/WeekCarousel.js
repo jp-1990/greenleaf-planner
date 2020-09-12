@@ -44,10 +44,10 @@ const WeekCarousel = () => {
     const result = array.map((el) => {
       return (
         <span
-          key={`${el.month} + ${el.year} + ${el.monday}`}
+          key={`${el.month} + ${el.year} + ${el.dates.monday}`}
           className={`carousel-item ${classes.weekContainer}`}
         >
-          <WeekCard year={el.year} month={el.month} monday={el.monday} />
+          <WeekCard year={el.year} month={el.month} dates={el.dates} />
         </span>
       );
     });
