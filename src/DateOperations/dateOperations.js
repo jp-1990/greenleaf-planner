@@ -58,6 +58,11 @@ export const daysInMonth = (year, month) => {
   return new Date(year, month + 1, 0).getDate();
 };
 
+// get date from string
+export const dateFromString = (date) => {
+  return new Date(date.split('/')[2], date.split('/')[1], date.split('/')[0]);
+};
+
 // handle case where week spans two months
 export const monthOverflowCheck = (el, month, year) => {
   if (el > daysInMonth(year, month)) {

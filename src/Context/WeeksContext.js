@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { monthOverflowCheck } from '../DateOperations/dateOperations';
 
 // current year
 const activeYear = new Date(Date.now()).getFullYear();
@@ -33,7 +34,14 @@ const weeks = (year) => {
         result.push({
           year: year,
           month: i,
-          monday: j,
+          dates: {
+            monday: j,
+            tuesday: monthOverflowCheck(j + 1, i, year).date,
+            wedneday: monthOverflowCheck(j + 2, i, year).date,
+            thursday: monthOverflowCheck(j + 3, i, year).date,
+            friday: monthOverflowCheck(j + 4, i, year).date,
+            saturday: monthOverflowCheck(j + 5, i, year).date,
+          },
         });
         // add 7 to monday to get the following monday
         monday += 7;
