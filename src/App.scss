@@ -17,3 +17,10 @@ html {
     background-color: rgba(0, 0, 0, 0.7) !important;
   }
 }
+
+#toast-container {
+  top: 10% !important;
+  right: auto !important;
+  left: 50%;
+  transform: translateX(-50%);
+}

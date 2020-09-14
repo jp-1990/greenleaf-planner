@@ -65,6 +65,8 @@
     position: relative;
     height: 26px;
     width: 100%;
+    user-select: none;
+    overflow: hidden;
 
     .person {
       color: #000000;
@@ -72,6 +74,34 @@
       font-size: 1.6rem;
       left: 0;
       bottom: 6px;
+      z-index: 100;
+    }
+
+    .dropdown {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      background-color: white;
+      width: 80%;
+      left: 24px;
+      bottom: 4px;
+      transition: width 0.3s ease;
+
+      .arrow {
+        position: relative;
+        font-size: 1.7rem;
+        width: 24px;
+        transition: width 0.3s ease;
+      }
+
+      .personAdd {
+        position: relative;
+        font-size: 1.6rem;
+        border: 1px solid rgba(220, 220, 220, 0.2);
+        border-radius: 2px;
+        width: 24px;
+        transition: width 0.3s ease;
+      }
     }
 
     span {
@@ -87,5 +117,31 @@
       font-size: 1.6rem;
       right: 0;
     }
+  }
+  .dropdown.inactive {
+    left: 2000px;
+    width: 0%;
+    animation: menuOut 0.2s;
+    .personAdd {
+      width: 0;
+    }
+    .arrow {
+      width: 0;
+    }
+  }
+}
+
+@keyframes menuOut {
+  0% {
+    left: 24px;
+    width: 80%;
+  }
+  99% {
+    left: 0;
+    width: 0%;
+  }
+  100% {
+    left: 2000px;
+    width: 0%;
   }
 }

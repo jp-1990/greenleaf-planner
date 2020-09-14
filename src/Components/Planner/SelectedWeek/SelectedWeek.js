@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import M from 'materialize-css';
 import classes from './SelectedWeek.module.scss';
 import Day from './Day/Day';
+import AssignedJobs from './Day/AssignedJobs/AssignedJobs';
 import { useWeeks, useSelectedWeek } from '../../../Context/WeeksContext';
-import { days, dateFromString } from '../../../DateOperations/dateOperations';
+import { days, dateFromString } from '../../../GlobalFunctions/dateOperations';
 
 // ==========================================================================
 // test data
@@ -21,6 +22,7 @@ const testCustomers = [
     prevVisit: '01/09/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'spicer',
@@ -29,6 +31,7 @@ const testCustomers = [
     prevVisit: '01/09/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'mercer',
@@ -37,6 +40,7 @@ const testCustomers = [
     prevVisit: '26/08/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'kendrick',
@@ -45,6 +49,7 @@ const testCustomers = [
     prevVisit: '01/09/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'richmond',
@@ -53,6 +58,7 @@ const testCustomers = [
     prevVisit: '24/08/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'churchfield green',
@@ -61,6 +67,7 @@ const testCustomers = [
     prevVisit: '01/09/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'spicer',
@@ -69,6 +76,7 @@ const testCustomers = [
     prevVisit: '01/09/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'mercer',
@@ -77,6 +85,7 @@ const testCustomers = [
     prevVisit: '26/08/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'kendrick',
@@ -85,6 +94,7 @@ const testCustomers = [
     prevVisit: '01/09/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
   {
     name: 'richmond',
@@ -93,6 +103,7 @@ const testCustomers = [
     prevVisit: '24/08/2020',
     nextVisit: testVisit(),
     assigned: 0,
+    time: 90,
   },
 ];
 
@@ -184,6 +195,14 @@ class JobList {
 const SelectedWeek = () => {
   const [day, setDay] = useState(0);
 
+  const colors = {
+    Nick: '#f44336',
+    Zack: '#ffc107',
+    Neil: '#00bcd4',
+    James: '#0d47a1',
+    Alan: '#00c853',
+  };
+
   // init options for materialize carousel
   useEffect(() => {
     let elems = document.querySelectorAll('.selectedWeek');
@@ -249,24 +268,28 @@ const SelectedWeek = () => {
         day={el}
         week={weeksArray[activeWeek]}
         jobs={calcJobsForWeek[i]}
+        colors={colors}
       ></Day>
     );
   });
 
   return (
-    <div className='container'>
-      <div
-        className={`col s12 green lighten-1 green-text text-lighten-5 ${classes.days}`}
-      >
-        {daysNav}
+    <>
+      <div className='container'>
+        <div
+          className={`col s12 green lighten-1 green-text text-lighten-5 ${classes.days}`}
+        >
+          {daysNav}
+        </div>
+        <div
+          className='carousel carousel-slider center selectedWeek'
+          style={{ height: '530px' }}
+        >
+          {daysOfWeek}
+        </div>
       </div>
-      <div
-        className='carousel carousel-slider center selectedWeek'
-        style={{ height: '530px' }}
-      >
-        {daysOfWeek}
-      </div>
-    </div>
+      <AssignedJobs day={days[day]} jobs={null} colors={colors} />
+    </>
   );
 };
 

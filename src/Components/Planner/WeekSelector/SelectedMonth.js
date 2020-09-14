@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './WeekSelectorCSS/SelectedMonth.module.scss';
-import { monthsAbr } from '../../../DateOperations/dateOperations';
+import { monthsAbr } from '../../../GlobalFunctions/dateOperations';
 
 const SelectedMonth = (props) => {
   const months = monthsAbr;

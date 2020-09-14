@@ -6,7 +6,7 @@ import {
   suffix,
   daysInMonth,
   monthOverflowCheck,
-} from '../../../DateOperations/dateOperations';
+} from '../../../GlobalFunctions/dateOperations';
 
 const WeekCard = (props) => {
   const endDate = () => {

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { monthOverflowCheck } from '../DateOperations/dateOperations';
+import { monthOverflowCheck } from '../GlobalFunctions/dateOperations';
 
 // current year
 const activeYear = new Date(Date.now()).getFullYear();
