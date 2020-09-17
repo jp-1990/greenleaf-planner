@@ -15,7 +15,7 @@ const getFirstMonday = (year, month) => {
 
 // current week of the year
 const curWeek = () => {
-  const start = new Date(activeYear, 0, getFirstMonday(activeYear, 0));
+  const start = new Date(activeYear, 0, getFirstMonday(activeYear, 0) - 1);
   const now = new Date(Date.now());
   const numberOfDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
   return Math.ceil(numberOfDays / 7) + 1;

@@ -1,8 +1,19 @@
 import React from 'react';
 import classes from './AssignedJob.module.scss';
 import { capitaliseFirstLetters } from '../../../../../../GlobalFunctions/stringOperations';
+import { useJobs } from '../../../../../../Context/JobsContext';
 
-const AssignedJob = ({ title, time, location }) => {
+const AssignedJob = ({ id, title, time, location }) => {
+  const setJobs = useJobs()[1];
+
+  const deleteHandler = () => {
+    setJobs((prev) => {
+      const newState = [...prev];
+      newState[newState.findIndex((el) => el['id'] === id)]['assigned'] = -1;
+      return newState;
+    });
+  };
+
   return (
     <div className={classes.job}>
       <h6 className='truncate'>{capitaliseFirstLetters(title)}</h6>
@@ -10,7 +21,9 @@ const AssignedJob = ({ title, time, location }) => {
         <i className='material-icons'>query_builder</i>
         <p>{time}</p>
       </div>
-      <i className='material-icons'>clear</i>
+      <i onClick={deleteHandler} className='material-icons'>
+        clear
+      </i>
     </div>
   );
 };

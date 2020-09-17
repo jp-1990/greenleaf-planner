@@ -2,17 +2,18 @@ import React from 'react';
 import '../../../../../sass/materialize.scss';
 import classes from './AssignedJobs.module.scss';
 import AssignedJob from './AssignedJob/AssignedJob';
-import { useAssignJobs } from '../../../../../Context/JobsContext';
+import { days } from '../../../../../GlobalFunctions/dateOperations';
+import { useJobs } from '../../../../../Context/JobsContext';
 import { capitaliseFirstLetters } from '../../../../../GlobalFunctions/stringOperations';
 
 class Jobs {
-  constructor(jobsArray, day, employee) {
+  constructor(jobsArray, date, employee) {
     this.jobsArray = jobsArray;
-    this.day = day;
+    this.date = date;
     this.employee = employee;
     this.init = (() => {
-      this.setlocations();
       this.setRawJobs();
+      this.setlocations();
       this.setJobs();
       this.setJsx();
     })();
@@ -25,7 +26,7 @@ class Jobs {
   setlocations() {
     return (this.locations = [
       ...new Set(
-        this.jobsArray[this.day.toLowerCase()][this.employee].map((el) => {
+        this.rawJobs.map((el) => {
           return el.location;
         })
       ),
@@ -33,11 +34,12 @@ class Jobs {
   }
 
   setRawJobs() {
-    return (this.rawJobs = this.jobsArray[this.day.toLowerCase()][
-      this.employee
-    ].map((el) => {
-      return el;
-    }));
+    this.rawJobs = [];
+    this.jobsArray.forEach((el) => {
+      if (el.assigned === this.employee && el.nextVisit === this.date) {
+        this.rawJobs.push(el);
+      }
+    });
   }
 
   setJobs() {
@@ -64,6 +66,7 @@ class Jobs {
       return (
         <AssignedJob
           key={`${el.name}${i}`}
+          id={el.id}
           title={el.name}
           time={el.time}
           location={el.location}
@@ -74,13 +77,11 @@ class Jobs {
 }
 
 const AssignedJobs = (props) => {
-  const [assignedJobs, setAssignedJobs] = useAssignJobs();
+  const jobs = useJobs()[0];
 
-  console.log(new Jobs(assignedJobs, props.day, 0).jobs);
-
-  const totalTime = (index) => {
+  const totalTime = (assignedJobs) => {
     let result = 0;
-    assignedJobs[props.day.toLowerCase()][index].forEach((el) => {
+    assignedJobs.forEach((el) => {
       if (el.time) result += el.time;
     });
     return result === 0
@@ -89,6 +90,10 @@ const AssignedJobs = (props) => {
   };
 
   const workPlan = Object.keys(props.colors).map((el, i) => {
+    const date = `${props.week.dates[days[props.day].toLowerCase()]}/${
+      props.week.month + 1
+    }/${props.week.year}`;
+    const assignedJobs = new Jobs(jobs, date, i);
     return (
       <div key={el} className={classes.jobs}>
         <div className={classes.titleBox}>
@@ -104,11 +109,9 @@ const AssignedJobs = (props) => {
           </i>
         </div>
         <div className={classes.timeEst}>
-          <p>{totalTime(i)}</p>
+          <p>{totalTime(assignedJobs.rawJobs)}</p>
         </div>
-        <div className={classes.jobContent}>
-          {new Jobs(assignedJobs, props.day, i).jobsJsx}
-        </div>
+        <div className={classes.jobContent}>{assignedJobs.jobsJsx}</div>
       </div>
     );
   });

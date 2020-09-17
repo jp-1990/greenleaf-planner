@@ -4,6 +4,7 @@ import classes from './SelectedWeek.module.scss';
 import Day from './Day/Day';
 import AssignedJobs from './Day/AssignedJobs/AssignedJobs';
 import { useWeeks, useSelectedWeek } from '../../../Context/WeeksContext';
+import { useJobs } from '../../../Context/JobsContext';
 import { days, dateFromString } from '../../../GlobalFunctions/dateOperations';
 
 // ==========================================================================
@@ -11,101 +12,49 @@ import { days, dateFromString } from '../../../GlobalFunctions/dateOperations';
 // ==========================================================================
 
 const testVisit = () => {
-  return `${Math.floor(Math.random() * 6) + 7}/09/2020`;
+  return `${Math.floor(Math.random() * 6) + 14}/9/2020`;
 };
 
-const testCustomers = [
-  {
-    name: 'churchfield green',
-    location: 'norwich',
-    rebook: 7,
-    prevVisit: '01/09/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'spicer',
-    location: 'north walsham',
-    rebook: 7,
-    prevVisit: '01/09/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'mercer',
-    location: 'aylsham',
-    rebook: 12,
-    prevVisit: '26/08/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'kendrick',
-    location: 'mundesley',
-    rebook: 10,
-    prevVisit: '01/09/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'richmond',
-    location: 'overstrand',
-    rebook: 14,
-    prevVisit: '24/08/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'churchfield green',
-    location: 'norwich',
-    rebook: 7,
-    prevVisit: '01/09/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'spicer',
-    location: 'north walsham',
-    rebook: 7,
-    prevVisit: '01/09/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'mercer',
-    location: 'aylsham',
-    rebook: 12,
-    prevVisit: '26/08/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'kendrick',
-    location: 'mundesley',
-    rebook: 10,
-    prevVisit: '01/09/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
-  {
-    name: 'richmond',
-    location: 'overstrand',
-    rebook: 14,
-    prevVisit: '24/08/2020',
-    nextVisit: testVisit(),
-    assigned: 0,
-    time: 90,
-  },
+const customerNames = [
+  'churchfield green',
+  'spicer',
+  'mercer',
+  'kendrick',
+  'richmond',
+  'patient',
+  'regal',
+  'sutherland court',
+  'dormy house',
+  'gray',
 ];
+
+const jobLocations = [
+  'mundesley',
+  'overstand',
+  'norwich',
+  'cromer',
+  'north walsham',
+  'holt',
+  'sheringham',
+  'worstead',
+  'aylsham',
+];
+
+const testData = [];
+const generateCutomers = (day) => {
+  for (let i = 0; i < Math.floor(Math.random() * 61 + 10); i++) {
+    testData.push({
+      name: customerNames[Math.floor(Math.random() * 9)],
+      id: `${i}${day}`,
+      location: jobLocations[Math.floor(Math.random() * 8)],
+      rebook: Math.floor(Math.random() * 14) + 7,
+      prevVisit: '01/09/2020',
+      nextVisit: testVisit(),
+      assigned: -1,
+      time: Math.floor(Math.random() * 170) + 10,
+    });
+  }
+};
 
 const testDays = [
   'Monday',
@@ -116,13 +65,8 @@ const testDays = [
   'Saturday',
 ];
 
-const testData = [];
-
-testDays.forEach(() => {
-  let i = 0;
-  for (i; i < Math.floor(Math.random() * 41 + 10); i++) {
-    testData.push(testCustomers[Math.floor(Math.random() * 10)]);
-  }
+testDays.forEach((el) => {
+  generateCutomers(el);
 });
 
 // ==========================================================================
@@ -132,29 +76,29 @@ class JobList {
     this.jobsArray = jobsArray;
     this.date = date;
     this.init = (() => {
-      this.findJobs();
-      this.findLocations();
+      this.setJobsList();
+      this.setUniqueLocations();
       this.sortJobsByLocation();
     })();
   }
 
   // get unique locations
   get locations() {
-    return this.sortedLocations;
+    return this.uniqueLocations;
   }
 
   // get jobs for date
   get jobs() {
-    return this.jobsForDate;
+    return this.jobsList;
   }
 
   // get jobs sorted by location
   get sortedJobs() {
-    return this.sortedJobsByLocation;
+    return this.jobsByLocation;
   }
 
   // find list of jobs for given date
-  findJobs() {
+  setJobsList() {
     const output = [];
     this.jobsArray.forEach((el) => {
       if (
@@ -164,36 +108,41 @@ class JobList {
         output.push(el);
       }
     });
-    return (this.jobsForDate = output);
+    return (this.jobsList = output);
   }
 
   // find list of unique locations alphabetically
-  findLocations() {
-    const output = this.findJobs().map((el) => {
+  setUniqueLocations() {
+    const output = this.setJobsList().map((el) => {
       return el.location;
     });
-    return (this.sortedLocations = [...new Set(output)].sort());
+    return (this.uniqueLocations = [...new Set(output)].sort());
   }
 
   // jobs by location
   sortJobsByLocation() {
-    const sortedArray = this.sortedLocations.map((el) => {
+    const sortedArray = this.uniqueLocations.map((el) => {
       return [el];
     });
 
-    this.jobsForDate.forEach((el) => {
+    this.jobsList.forEach((el) => {
       sortedArray[
         sortedArray.findIndex((i) => {
           return i[0] === el.location;
         })
       ].push(el);
     });
-    return (this.sortedJobsByLocation = sortedArray);
+    return (this.jobsByLocation = sortedArray);
   }
 }
 
 const SelectedWeek = () => {
   const [day, setDay] = useState(0);
+  const [jobs, setJobs] = useJobs();
+
+  useEffect(() => {
+    setJobs(testData);
+  }, [setJobs]);
 
   const colors = {
     Nick: '#f44336',
@@ -252,7 +201,7 @@ const SelectedWeek = () => {
   const calcJobsForWeek = Object.values(weeksArray[activeWeek].dates).map(
     (el) => {
       return new JobList(
-        testData,
+        jobs,
         `${el}/${weeksArray[activeWeek].month + 1}/${
           weeksArray[activeWeek].year
         }`
@@ -288,7 +237,7 @@ const SelectedWeek = () => {
           {daysOfWeek}
         </div>
       </div>
-      <AssignedJobs day={days[day]} jobs={null} colors={colors} />
+      <AssignedJobs day={day} week={weeksArray[activeWeek]} colors={colors} />
     </>
   );
 };

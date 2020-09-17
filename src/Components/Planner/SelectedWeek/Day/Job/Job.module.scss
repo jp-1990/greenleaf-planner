@@ -6,6 +6,7 @@
   margin: 10px 0;
   padding: 0 10px;
   border-radius: 5px;
+  border: 1px solid white;
 
   i:hover {
     cursor: pointer;
@@ -111,6 +112,12 @@
       font-size: 0.8rem;
     }
 
+    .rebooked {
+      font-size: 1rem;
+      padding-left: 15px;
+      margin-bottom: 8px;
+    }
+
     .check {
       color: #1b5e20;
       position: absolute;
@@ -122,6 +129,17 @@
     left: 2000px;
     width: 0%;
     animation: menuOut 0.2s;
+    .personAdd {
+      width: 0;
+    }
+    .arrow {
+      width: 0;
+    }
+  }
+  .dropdown.default {
+    left: 2000px;
+    width: 0;
+    animation: none;
     .personAdd {
       width: 0;
     }

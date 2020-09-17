@@ -58,13 +58,14 @@ const Day = (props) => {
       return (
         <Job
           key={`${e.name}${i}`}
-          id={`${e.name}${i}`}
           name={e.name}
+          id={e.id}
           location={e.location}
           rebook={e.rebook}
           prevVisit={e.prevVisit}
-          day={props.day}
+          assigned={e.assigned}
           time={e.time}
+          day={props.day}
           colors={props.colors}
         ></Job>
       );
