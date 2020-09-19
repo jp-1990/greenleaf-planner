@@ -63,6 +63,7 @@ const Day = (props) => {
           location={e.location}
           rebook={e.rebook}
           prevVisit={e.prevVisit}
+          nextVisit={e.nextVisit}
           assigned={e.assigned}
           time={e.time}
           day={props.day}

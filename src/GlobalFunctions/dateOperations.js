@@ -60,7 +60,31 @@ export const daysInMonth = (year, month) => {
 
 // get date from string
 export const dateFromString = (date) => {
-  return new Date(date.split('/')[2], date.split('/')[1], date.split('/')[0]);
+  return new Date(
+    date.split('/')[2],
+    date.split('/')[1] - 1,
+    date.split('/')[0]
+  );
+};
+
+// date +1/-1 day
+export const incrementDay = (dateString, operator) => {
+  // add/subtract one day from given date
+  let date = dateFromString(dateString);
+  const operators = {
+    '+': () => {
+      return new Date(date.valueOf() + 1000 * 3600 * 24);
+    },
+    '-': () => {
+      return new Date(date.valueOf() - 1000 * 3600 * 24);
+    },
+  };
+  // use provided operator to return new date value
+  date = operators[operator]();
+  // if sunday, increment again
+  if (date.getDay() === 0) date = operators[operator]();
+
+  return date.toLocaleDateString();
 };
 
 // handle case where week spans two months

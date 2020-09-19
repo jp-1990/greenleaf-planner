@@ -198,13 +198,34 @@ const SelectedWeek = () => {
   const weeksArray = useWeeks();
   const activeWeek = useSelectedWeek()[0];
 
+  let incrementMonth = 1;
+  let monthChanged = false;
   const calcJobsForWeek = Object.values(weeksArray[activeWeek].dates).map(
-    (el) => {
+    (el, index) => {
+      let month = weeksArray[activeWeek].month;
+      let year = weeksArray[activeWeek].year;
+      let yearChanged = false;
+      if (index > 0) {
+        Object.values(weeksArray[activeWeek].dates).forEach((e, i) => {
+          if (
+            e < Object.values(weeksArray[activeWeek].dates)[i - 1] &&
+            i === index
+          ) {
+            monthChanged = true;
+          }
+        });
+      }
+      if (monthChanged) incrementMonth = 2;
+      if (month + incrementMonth === 13) {
+        //console.log('from 13if', el, month, incrementMonth);
+        incrementMonth = 1;
+        month = 0;
+        yearChanged = true;
+      }
+
       return new JobList(
         jobs,
-        `${el}/${weeksArray[activeWeek].month + 1}/${
-          weeksArray[activeWeek].year
-        }`
+        `${el}/${month + incrementMonth}/${yearChanged ? year + 1 : year}`
       );
     }
   );

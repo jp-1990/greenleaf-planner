@@ -3,6 +3,7 @@ import classes from './Job.module.scss';
 import M from 'materialize-css';
 import { useJobs } from '../../../../../Context/JobsContext';
 import { capitaliseFirstLetters } from '../../../../../GlobalFunctions/stringOperations';
+import { incrementDay } from '../../../../../GlobalFunctions/dateOperations';
 
 const Job = (props) => {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -12,6 +13,7 @@ const Job = (props) => {
   const [iconColor, setIconColor] = useState('#000000');
   const [jobs, setJobs] = useJobs();
 
+  // if assigned, icon color should be that of relevant employee
   useEffect(() => {
     const colors = Object.values(props.colors).map((el) => el);
     const newColor =
@@ -23,6 +25,18 @@ const Job = (props) => {
   const dropdownHandler = () => {
     setMenuStyle('inactive');
     setMenuToggle((prevState) => !prevState);
+  };
+
+  // send job to next/prev day
+  const moveJobHandler = (operator) => {
+    const newDate = incrementDay(props.nextVisit, operator);
+
+    const prevState = [...jobs];
+    prevState[
+      prevState.findIndex((el) => el['id'] === props.id)
+    ].nextVisit = newDate;
+
+    setJobs(prevState);
   };
 
   // assign job to employee
@@ -58,10 +72,12 @@ const Job = (props) => {
     });
   };
 
+  // job complete toggle
   const completeHandler = () => {
     setComplete((prevState) => !prevState);
   };
 
+  // delete job handler
   const deleteHandler = () => {
     const newState = [...jobs];
     newState.splice(
@@ -107,6 +123,12 @@ const Job = (props) => {
       className={classes.jobCard}
     >
       <div className={classes.top}>
+        <i
+          onClick={() => moveJobHandler('-')}
+          className={`material-icons ${classes.prev}`}
+        >
+          chevron_left
+        </i>
         <h6 className='truncate'>{props.name}</h6>
         <div className={classes.rebook}>
           <span>{props.rebook}</span>
@@ -122,6 +144,12 @@ const Job = (props) => {
           className={`material-icons ${classes.clear}`}
         >
           clear
+        </i>
+        <i
+          onClick={() => moveJobHandler('+')}
+          className={`material-icons ${classes.next}`}
+        >
+          chevron_right
         </i>
       </div>
       <div className={classes.bottom}>
