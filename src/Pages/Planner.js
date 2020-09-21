@@ -6,7 +6,7 @@ import Footer from '../Components/Footer/Footer';
 import { WeeksProvider } from '../Context/WeeksContext';
 import { JobsProvider } from '../Context/JobsContext';
 
-const Layout = () => {
+const Planner = () => {
   return (
     <>
       <Nav />
@@ -21,4 +21,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default Planner;
