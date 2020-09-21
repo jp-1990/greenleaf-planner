@@ -31,12 +31,13 @@ const Job = (props) => {
   const moveJobHandler = (operator) => {
     const newDate = incrementDay(props.nextVisit, operator);
 
-    const prevState = [...jobs];
-    prevState[
-      prevState.findIndex((el) => el['id'] === props.id)
+    const newState = [...jobs];
+    newState[
+      newState.findIndex((el) => el['id'] === props.id)
     ].nextVisit = newDate;
+    newState[newState.findIndex((el) => el['id'] === props.id)].assigned = -1;
 
-    setJobs(prevState);
+    setJobs(newState);
   };
 
   // assign job to employee

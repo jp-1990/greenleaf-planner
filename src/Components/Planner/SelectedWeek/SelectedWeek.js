@@ -12,7 +12,9 @@ import { days, dateFromString } from '../../../GlobalFunctions/dateOperations';
 // ==========================================================================
 
 const testVisit = () => {
-  return `${Math.floor(Math.random() * 6) + 14}/9/2020`;
+  return dateFromString(
+    `${Math.floor(Math.random() * 6) + 14}/9/2020`
+  ).toLocaleDateString();
 };
 
 const customerNames = [
@@ -198,6 +200,7 @@ const SelectedWeek = () => {
   const weeksArray = useWeeks();
   const activeWeek = useSelectedWeek()[0];
 
+  // get jobs for the selected week
   let incrementMonth = 1;
   let monthChanged = false;
   const calcJobsForWeek = Object.values(weeksArray[activeWeek].dates).map(
@@ -217,7 +220,6 @@ const SelectedWeek = () => {
       }
       if (monthChanged) incrementMonth = 2;
       if (month + incrementMonth === 13) {
-        //console.log('from 13if', el, month, incrementMonth);
         incrementMonth = 1;
         month = 0;
         yearChanged = true;

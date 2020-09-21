@@ -19,29 +19,27 @@ const Day = (props) => {
 
   // divide array into an even-ish number for each column of the selected week div
   const jobColumns = (jobs) => {
-    try {
-      // calc number per column, min 6
-      const perColumn =
-        Math.ceil(jobs.length / 5) > 6 ? Math.ceil(jobs.length / 5) : 6;
-      const columns = [[]];
+    // calc number per column, min 6
+    const perColumn =
+      Math.ceil((jobs.length + 3) / 5) > 6
+        ? Math.ceil((jobs.length + 3) / 5)
+        : 6;
+    const columns = [[]];
 
-      // add jobs to relevant array based on current column length
-      let columnId = 0;
-      let count = 0;
-      jobs.forEach((el, i) => {
-        // ensure title never appears as the last element in a column
-        if (count >= perColumn || (!el.name && count >= perColumn - 1)) {
-          columnId += 1;
-          count = 0;
-          columns.push([]);
-        }
-        columns[columnId].push(el);
-        count++;
-      });
-      return columns;
-    } catch (err) {
-      console.log(err);
-    }
+    // add jobs to relevant array based on current column length
+    let columnId = 0;
+    let count = 0;
+    jobs.forEach((el, i) => {
+      // ensure title never appears as the last element in a column
+      if (count >= perColumn || (!el.name && count >= perColumn - 1)) {
+        columnId += 1;
+        count = 0;
+        columns.push([]);
+      }
+      columns[columnId].push(el);
+      count++;
+    });
+    return columns;
   };
 
   // create jsx from the columns arrays

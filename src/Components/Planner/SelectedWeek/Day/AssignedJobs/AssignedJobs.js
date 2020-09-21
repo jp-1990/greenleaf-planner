@@ -2,7 +2,10 @@ import React from 'react';
 import '../../../../../sass/materialize.scss';
 import classes from './AssignedJobs.module.scss';
 import AssignedJob from './AssignedJob/AssignedJob';
-import { days } from '../../../../../GlobalFunctions/dateOperations';
+import {
+  days,
+  dateFromString,
+} from '../../../../../GlobalFunctions/dateOperations';
 import { useJobs } from '../../../../../Context/JobsContext';
 import { capitaliseFirstLetters } from '../../../../../GlobalFunctions/stringOperations';
 
@@ -12,6 +15,7 @@ class Jobs {
     this.date = date;
     this.employee = employee;
     this.init = (() => {
+      this.setDate();
       this.setRawJobs();
       this.setlocations();
       this.setJobs();
@@ -21,6 +25,10 @@ class Jobs {
 
   get jsx() {
     return this.jobsJsx;
+  }
+
+  setDate() {
+    return (this.date = dateFromString(this.date).toLocaleDateString());
   }
 
   setlocations() {
@@ -38,6 +46,7 @@ class Jobs {
     this.jobsArray.forEach((el) => {
       if (el.assigned === this.employee && el.nextVisit === this.date) {
         this.rawJobs.push(el);
+        console.log('rawjobs', el);
       }
     });
   }
@@ -89,11 +98,22 @@ const AssignedJobs = (props) => {
       : `Time est. ${Math.floor(result / 60)} hours ${result % 60} mins`;
   };
 
+  const logging = [];
+  jobs.forEach((el) => {
+    if (el.assigned !== -1)
+      logging.push(el.name + ' ' + el.assigned + ' ' + el.nextVisit);
+  });
+  console.log('From assignedjobs state: assigned:', logging);
+
   const workPlan = Object.keys(props.colors).map((el, i) => {
     const date = `${props.week.dates[days[props.day].toLowerCase()]}/${
       props.week.month + 1
     }/${props.week.year}`;
+
     const assignedJobs = new Jobs(jobs, date, i);
+
+    console.log('from assignedjobs', assignedJobs);
+
     return (
       <div key={el} className={classes.jobs}>
         <div className={classes.titleBox}>
