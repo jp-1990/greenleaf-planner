@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.scss';
 import './sass/materialize.scss';
-import Nav from './Components/Nav/Nav';
 import Footer from './Components/Footer/Footer';
 import Customers from './Pages/Customers';
 import Home from './Pages/Home';
@@ -14,7 +13,6 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        <Nav />
         <Switch>
           <Route path='/' exact component={Landing} />
           <Route path='/signin' exact component={SignIn} />
