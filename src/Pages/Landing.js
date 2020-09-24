@@ -3,6 +3,7 @@ import Nav from '../Components/Nav/Nav';
 import Hero from '../Components/Landing/Hero/Hero';
 import About from '../Components/Landing/About/About';
 import ProjectsShowcase from '../Components/Landing/Projects/ProjectsShowcase/ProjectsShowcase';
+import Team from '../Components/Landing/Team/Team';
 
 const Landing = () => {
   return (
@@ -12,6 +13,7 @@ const Landing = () => {
         <Hero />
         <About />
         <ProjectsShowcase />
+        <Team />
       </div>
     </>
   );
