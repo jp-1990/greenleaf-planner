@@ -4,6 +4,7 @@ import Hero from '../Components/Landing/Hero/Hero';
 import About from '../Components/Landing/About/About';
 import ProjectsShowcase from '../Components/Landing/Projects/ProjectsShowcase/ProjectsShowcase';
 import Team from '../Components/Landing/Team/Team';
+import Gardening from '../Components/Landing/Gardening/Gardening';
 
 const Landing = () => {
   return (
@@ -14,6 +15,7 @@ const Landing = () => {
         <About />
         <ProjectsShowcase />
         <Team />
+        <Gardening />
       </div>
     </>
   );

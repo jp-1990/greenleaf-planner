@@ -1,0 +1,104 @@
+.gardening {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #555555;
+  padding: 30px 0px;
+
+  .intro {
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    h2:after {
+      display: block;
+      height: 2px;
+      background-color: #003f12;
+      content: ' ';
+      width: 120px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    p {
+      line-height: 145%;
+      word-spacing: 2px;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 40px 0px 10px 0;
+    }
+  }
+  .cardbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 1440px;
+    margin: 0px auto;
+    text-align: center;
+
+    .card {
+      display: inline-block;
+      width: 23%;
+      padding: 10px;
+      padding-top: 20px;
+      margin: 0px 0.5%;
+      border: 2px solid #003f12;
+      border-radius: 15px;
+      background: #001d08;
+      color: #e0e0e0;
+      -webkit-transform: scale(0.99);
+      transform: scale(0.99);
+      -webkit-transition: 0.2s;
+      transition: 0.2s;
+      opacity: 0.95;
+      &:hover {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      h3 {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        letter-spacing: 1px;
+        font-size: 1.7rem;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      h3:after {
+        display: block;
+        height: 2px;
+        background-color: #006c1f;
+        content: ' ';
+        width: 120px;
+        margin: 10px auto 20px auto;
+      }
+
+      img {
+        margin-top: 0px;
+        border-radius: 20px;
+        border: 2px solid #002c0d;
+        width: 100%;
+        height: auto;
+      }
+
+      p {
+        padding: 0px 6px;
+        width: 100%;
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 145%;
+        text-align: center;
+      }
+    }
+  }
+}

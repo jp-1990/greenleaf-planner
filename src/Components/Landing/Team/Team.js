@@ -14,7 +14,7 @@ const Team = () => {
 
   const headshotsJsx = staffHeadshots.map((el) => {
     return (
-      <li>
+      <li key={el}>
         <figure className={classes.team__headshots}>
           <img
             src={require(`../../../assets/images/${el}_thumb.jpg`)}
