@@ -1,0 +1,91 @@
+.treework {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.8)),
+      to(rgba(0, 0, 0, 0.85))
+    ),
+    url(../../../assets/images/background_treework.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.85)),
+    url(../../../assets/images/background_treework.jpg);
+  background-size: cover;
+  padding: 50px 0px;
+
+  .intro {
+    color: white;
+
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    h2:after {
+      display: block;
+      height: 2px;
+      background-color: #004d16;
+      content: ' ';
+      width: 120px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    p {
+      line-height: 145%;
+      word-spacing: 2px;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 40px 0px 10px 0;
+    }
+  }
+}
+
+.examples {
+  display: block;
+  max-width: 1440px;
+  margin: 40px auto 2% auto;
+
+  p {
+    line-height: 145%;
+    color: #fff;
+    margin: auto 2%;
+  }
+  img {
+    padding: 10px;
+    margin: 1%;
+    margin-left: 2%;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    opacity: 0.95;
+
+    &:hover {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .example {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    p {
+      font-size: 1.4rem;
+      font-weight: 300;
+    }
+  }
+}
