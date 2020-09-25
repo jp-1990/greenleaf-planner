@@ -1,0 +1,55 @@
+.contact {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #f4f4f4;
+  padding: 50px 0px;
+  color: #555;
+
+  .intro {
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    h2:after {
+      display: block;
+      height: 2px;
+      background-color: #003f12;
+      content: ' ';
+      width: 120px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    p {
+      line-height: 145%;
+      word-spacing: 2px;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 40px 0px 10px 0;
+    }
+  }
+  .details {
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+    h4 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+    li {
+      font-size: 1.6rem;
+      font-weight: 300;
+      line-height: 110%;
+    }
+  }
+}

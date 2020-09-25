@@ -8,6 +8,7 @@ import Gardening from '../Components/Landing/Gardening/Gardening';
 import Tree from '../Components/Landing/Tree/Tree';
 import Landscaping from '../Components/Landing/Landscaping/Landscaping';
 import ProjectsPatio from '../Components/Landing/Projects/ProjectsPatio/ProjectsPatio';
+import Contact from '../Components/Landing/Contact/Contact';
 
 const Landing = () => {
   return (
@@ -22,6 +23,7 @@ const Landing = () => {
         <Tree />
         <Landscaping />
         <ProjectsPatio />
+        <Contact />
       </div>
     </>
   );
