@@ -1,0 +1,142 @@
+.projects {
+  padding-top: 50px;
+  color: #555555;
+
+  .intro {
+    h2 {
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    h2:after {
+      display: block;
+      height: 2px;
+      background-color: #003f12;
+      content: ' ';
+      width: 120px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    p {
+      line-height: 145%;
+      word-spacing: 2px;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 40px 0px 10px 0;
+    }
+  }
+}
+
+.patio {
+  padding: 0px 0px 0px 4%;
+  max-width: 1450px;
+  margin: 0px auto;
+  margin-top: 50px;
+  img {
+    margin-right: -4px;
+    -webkit-box-shadow: 0px 0px 10px #3c2616;
+    box-shadow: 0px 0px 10px #3c2616;
+  }
+  .row1 {
+    width: 100%;
+    margin-bottom: -4px;
+    .catlow {
+      width: 25%;
+      height: auto;
+      margin: 0 0 0 20.83%;
+    }
+  }
+  .row2 {
+    width: 100%;
+    margin-left: -4px;
+    margin-bottom: -4px;
+    margin-top: -8.75%;
+    .rackham {
+      width: 25%;
+      height: auto;
+      margin: 0 0 -8.34% 8.33%;
+    }
+    .patient {
+      width: 25%;
+      height: auto;
+    }
+    .richmond {
+      width: 25%;
+      height: auto;
+    }
+  }
+  .row3 {
+    width: 100%;
+    margin-bottom: -4px;
+    .trafalgar {
+      width: 33.33%;
+      height: auto;
+    }
+    .mears {
+      width: 16.66%;
+      height: auto;
+    }
+    .unknown {
+      width: 25%;
+      height: auto;
+      margin: 0 25% 0 0;
+    }
+  }
+  .row4 {
+    width: 100%;
+    margin-top: -5px;
+    margin-left: -4px;
+    .catlow2 {
+      width: 16.66%;
+      height: auto;
+      margin: 0 0 0 8.33%;
+    }
+    .paul2 {
+      width: 25%;
+      height: auto;
+    }
+    .masters {
+      width: 33.33%;
+      height: auto;
+      margin-bottom: 8.33%;
+    }
+  }
+  .row5 {
+    width: 100%;
+    margin-left: -8px;
+    margin-top: -8.71%;
+    .sharples {
+      width: 33.33%;
+      height: auto;
+      margin: 0 0 0 16.66%;
+    }
+    .hampton {
+      width: 16.66%;
+      height: auto;
+    }
+    .paul {
+      width: 33.33%;
+      height: auto;
+      margin-bottom: 8.33%;
+    }
+  }
+  .row6 {
+    width: 100%;
+    margin-left: -12px;
+    margin-bottom: 0px;
+    margin-top: -8.79%;
+    .dalzell {
+      width: 25%;
+      height: auto;
+      margin: 0 0 0 41.65%;
+    }
+    .hamilton {
+      width: 25%;
+      height: auto;
+      margin-bottom: 8.5%;
+    }
+  }
+}
