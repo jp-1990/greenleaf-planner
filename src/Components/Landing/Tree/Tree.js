@@ -35,7 +35,7 @@ const Tree = () => {
   });
 
   return (
-    <section className={classes.treework}>
+    <section className={classes.treework} id='tree'>
       <div className='container'>
         <div className='row'>
           <div className={`${classes.intro} col s10 offset-s1`}>

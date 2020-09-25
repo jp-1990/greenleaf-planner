@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../Components/Nav/Nav';
+import LandingNav from '../Components/Nav/LandingNav';
 import Hero from '../Components/Landing/Hero/Hero';
 import About from '../Components/Landing/About/About';
 import ProjectsShowcase from '../Components/Landing/Projects/ProjectsShowcase/ProjectsShowcase';
@@ -12,8 +12,8 @@ import Contact from '../Components/Landing/Contact/Contact';
 
 const Landing = () => {
   return (
-    <>
-      <Nav active='landing' />
+    <div id='landing'>
+      <LandingNav />
       <div>
         <Hero />
         <About />
@@ -25,7 +25,7 @@ const Landing = () => {
         <ProjectsPatio />
         <Contact />
       </div>
-    </>
+    </div>
   );
 };
 

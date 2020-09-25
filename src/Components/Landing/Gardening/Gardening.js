@@ -53,7 +53,7 @@ const Gardening = () => {
   });
 
   return (
-    <section className={`${classes.gardening}`}>
+    <section className={`${classes.gardening}`} id='gardening'>
       <div className='container'>
         <div className='row'>
           <div className={`${classes.intro} col s10 offset-s1`}>

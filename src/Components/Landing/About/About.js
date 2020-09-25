@@ -6,7 +6,7 @@ import classes from './About.module.scss';
 
 const About = () => {
   return (
-    <section className={`${classes.about} row container`}>
+    <section className={`${classes.about} row container`} id='about'>
       <div className='row'>
         <div className='col s8 offset-s2'>
           <h2>About Us</h2>

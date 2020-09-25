@@ -27,7 +27,7 @@ const ProjectsShowcase = () => {
   });
 
   return (
-    <section className={classes.projects}>
+    <section className={classes.projects} id='projectsshowcase'>
       <ul className={classes.showcase}>
         {imagesJsx[0]}
         {imagesJsx[1]}

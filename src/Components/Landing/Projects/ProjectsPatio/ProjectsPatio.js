@@ -3,7 +3,7 @@ import classes from './ProjectsPatio.module.scss';
 
 const ProjectsPatio = () => {
   return (
-    <section className={classes.projects}>
+    <section className={classes.projects} id='projects'>
       <div className='container'>
         <div className='row'>
           <div className={`${classes.intro} col s10 offset-s1`}>
