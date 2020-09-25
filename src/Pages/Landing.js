@@ -6,6 +6,7 @@ import ProjectsShowcase from '../Components/Landing/Projects/ProjectsShowcase/Pr
 import Team from '../Components/Landing/Team/Team';
 import Gardening from '../Components/Landing/Gardening/Gardening';
 import Tree from '../Components/Landing/Tree/Tree';
+import Landscaping from '../Components/Landing/Landscaping/Landscaping';
 
 const Landing = () => {
   return (
@@ -18,6 +19,7 @@ const Landing = () => {
         <Team />
         <Gardening />
         <Tree />
+        <Landscaping />
       </div>
     </>
   );

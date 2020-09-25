@@ -1,0 +1,131 @@
+.landscaping {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #f4f4f4;
+  padding-top: 50px;
+  color: #555555;
+
+  .intro {
+    h2,
+    h3 {
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    h2:after {
+      display: block;
+      height: 2px;
+      background: #3c2616;
+      content: ' ';
+      width: 120px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    h3:after {
+      display: block;
+      height: 2px;
+      background-color: #3c2616;
+      content: ' ';
+      width: 120px;
+      margin: 15px auto 15px auto;
+    }
+
+    p {
+      line-height: 145%;
+      word-spacing: 2px;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 40px 0px 10px 0;
+    }
+  }
+
+  .stages {
+    display: flex;
+
+    h4 {
+      font-size: 1.8rem;
+      font-weight: 300;
+      text-align: center;
+      margin: 20px 10px;
+      text-transform: uppercase;
+      -webkit-box-shadow: 5px 5px 12px #555;
+      box-shadow: 5px 5px 12px #555;
+      padding: 8px;
+      border-radius: 5px;
+      background-color: #342214;
+      color: #c9c9c9;
+    }
+
+    p {
+      margin: 20px 0px;
+      padding: 18px;
+      font-size: 1.2rem;
+      line-height: 145%;
+      text-align: center;
+      -webkit-box-shadow: 5px 5px 15px #999;
+      box-shadow: 5px 5px 15px #999;
+      border-radius: 5px;
+    }
+
+    .stage {
+      display: flex;
+      flex-direction: column;
+      -webkit-transform: scale(0.98);
+      transform: scale(0.98);
+      -webkit-transition: 0.3s;
+      transition: 0.3s;
+      opacity: 0.95;
+      padding: 0 20px;
+
+      &:hover {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        -webkit-box-shadow: 5px 5px 10px #999;
+        box-shadow: 5px 5px 10px #999;
+      }
+    }
+  }
+  .complete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px 80px 0px;
+    -webkit-transform: scale(0.99);
+    transform: scale(0.99);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    opacity: 0.98;
+    &:hover {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+    }
+    img {
+      height: auto;
+
+      border-radius: 20px;
+      -webkit-box-shadow: 5px 5px 10px #777;
+      box-shadow: 5px 5px 10px #777;
+    }
+    p {
+      margin: 10px 0 40px 0;
+      width: 80%;
+    }
+  }
+}
