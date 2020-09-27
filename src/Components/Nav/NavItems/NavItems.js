@@ -3,7 +3,7 @@ import NavItem from './NavItem/NavItem';
 import { NavLink } from 'react-router-dom';
 import classes from './NavItems.module.scss';
 
-const navItems = (props) => {
+const NavItems = (props) => {
   return (
     <ul id='nav-mobile' className={`${classes[props.styles]} right`}>
       <NavItem scroll={'about'} menuFunc={props.menuFunc}>
@@ -34,4 +34,4 @@ const navItems = (props) => {
   );
 };
 
-export default navItems;
+export default NavItems;

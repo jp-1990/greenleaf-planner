@@ -1,7 +1,15 @@
 .Menu {
-  height: 60px;
+  height: 64px;
   width: 100%;
   animation: drop-down 0.5s, fade-in 0.5s;
+}
+
+.Fixed {
+  height: 64px;
+}
+
+.logo {
+  margin-top: 2px;
 }
 
 .closed {
@@ -110,7 +118,7 @@
     height: 0;
   }
   100% {
-    height: 60px;
+    height: 64px;
   }
 }
 
@@ -219,6 +227,12 @@
   }
   100% {
     top: 10px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .logo {
+    margin-top: -3px;
   }
 }
 

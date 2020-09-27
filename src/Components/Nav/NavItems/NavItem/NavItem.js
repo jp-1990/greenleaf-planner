@@ -5,7 +5,7 @@ const navItem = (props) => {
   const scrollHandler = (scroll) => {
     window.scroll({
       left: 0,
-      top: document.getElementById(scroll).offsetTop - 43,
+      top: document.getElementById(scroll).offsetTop - 47,
       behavior: 'smooth',
     });
     if (props.menuFunc) props.menuFunc('closed');
@@ -14,8 +14,9 @@ const navItem = (props) => {
     <li
       style={{ listStyle: 'none' }}
       onClick={() => scrollHandler(props.scroll)}
+      className={props.class}
     >
-      <a className={props.class}>{props.children}</a>
+      <a> {props.children}</a>
     </li>
   );
 };
