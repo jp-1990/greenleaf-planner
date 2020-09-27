@@ -1,0 +1,31 @@
+.mobNav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  margin-top: 4px;
+  li {
+    margin: 0;
+    padding: 0;
+    a {
+      display: flex;
+      align-items: center;
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin: 1px 0;
+      padding: 0 10px;
+      border-radius: 3px;
+      height: 38px;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.None {
+  display: none;
+}

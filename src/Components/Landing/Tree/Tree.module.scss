@@ -22,12 +22,12 @@
 
   .intro {
     color: white;
-
     h2 {
       text-transform: uppercase;
       text-align: center;
       font-weight: 300;
       letter-spacing: 1px;
+      font-size: 3rem;
     }
 
     h2:after {
@@ -38,22 +38,24 @@
       width: 120px;
       margin: 0 auto;
       margin-top: 20px;
+      margin-bottom: 3%;
     }
 
     p {
       line-height: 145%;
       word-spacing: 2px;
-      font-size: 1.2rem;
+      padding: 5px 0;
+      font-size: 1rem;
       text-align: center;
-      margin: 40px 0px 10px 0;
+      margin: 0;
     }
   }
 }
 
 .examples {
   display: block;
-  max-width: 1440px;
-  margin: 40px auto 2% auto;
+  max-width: 1900px;
+  margin: 20px auto 2% auto;
 
   p {
     line-height: 145%;
@@ -79,13 +81,120 @@
     }
   }
   .example {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     p {
-      font-size: 1.4rem;
+      text-align: center;
+      font-size: 1.1rem;
       font-weight: 300;
+      max-width: 300px;
+      width: 80%;
+      margin: 5px 0 25px 0;
+    }
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .treework {
+    .intro {
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .examples {
+    .example {
+      flex-direction: row;
+      p {
+        max-width: 60%;
+        padding: 0 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .treework {
+    .intro {
+      h2 {
+        font-size: 3.56rem;
+      }
+    }
+  }
+
+  .examples {
+    .example {
+      margin: 10px 0;
+      p {
+        max-width: 60%;
+        padding: 0 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .treework {
+    padding: 30px 0px;
+
+    .intro {
+      p {
+        margin: 40px 0px 10px 0;
+      }
+    }
+  }
+
+  .examples {
+    margin: 40px auto 2% auto;
+
+    p {
+      margin: auto 2%;
+    }
+
+    .example {
+      width: 100%;
+      p {
+        font-size: 1.4rem;
+        font-weight: 300;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 2560px) {
+  .treework {
+    padding: 40px 0px;
+
+    .intro {
+      position: relative;
+      width: 1460px !important;
+      transform: translate(-13.5%);
+      h2 {
+        font-size: 5rem;
+      }
+      p {
+        font-size: 1.7rem;
+        margin: 40px 0px 20px 0;
+      }
+    }
+  }
+
+  .examples {
+    max-width: 1900px;
+
+    .example {
+      width: 100%;
+      img {
+        width: 250px;
+        height: 250px;
+      }
+      p {
+        font-size: 1.8rem;
+        font-weight: 300;
+      }
     }
   }
 }

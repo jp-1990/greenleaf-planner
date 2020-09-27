@@ -6,9 +6,9 @@ import classes from './About.module.scss';
 
 const About = () => {
   return (
-    <section className={`${classes.about} row container`} id='about'>
+    <section className={`${classes.about} container`} id='about'>
       <div className='row'>
-        <div className='col s8 offset-s2'>
+        <div className='col s12 m10 offset-m1'>
           <h2>About Us</h2>
           <p className='long-copy'>
             Established in 2002, Lowthers Gardening Services has been steadily
@@ -21,7 +21,7 @@ const About = () => {
         </div>
       </div>
       <div className='row'>
-        <div className={`col s4 ${classes.card}`}>
+        <div className={`col s12 m10 offset-m1 l4 ${classes.card}`}>
           <Grass />
           <h3>Maintenance</h3>
           <p>
@@ -31,7 +31,7 @@ const About = () => {
             involved with keeping your garden the envy of the neighbourhood.
           </p>
         </div>
-        <div className={`col s4 ${classes.card}`}>
+        <div className={`col s12 m10 offset-m1 l4 ${classes.card}`}>
           <Tree />
 
           <h3>Tree work</h3>
@@ -42,7 +42,7 @@ const About = () => {
             your job is beyond our level of insurance and qualification.
           </p>
         </div>
-        <div className={`col s4 ${classes.card}`}>
+        <div className={`col s12 m10 offset-m1 l4 ${classes.card}`}>
           <Spade />
 
           <h3>Landscaping</h3>

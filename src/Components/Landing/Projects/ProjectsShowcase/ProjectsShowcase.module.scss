@@ -1,40 +1,66 @@
 .projects {
   margin: 0px 0px 2px 0px;
   padding: 0px;
+  .showcase {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    li {
+      display: block;
+      width: 49%;
+      margin: 0.5%;
+    }
+    .photo {
+      width: 100%;
+      margin: 0;
+      background-color: #000;
+      overflow: hidden;
+      img {
+        opacity: 0.7;
+        width: 100%;
+        height: auto;
+        -webkit-transform: scale(1.15);
+        transform: scale(1.15);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        &:hover {
+          opacity: 1;
+          -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
 }
 
-.showcase {
-  list-style: none;
-  width: 100%;
-  display: flex;
-  margin: 0;
+@media only screen and (min-width: 768px) {
+  .projects {
+    .showcase {
+      width: 80%;
+      margin-left: 10%;
+    }
+  }
 }
 
-.showcase li {
-  display: block;
-  width: 24.8%;
-  margin: 0.1% 0.1%;
-}
-
-.photo {
-  width: 100%;
-  margin: 0;
-  background-color: #000;
-  overflow: hidden;
-}
-
-.photo img {
-  opacity: 0.7;
-  width: 100%;
-  height: auto;
-  -webkit-transform: scale(1.15);
-  transform: scale(1.15);
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-}
-
-.photo img:hover {
-  opacity: 1;
-  -webkit-transform: scale(1.03);
-  transform: scale(1.03);
+@media only screen and (min-width: 1024px) {
+  .projects {
+    .showcase {
+      width: 100%;
+      flex-wrap: nowrap;
+      margin: 0;
+      li {
+        width: 24.8%;
+        margin: 0.1% 0.1%;
+      }
+      .photo {
+        img {
+          &:hover {
+            transform: scale(1.03);
+          }
+        }
+      }
+    }
+  }
 }

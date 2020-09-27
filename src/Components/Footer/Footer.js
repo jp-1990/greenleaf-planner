@@ -1,33 +1,46 @@
 import React from 'react';
-import './Footer.module.scss';
+import classes from './Footer.module.scss';
 
 const Footer = () => {
   const address = () => {
     return (
       <p className='grey-text text-lighten-4'>
-        18 Smith Street <br /> Aylsham <br /> NR54 9XQ
+        17 Simpson Close <br /> North Walsham <br /> NR28 0HZ
       </p>
     );
   };
 
+  const email = ['lowthers', 'gardening', 'services', '@', 'gmail', '.com'];
+
   const contact = () => {
     return (
       <p className='grey-text text-lighten-4'>
-        01263 515673 <br /> lowthers@gmail.com
+        07799 311550 <br /> {email[0]}
+        <span style={{ display: 'none' }}>8sk23n4</span>
+        {email[1]}
+        <span style={{ display: 'none' }}>8sk23n4</span>
+        {email[2]}
+        <span style={{ display: 'none' }}>8sk23n4</span>
+        {email[3]}
+        <span style={{ display: 'none' }}>8sk23n4</span>
+        {email[4]}
+        <span style={{ display: 'none' }}>8sk23n4</span>
+        {email[5]}
+        <span style={{ display: 'none' }}>8sk23n4</span>
       </p>
     );
   };
 
   return (
-    <footer className='page-footer green darken-4'>
+    <footer className={`${classes.footer} page-footer green darken-4`}>
       <div className='container'>
         <div className='row'>
-          <div className='col l6 s12'>
+          <div className='col s12 m10 l8'>
             <h5 className='white-text'>Lowthers Gardening Services Ltd.</h5>
             {address()}
             {contact()}
           </div>
-          <div className='col l4 offset-l2 s12'>
+          <div className='col s12 m2 l2 offset-l2'>
             <ul>
               <li>
                 <a className='grey-text text-lighten-3' href='#!'>
@@ -54,7 +67,9 @@ const Footer = () => {
         </div>
       </div>
       <div className='footer-copyright'>
-        <div className='container'>© 2020 J.Plummer. All rights reserved.</div>
+        <p className='container' style={{ fontWeight: '300' }}>
+          © 2020 J.Plummer. All rights reserved.
+        </p>
       </div>
     </footer>
   );

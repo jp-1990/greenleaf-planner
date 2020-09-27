@@ -2,3 +2,27 @@ ion-icon {
   font-size: 2.5rem;
   margin: 3px;
 }
+
+@media only screen and (max-width: 599px) {
+  .footer {
+    ul {
+      display: flex;
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .footer {
+    h5 {
+      font-size: 2.4rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+  }
+  ion-icon {
+    font-size: 3.5rem;
+    margin: 3px;
+    margin-left: 200px;
+  }
+}

@@ -16,21 +16,20 @@
 
   .herotextbox {
     position: absolute;
-    width: 1140px;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -80%);
-    transform: translate(-50%, -80%);
+    transform: translate(-50%, -50%);
     color: #fff;
     text-transform: uppercase;
+    z-index: 100;
     h1 {
-      font-size: 6rem;
+      font-size: 3rem;
       font-weight: 400;
-      letter-spacing: 10px;
+      letter-spacing: 3px;
     }
     h2 {
       margin-top: -20px;
-      font-size: 3rem;
+      font-size: 1.6rem;
       font-weight: 300;
       word-spacing: 4px;
       letter-spacing: 1px;
@@ -45,12 +44,72 @@
     }
 
     .contact {
-      margin: 0 15px;
+      margin: 20px 6px;
       border: 1px solid #3e2723;
       &:hover {
         border: 1px solid white !important;
         background-color: #4e342e !important;
         color: white !important;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .hero {
+    .herotextbox {
+      transform: translate(-80%, -50%);
+      h1 {
+        font-size: 4rem;
+        letter-spacing: 5px;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .hero {
+    .herotextbox {
+      transform: translate(-100%, -80%);
+      h1 {
+        font-size: 6rem;
+        letter-spacing: 10px;
+      }
+      h2 {
+        font-size: 3rem;
+      }
+
+      .about {
+        border: 1px solid white;
+      }
+
+      .contact {
+        margin: 0 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .hero {
+    .herotextbox {
+      h1 {
+        font-size: 8rem;
+        letter-spacing: 12px;
+      }
+      h2 {
+        font-size: 4rem;
+      }
+      .about {
+        transform: scale(1.5);
+        margin: 35px;
+      }
+      .contact {
+        transform: scale(1.5);
+        margin-left: 45px;
       }
     }
   }

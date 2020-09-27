@@ -1,13 +1,12 @@
 .team {
   color: #555555;
-  padding: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   background-color: #f4f4f4;
-  padding: 30px 0px;
+  padding: 10px 0px;
 
   .intro {
     h2 {
@@ -15,8 +14,8 @@
       text-align: center;
       font-weight: 300;
       letter-spacing: 1px;
+      font-size: 3rem;
     }
-
     h2:after {
       display: block;
       height: 2px;
@@ -25,17 +24,21 @@
       width: 120px;
       margin: 0 auto;
       margin-top: 20px;
+      margin-bottom: 3%;
     }
 
     p {
       line-height: 145%;
       word-spacing: 2px;
-      font-size: 1.2rem;
+      padding: 5px 0;
+      font-size: 1rem;
       text-align: center;
+      margin: 0;
     }
   }
   .team__images {
-    max-width: 1440px;
+    width: 100%;
+    max-width: 1900px;
     margin: 0px auto;
     text-align: center;
 
@@ -43,13 +46,14 @@
       display: inline-block;
       margin: 0 1%;
       width: 11%;
+      min-width: 22%;
 
       .team__headshots {
         width: 100%;
         margin: 0px;
         margin-top: 5px;
         border-radius: 50%;
-        padding: 5px 1px;
+        padding: 5px 2px;
 
         img {
           width: 100%;
@@ -62,10 +66,100 @@
 
       h4 {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 0;
         text-transform: capitalize;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: 500;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .team {
+    .team__images {
+      width: 80%;
+      max-width: 600px;
+    }
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .team {
+    .intro {
+      p {
+        font-size: 1.2rem;
+      }
+    }
+    .team__images {
+      width: 55%;
+      max-width: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .team {
+    .intro {
+      p {
+        padding: 5px 5px;
+      }
+      h2 {
+        font-size: 3.56rem;
+      }
+    }
+    .team__images {
+      width: 70%;
+      li {
+        min-width: 11%;
+        h4 {
+          margin-top: 3px;
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .team {
+    padding: 30px 0px;
+    .team__images {
+      li {
+        margin: 0 1%;
+        width: 11%;
+
+        .team__headshots {
+          width: 100%;
+          margin: 0px;
+          margin-top: 5px;
+          padding: 5px 1px;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        h4 {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .team {
+    padding: 40px 0;
+
+    .intro {
+      max-width: 1900px;
+      h2 {
+        font-size: 5rem;
+      }
+      p {
+        font-size: 1.7rem;
+        margin: 5px 0 40px 0;
       }
     }
   }

@@ -6,7 +6,7 @@ const ProjectsPatio = () => {
     <section className={classes.projects} id='projects'>
       <div className='container'>
         <div className='row'>
-          <div className={`${classes.intro} col s10 offset-s1`}>
+          <div className={`${classes.intro} col s12 m10 offset-m1`}>
             <h2>Projects</h2>
             <p>
               Established in 2002, Lowthers Gardening Services has been steadily

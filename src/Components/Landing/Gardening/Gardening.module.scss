@@ -1,13 +1,9 @@
 .gardening {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   flex-direction: column;
   color: #555555;
-  padding: 30px 0px;
+  padding: 10px 0px;
 
   .intro {
     h2 {
@@ -15,8 +11,9 @@
       text-align: center;
       font-weight: 300;
       letter-spacing: 1px;
+      font-size: 3rem;
+      margin-left: -8px;
     }
-
     h2:after {
       display: block;
       height: 2px;
@@ -25,32 +22,33 @@
       width: 120px;
       margin: 0 auto;
       margin-top: 20px;
+      margin-bottom: 3%;
     }
 
     p {
       line-height: 145%;
       word-spacing: 2px;
-      font-size: 1.2rem;
+      padding: 5px 0;
+      font-size: 1rem;
       text-align: center;
-      margin: 40px 0px 10px 0;
+      margin: 0;
     }
   }
   .cardbox {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    max-width: 1440px;
+    max-width: 1900px;
     margin: 0px auto;
     text-align: center;
 
     .card {
       display: inline-block;
-      width: 23%;
+      width: 100%;
+      max-width: 320px;
       padding: 10px;
       padding-top: 20px;
-      margin: 0px 0.5%;
+      margin: 0px;
       border: 2px solid #003f12;
-      border-radius: 15px;
+      border-radius: 3px;
       background: #001d08;
       color: #e0e0e0;
       -webkit-transform: scale(0.99);
@@ -85,7 +83,7 @@
 
       img {
         margin-top: 0px;
-        border-radius: 20px;
+        border-radius: 10px;
         border: 2px solid #002c0d;
         width: 100%;
         height: auto;
@@ -98,6 +96,107 @@
         font-weight: 300;
         line-height: 145%;
         text-align: center;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .gardening {
+    .cardbox {
+      .card {
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .gardening {
+    .intro {
+      p {
+        font-size: 1.2rem;
+      }
+    }
+    .cardbox {
+      width: 70%;
+      max-width: 899px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .gardening {
+    .intro {
+      p {
+        padding: 5px 5px;
+      }
+      h2 {
+        font-size: 3.56rem;
+      }
+    }
+    .cardbox {
+      width: 100%;
+      max-width: 1200px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .gardening {
+    flex-direction: column;
+    padding: 30px 0px;
+
+    .intro {
+      h2 {
+        letter-spacing: 1px;
+      }
+
+      p {
+        margin: 40px 0px 10px 0;
+      }
+    }
+    .cardbox {
+      max-width: 1216px;
+      .card {
+        padding: 10px;
+        padding-top: 20px;
+        margin: 0 2px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .gardening {
+    padding: 40px 0px;
+    .intro {
+      position: relative;
+      width: 1460px !important;
+      transform: translate(-13.5%);
+      h2 {
+        font-size: 5rem;
+      }
+      p {
+        font-size: 1.7rem;
+        margin: 40px 0px 20px 0;
+      }
+    }
+    .cardbox {
+      max-width: 1900px;
+      .card {
+        display: inline-block;
+        max-width: 500px;
+        width: 23%;
+        padding: 10px;
+        padding-top: 20px;
+        margin: 0px 0.5%;
+        h3 {
+          font-size: 2.4rem;
+        }
+        p {
+          font-size: 1.5rem;
+        }
       }
     }
   }

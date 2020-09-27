@@ -1,5 +1,5 @@
 .projects {
-  padding: 30px 0 70px 0;
+  padding: 10px 0 60px 0;
   color: #555555;
 
   .intro {
@@ -8,8 +8,9 @@
       text-align: center;
       font-weight: 300;
       letter-spacing: 1px;
+      font-size: 3rem;
+      margin-left: -8px;
     }
-
     h2:after {
       display: block;
       height: 2px;
@@ -18,31 +19,33 @@
       width: 120px;
       margin: 0 auto;
       margin-top: 20px;
+      margin-bottom: 3%;
     }
 
     p {
       line-height: 145%;
       word-spacing: 2px;
-      font-size: 1.2rem;
+      padding: 5px 0;
+      font-size: 1rem;
       text-align: center;
-      margin: 40px 0px 10px 0;
+      margin: 0;
     }
   }
 }
 
 .patio {
   padding: 0px 0px 0px 4%;
-  max-width: 1450px;
+  max-width: 1700px;
   margin: 0px auto;
-  margin-top: 50px;
+  margin-top: 30px;
   img {
     margin-right: -4px;
-    -webkit-box-shadow: 0px 0px 10px #3c2616;
-    box-shadow: 0px 0px 10px #3c2616;
+    -webkit-box-shadow: 0px 0px 5px #3c2616;
+    box-shadow: 0px 0px 5px #3c2616;
   }
   .row1 {
     width: 100%;
-    margin-bottom: -4px;
+    margin-bottom: -9.8%;
     .catlow {
       width: 25%;
       height: auto;
@@ -107,7 +110,7 @@
   .row5 {
     width: 100%;
     margin-left: -8px;
-    margin-top: -8.71%;
+    margin-top: -9.5%;
     .sharples {
       width: 33.33%;
       height: auto;
@@ -127,7 +130,7 @@
     width: 100%;
     margin-left: -12px;
     margin-bottom: 0px;
-    margin-top: -8.79%;
+    margin-top: -9.8%;
     .dalzell {
       width: 25%;
       height: auto;
@@ -137,6 +140,186 @@
       width: 25%;
       height: auto;
       margin-bottom: 8.5%;
+    }
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .patio {
+    .row6 {
+      margin-top: -9.4%;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .patio {
+    .row5 {
+      margin-top: -9.2%;
+    }
+    .row6 {
+      margin-top: -9.2%;
+    }
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .patio {
+    .row5 {
+      margin-top: -9.1%;
+    }
+    .row6 {
+      margin-top: -9.1%;
+    }
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .projects {
+    .intro {
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .patio {
+    .row5 {
+      margin-top: -9%;
+    }
+    .row6 {
+      margin-top: -9%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .patio {
+    margin-top: 40px;
+    width: 80%;
+    .row5 {
+      margin-top: -8.9%;
+    }
+    .row6 {
+      margin-top: -9%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .patio {
+    .row5 {
+      margin-top: -8.9%;
+    }
+    .row6 {
+      margin-top: -8.9%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .projects {
+    .intro {
+      p {
+        padding: 5px 5px;
+      }
+      h2 {
+        font-size: 3.56rem;
+      }
+    }
+  }
+  .patio {
+    .row5 {
+      margin-top: -8.75%;
+    }
+    .row6 {
+      margin-top: -8.9%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .projects {
+    padding: 30px 0 70px 0;
+    color: #555555;
+
+    .intro {
+      h2 {
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+
+      h2:after {
+        display: block;
+        height: 2px;
+        background-color: #003f12;
+        content: ' ';
+        width: 120px;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
+
+      p {
+        line-height: 145%;
+        word-spacing: 2px;
+        font-size: 1.2rem;
+        text-align: center;
+        margin: 40px 0px 10px 0;
+      }
+    }
+
+    .row5 {
+      width: 100%;
+      margin-left: -8px;
+      margin-top: -8.71%;
+      .sharples {
+        width: 33.33%;
+        height: auto;
+        margin: 0 0 0 16.66%;
+      }
+      .hampton {
+        width: 16.66%;
+        height: auto;
+      }
+      .paul {
+        width: 33.33%;
+        height: auto;
+        margin-bottom: 8.33%;
+      }
+    }
+    .row6 {
+      width: 100%;
+      margin-left: -12px;
+      margin-bottom: 0px;
+      margin-top: -8.7%;
+      .dalzell {
+        width: 25%;
+        height: auto;
+        margin: 0 0 0 41.65%;
+      }
+      .hamilton {
+        width: 25%;
+        height: auto;
+        margin-bottom: 8.4%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .projects {
+    .intro {
+      position: relative;
+      width: 1460px !important;
+      transform: translate(-13.5%);
+      h2 {
+        font-size: 5rem;
+      }
+      p {
+        font-size: 1.7rem;
+        margin: 40px 0px 20px 0;
+      }
     }
   }
 }

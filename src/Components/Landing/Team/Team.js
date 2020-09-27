@@ -33,7 +33,7 @@ const Team = () => {
       <div className={`container ${classes.intro}`}>
         <div className='row'>
           <h2>The Team</h2>
-          <div className='col s10 offset-s1'>
+          <div className='col s12 m10 offset-m1'>
             <p>
               Established in 2002, Lowthers Gardening Services has been steadily
               growing in size. Originally a one-man operation, we now boast a

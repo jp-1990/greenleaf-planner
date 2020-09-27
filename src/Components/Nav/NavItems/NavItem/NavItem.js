@@ -8,6 +8,7 @@ const navItem = (props) => {
       top: document.getElementById(scroll).offsetTop - 43,
       behavior: 'smooth',
     });
+    if (props.menuFunc) props.menuFunc('closed');
   };
   return (
     <li
