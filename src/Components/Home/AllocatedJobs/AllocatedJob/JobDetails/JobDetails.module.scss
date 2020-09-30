@@ -1,0 +1,55 @@
+.details {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(80%, -50%);
+  border-radius: 3px;
+  padding: 10px;
+  width: 320px;
+  .titleBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px 10px 10px;
+
+    h5 {
+      margin: 0;
+      text-transform: capitalize;
+    }
+
+    .time {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 30px;
+      p {
+        padding: 0 5px 1px 5px;
+        margin: 0;
+        color: #43a047;
+        font-weight: 400;
+      }
+      i {
+        color: #43a047;
+        font-weight: 500;
+        cursor: auto;
+      }
+    }
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    min-height: 80px;
+    .contact {
+      background-color: white;
+      width: 40%;
+      padding: 5px;
+    }
+    .notes {
+      background-color: white;
+      padding: 5px;
+      width: 58%;
+    }
+  }
+}

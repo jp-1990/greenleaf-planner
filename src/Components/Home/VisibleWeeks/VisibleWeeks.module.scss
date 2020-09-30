@@ -1,0 +1,33 @@
+.weeks {
+  color: grey;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2%;
+
+  .week {
+    background-color: white;
+    width: 31%;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .days {
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      .day {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 12px;
+        p {
+          margin: 0 0 5px 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
