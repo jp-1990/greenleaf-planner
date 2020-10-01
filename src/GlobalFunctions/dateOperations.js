@@ -40,6 +40,16 @@ export const days = [
   'Saturday',
 ];
 
+export const currentDate = () => {
+  const today = new Date(Date.now());
+  return {
+    year: today.getFullYear(),
+    month: today.getMonth(),
+    date: today.getDate(),
+    day: today.getDay(),
+  };
+};
+
 // add appropriate suffix to date
 export const suffix = (el) => {
   if (el === 1 || el === 21 || el === 31) {
