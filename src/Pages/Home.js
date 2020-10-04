@@ -12,6 +12,7 @@ import { currentDate } from '../GlobalFunctions/dateOperations';
 const Home = () => {
   const [selectedWeek, setSelectedWeek] = useState(1);
   const [selectedDay, setSelectedDay] = useState(currentDate().day - 1);
+  const [displayDetails, setDisplayDetails] = useState();
 
   // const colors = {
   //   Nick: '#f44336',
@@ -35,6 +36,8 @@ const Home = () => {
             <div className='container' style={{ display: 'flex' }}>
               <Map />
               <AllocatedJobs
+                details={displayDetails}
+                setDetails={setDisplayDetails}
                 day={selectedDay}
                 week={selectedWeek}
                 employee={0}

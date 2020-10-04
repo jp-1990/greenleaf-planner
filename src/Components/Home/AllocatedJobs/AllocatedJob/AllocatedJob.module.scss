@@ -9,11 +9,14 @@
   border-radius: 5px;
   padding: 0 5px;
   margin: 2px 0;
+
   h6 {
     font-size: 1.1rem;
     width: 65%;
     margin: 0 5px 0 0;
     padding: 6px 0;
+    cursor: pointer;
+    user-select: none;
   }
   .time {
     display: flex;

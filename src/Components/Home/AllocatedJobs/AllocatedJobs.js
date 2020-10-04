@@ -6,7 +6,7 @@ import { capitaliseFirstLetters } from '../../../GlobalFunctions/stringOperation
 import { useJobs } from '../../../Context/JobsContext';
 import { useWeeks } from '../../../Context/WeeksContext';
 
-const AllocatedJobs = ({ day, week, employee }) => {
+const AllocatedJobs = ({ details, setDetails, day, week, employee }) => {
   const jobs = useJobs()[0];
   const weeks = useWeeks();
 
@@ -80,6 +80,8 @@ const AllocatedJobs = ({ day, week, employee }) => {
             time={el.time}
             address={el.address}
             notes={el.notes}
+            details={details}
+            setDetails={setDetails}
           ></AllocatedJob>
         );
       }));
@@ -96,10 +98,15 @@ const AllocatedJobs = ({ day, week, employee }) => {
       : `Time est. ${Math.floor(result / 60)} hours ${result % 60} mins`;
   };
 
-  const date = `${weeks[week].dates[days[day].toLowerCase()]}/${
-    weeks[week].month + 1
-  }/${weeks[week].year}`;
+  // elements for date, handling weeks that span two months
+  const buildDate = {
+    day: weeks[week].dates[days[day].toLowerCase()],
+    month: weeks[week].month + 1,
+    year: weeks[week].year,
+  };
+  if (day + 1 > buildDate.day) buildDate.month += 1;
 
+  const date = `${buildDate.day}/${buildDate.month}/${buildDate.year}`;
   const assignedJobs = new Jobs(jobs, date, employee);
 
   return (

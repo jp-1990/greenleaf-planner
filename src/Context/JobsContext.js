@@ -48,7 +48,7 @@ const generateCutomers = (day) => {
       nextVisit: testVisit(),
       assigned: Math.floor(Math.random() * 5),
       time: Math.floor(Math.random() * 170) + 10,
-      notes: null,
+      notes: 'Grass cutting, hedging',
       address: '405 Somestreet, Norwich, Norfolk',
     });
   }

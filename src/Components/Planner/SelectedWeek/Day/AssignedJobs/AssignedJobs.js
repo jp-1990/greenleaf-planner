@@ -99,9 +99,15 @@ const AssignedJobs = (props) => {
   };
 
   const workPlan = Object.keys(props.colors).map((el, i) => {
-    const date = `${props.week.dates[days[props.day].toLowerCase()]}/${
-      props.week.month + 1
-    }/${props.week.year}`;
+    // elements for date, handling weeks that span two months
+    const buildDate = {
+      day: props.week.dates[days[props.day].toLowerCase()],
+      month: props.week.month + 1,
+      year: props.week.year,
+    };
+    if (props.day + 1 > buildDate.day) buildDate.month += 1;
+
+    const date = `${buildDate.day}/${buildDate.month}/${buildDate.year}`;
 
     const assignedJobs = new Jobs(jobs, date, i);
 

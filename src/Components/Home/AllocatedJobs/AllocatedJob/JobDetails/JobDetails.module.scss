@@ -6,6 +6,8 @@
   border-radius: 3px;
   padding: 10px;
   width: 320px;
+  z-index: 100;
+
   .titleBox {
     display: flex;
     justify-content: space-between;
@@ -32,7 +34,7 @@
       i {
         color: #43a047;
         font-weight: 500;
-        cursor: auto;
+        cursor: context-menu;
       }
     }
   }
