@@ -46,7 +46,6 @@ class Jobs {
     this.jobsArray.forEach((el) => {
       if (el.assigned === this.employee && el.nextVisit === this.date) {
         this.rawJobs.push(el);
-        console.log('rawjobs', el);
       }
     });
   }
@@ -79,6 +78,7 @@ class Jobs {
           title={el.name}
           time={el.time}
           location={el.location}
+          notes={false}
         ></AssignedJob>
       );
     }));

@@ -13,7 +13,7 @@ import { days, dateFromString } from '../../../GlobalFunctions/dateOperations';
 
 const testVisit = () => {
   return dateFromString(
-    `${Math.floor(Math.random() * 6) + 14}/9/2020`
+    `${Math.floor(Math.random() * 6) + 28}/9/2020`
   ).toLocaleDateString();
 };
 
@@ -54,6 +54,7 @@ const generateCutomers = (day) => {
       nextVisit: testVisit(),
       assigned: -1,
       time: Math.floor(Math.random() * 170) + 10,
+      notes: null,
     });
   }
 };
