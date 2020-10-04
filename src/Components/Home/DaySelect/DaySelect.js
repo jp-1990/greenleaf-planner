@@ -2,10 +2,17 @@ import React from 'react';
 import { days } from '../../../GlobalFunctions/dateOperations';
 import classes from './DaySelect.module.scss';
 
-const DaySelect = () => {
-  const daysJsx = days.map((el) => {
+const DaySelect = ({ activeDay, setActiveDay }) => {
+  console.log(activeDay);
+  const daysJsx = days.map((el, i) => {
     return (
-      <p key={el} onClick={null} className={`${classes.day} grey-text`}>
+      <p
+        key={el}
+        onClick={() => setActiveDay(i)}
+        className={`${classes.day} ${
+          activeDay === i ? classes.active : 'grey-text'
+        }`}
+      >
         {el}
       </p>
     );
