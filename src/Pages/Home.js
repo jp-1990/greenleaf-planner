@@ -13,6 +13,11 @@ const Home = () => {
   const [selectedWeek, setSelectedWeek] = useState(1);
   const [selectedDay, setSelectedDay] = useState(currentDate().day - 1);
   const [displayDetails, setDisplayDetails] = useState();
+  const [mapSettings, setMapSettings] = useState({
+    lng: 1.296901,
+    lat: 52.630331,
+    zoom: 10,
+  });
 
   // const colors = {
   //   Nick: '#f44336',
@@ -22,6 +27,7 @@ const Home = () => {
   //   Alan: '#00c853',
   // };
 
+  //52.630331, 1.296901
   return (
     <>
       <Nav active='home' />
@@ -34,7 +40,7 @@ const Home = () => {
             />
             <DaySelect activeDay={selectedDay} setActiveDay={setSelectedDay} />
             <div className='container' style={{ display: 'flex' }}>
-              <Map />
+              <Map settings={mapSettings} setSettings={setMapSettings} />
               <AllocatedJobs
                 details={displayDetails}
                 setDetails={setDisplayDetails}
