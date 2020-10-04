@@ -8,7 +8,7 @@ import {
 } from '../../../GlobalFunctions/dateOperations';
 import { useWeeks } from '../../../Context/WeeksContext';
 
-const VisibleWeeks = () => {
+const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
   const weeksArray = useWeeks();
 
   // find the index of the current week of the year
@@ -22,6 +22,7 @@ const VisibleWeeks = () => {
         return new Date(el.year, el.month, e).toLocaleDateString();
       }
     });
+
     if (
       week.findIndex(
         (element) =>
@@ -41,8 +42,6 @@ const VisibleWeeks = () => {
     weeksArray[currentWeek + 1],
   ];
 
-  console.log(relevantWeeks);
-
   // generate 3 week cards for prev/cur/next week
   const weeksJsx = relevantWeeks.map((el, i) => {
     // generate days of week with relevant dates
@@ -58,7 +57,13 @@ const VisibleWeeks = () => {
     });
 
     return (
-      <div key={i} className={classes.week}>
+      <div
+        key={i}
+        className={`${classes.week} ${
+          activeWeek === i ? classes.active : null
+        }`}
+        onClick={() => setActiveWeek(i)}
+      >
         <h4>{months[el.month]}</h4>
         <div className={classes.days}>{daysJsx}</div>
       </div>

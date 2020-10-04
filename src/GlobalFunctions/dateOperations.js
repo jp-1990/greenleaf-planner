@@ -41,7 +41,11 @@ export const days = [
 ];
 
 export const currentDate = () => {
-  const today = new Date(Date.now());
+  let today = Date.now();
+  if (new Date(today).getDay() === 0) {
+    today += 1000 * 60 * 60 * 24;
+  }
+  today = new Date(today);
   return {
     year: today.getFullYear(),
     month: today.getMonth(),

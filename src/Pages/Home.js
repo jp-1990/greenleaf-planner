@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Nav from '../Components/Nav/Nav';
 import Background from '../Components/Home/Background/Background';
 import { WeeksProvider } from '../Context/WeeksContext';
@@ -8,12 +8,17 @@ import Map from '../Components/Home/Map/Map';
 import AllocatedJobs from '../Components/Home/AllocatedJobs/AllocatedJobs';
 
 const Home = () => {
+  const [selectedWeek, setSelectedWeek] = useState(1);
+
   return (
     <>
       <Nav active='home' />
       <Background>
         <WeeksProvider>
-          <VisibleWeeks />
+          <VisibleWeeks
+            activeWeek={selectedWeek}
+            setActiveWeek={setSelectedWeek}
+          />
           <DaySelect />
           <div className='container' style={{ display: 'flex' }}>
             <Map />
