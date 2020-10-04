@@ -3,7 +3,6 @@ import { days } from '../../../GlobalFunctions/dateOperations';
 import classes from './DaySelect.module.scss';
 
 const DaySelect = ({ activeDay, setActiveDay }) => {
-  console.log(activeDay);
   const daysJsx = days.map((el, i) => {
     return (
       <p

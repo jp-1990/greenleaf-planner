@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './VisibleWeeks.module.scss';
 import {
   days,
@@ -35,6 +35,11 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
     return result;
   });
 
+  useEffect(() => {
+    setActiveWeek(currentWeek);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // generate array of prev/cur/next weeks
   const relevantWeeks = [
     weeksArray[currentWeek - 1],
@@ -60,9 +65,9 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
       <div
         key={i}
         className={`${classes.week} ${
-          activeWeek === i ? classes.active : null
+          activeWeek === currentWeek - 1 + i ? classes.active : null
         }`}
-        onClick={() => setActiveWeek(i)}
+        onClick={() => setActiveWeek(currentWeek - 1 + i)}
       >
         <h4>{months[el.month]}</h4>
         <div className={classes.days}>{daysJsx}</div>
