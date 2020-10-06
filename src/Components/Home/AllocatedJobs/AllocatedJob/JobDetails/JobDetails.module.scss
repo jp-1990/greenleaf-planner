@@ -1,11 +1,12 @@
 .details {
   position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(80%, -50%);
+  left: 50%;
+  top: 100%;
+  transform: translateX(-51%);
   border-radius: 3px;
+  border: 1px solid rgb(184, 184, 184);
   padding: 10px;
-  width: 320px;
+  width: 310px;
   z-index: 100;
 
   .titleBox {
@@ -52,6 +53,48 @@
       background-color: white;
       padding: 5px;
       width: 58%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .details {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(80%, -50%);
+    width: 320px;
+    border: none;
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .details {
+    width: 450px;
+    .titleBox {
+      margin: 5px 0;
+      h5 {
+        font-size: 2.2rem;
+      }
+      .time {
+        p {
+          font-size: 1.5rem;
+        }
+        i {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .info {
+      min-height: 120px;
+      font-size: 1.2rem;
+      .contact {
+        padding: 10px;
+      }
+      .notes {
+        padding: 10px;
+      }
     }
   }
 }

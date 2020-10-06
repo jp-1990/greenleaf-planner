@@ -1,6 +1,27 @@
 .map {
-  width: 60%;
-  height: 500px;
-  background-color: grey;
-  margin: 3% 0;
+  display: none;
+}
+
+@media only screen and (min-width: 993px) {
+  .map {
+    display: block;
+    width: 60%;
+    height: 500px;
+    background-color: grey;
+    margin: 3% 0;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .map {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .map {
+    height: 700px;
+    width: 90%;
+    margin-left: -260px;
+  }
 }

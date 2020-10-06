@@ -36,3 +36,20 @@
     }
   }
 }
+
+@media only screen and (min-width: 2560px) {
+  .job {
+    height: 45px;
+    h6 {
+      font-size: 1.5rem;
+    }
+    .time {
+      p {
+        font-size: 1.5rem;
+      }
+      i {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}

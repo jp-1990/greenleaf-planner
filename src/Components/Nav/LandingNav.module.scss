@@ -258,7 +258,9 @@
 
   .Menu,
   .Fixed {
-    height: 80px;
+    div {
+      height: 80px;
+    }
   }
 
   .standardNav {

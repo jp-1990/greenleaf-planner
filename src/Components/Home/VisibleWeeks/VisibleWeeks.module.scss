@@ -1,31 +1,43 @@
 .weeks {
   color: rgb(197, 197, 197);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
+  min-width: 320px;
+  padding: 5px 10px;
   margin-bottom: 2%;
 
   .week {
     background-color: rgb(119, 119, 119);
-    width: 32%;
+    width: 100%;
     border-radius: 3px;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     transform: scale(0.9);
     transition: color 0.5s, background-color 1s, transform 0.5s;
     cursor: pointer;
 
+    h4 {
+      margin: 0 4px;
+      margin-bottom: 3px;
+      width: 2.95ch;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 1.8rem;
+    }
+
     .days {
       display: flex;
-      margin: 0;
+      margin: 0 3px;
       padding: 0;
 
       .day {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 12px;
+        margin: 6px;
         p {
           margin: 0 0 5px 0;
           padding: 0;
@@ -38,5 +50,95 @@
     background-color: white;
     color: grey;
     transform: scale(1);
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .weeks {
+    flex-direction: row;
+    width: 100%;
+    .week {
+      width: 33%;
+      flex-direction: column;
+      h4 {
+        padding: 5px 0;
+        width: auto;
+      }
+      .days {
+        .day {
+          font-weight: 300;
+          margin: 4px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .weeks {
+    flex-direction: row;
+    width: 100%;
+    .week {
+      width: 33%;
+      flex-direction: column;
+      h4 {
+        font-size: 2rem;
+        padding: 15px 0 5px 0;
+        width: auto;
+      }
+      .days {
+        margin: 0;
+        .day {
+          font-weight: 400;
+          margin: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .weeks {
+    margin-bottom: 1%;
+    padding: 10px;
+    .week {
+      padding: 8px 0;
+      h4 {
+        font-size: 2.8rem;
+      }
+      .days {
+        .day {
+          margin: 12px;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .weeks {
+    flex-direction: row;
+    width: 100%;
+    min-width: 1800px;
+    .week {
+      width: 33%;
+      h4 {
+        font-size: 3.5rem;
+        padding: 25px 0 5px 0;
+        width: auto;
+      }
+      .days {
+        margin: 0;
+        .day {
+          font-weight: 400;
+          font-size: 1.5rem;
+          margin: 20px 18px 15px 18px;
+          p {
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
   }
 }

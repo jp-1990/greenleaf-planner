@@ -27,7 +27,6 @@ const Home = () => {
   //   Alan: '#00c853',
   // };
 
-  //52.630331, 1.296901
   return (
     <>
       <Nav active='home' />
