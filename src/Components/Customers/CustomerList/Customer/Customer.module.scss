@@ -1,0 +1,151 @@
+.customer {
+  display: flex;
+  flex-direction: column;
+  .letter {
+    position: relative;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    span {
+      position: absolute;
+      font-size: 1.5rem;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 10%;
+    h5 {
+      color: rgb(99, 99, 99);
+      width: 300px;
+    }
+    .numbers {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      p {
+        padding: 0;
+        margin: 0;
+      }
+    }
+    .email {
+      margin: 5px 0;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .customer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 15px 0;
+    .letter {
+      width: 10%;
+      max-width: 40px;
+    }
+    .contact {
+      flex-direction: row;
+      align-items: center;
+      margin: 0;
+      width: 90%;
+      h5 {
+        margin: 0 20px;
+        width: 30%;
+      }
+      .numbers {
+        width: 20%;
+        margin: 0 20px 0 0;
+        p {
+          margin: 0;
+          padding: 0;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .customer {
+    margin: 15px 0;
+    .letter {
+      width: 10%;
+      max-width: 40px;
+    }
+    .contact {
+      flex-direction: row;
+      align-items: center;
+      margin: 0;
+      width: 90%;
+      h5 {
+        margin: 0 20px;
+        width: 40%;
+      }
+      .numbers {
+        width: 20%;
+        margin: 0 20px 0 0;
+        p {
+          margin: 0;
+          padding: 0;
+          line-height: 1.4;
+        }
+      }
+      .email {
+        width: 30%;
+        text-align: right;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .customer {
+    max-width: 900px;
+    .contact {
+      .numbers {
+        font-size: 1.1rem;
+        flex-direction: row;
+        width: 40%;
+        p {
+          width: 45%;
+        }
+      }
+      .email {
+        font-size: 1.1rem;
+        margin-right: -50px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .customer {
+    max-width: 1500px;
+    .letter {
+      max-width: 60px;
+      height: 60px;
+      span {
+        font-size: 2rem;
+      }
+    }
+    .contact {
+      h5 {
+        font-size: 2rem;
+      }
+      .numbers {
+        p {
+          font-size: 1.8rem;
+        }
+      }
+      .email {
+        font-size: 1.8rem;
+      }
+    }
+  }
+}

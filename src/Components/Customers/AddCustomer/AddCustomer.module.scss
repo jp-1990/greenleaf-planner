@@ -1,0 +1,53 @@
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+
+  i {
+    font-size: 3rem;
+    color: #a5d6a7;
+    margin-left: 8%;
+  }
+  p {
+    padding: 0 10px;
+    font-weight: 300;
+    font-size: 1.8rem;
+    color: grey;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .add {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .add {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-left: 20%;
+    i {
+      font-size: 4.5rem;
+      margin-left: 0;
+    }
+    p {
+      padding: 0 20px;
+      font-size: 2.5rem;
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .add {
+    i {
+      font-size: 6rem;
+    }
+    p {
+      font-size: 3.5rem;
+    }
+  }
+}

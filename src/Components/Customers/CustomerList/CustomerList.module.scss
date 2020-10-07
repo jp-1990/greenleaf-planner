@@ -1,0 +1,50 @@
+.customerList {
+  width: 94%;
+  margin-left: 3%;
+  padding: 0 2%;
+  p {
+    color: rgb(179, 179, 179);
+  }
+  .customers {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .customerList {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .customerList {
+    width: 70%;
+    margin-left: 15%;
+    p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  .customerList {
+    margin: 30px 0;
+    width: 60%;
+    margin-left: 20%;
+    p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .customerList {
+    p {
+      font-size: 2rem;
+    }
+  }
+}
