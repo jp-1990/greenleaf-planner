@@ -73,16 +73,16 @@ const Nav = (props) => {
     return (
       <div className={`${classes.nav} col l10 offset-l2 xl9 offset-xl2`}>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
-          <li className={props.active === 'home' ? 'active' : null}>
+          <li className={props.active === 'home' ? `active ${classes.active}` : null}>
             <NavLink to='/home'>Home</NavLink>
           </li>
-          <li className={props.active === 'planner' ? 'active' : null}>
+          <li className={props.active === 'planner' ? `active ${classes.active}` : null}>
             <NavLink to='/planner'>Planner</NavLink>
           </li>
-          <li className={props.active === 'customers' ? 'active' : null}>
+          <li className={props.active === 'customers' ? `active ${classes.active}` : null}>
             <NavLink to='/customers'>Customers</NavLink>
           </li>
-          <li className={props.active === 'sign in' ? 'active' : null}>
+          <li className={props.active === 'sign in' ? `active ${classes.active}` : null}>
             <NavLink to='/signin'>Sign In</NavLink>
           </li>
         </ul>

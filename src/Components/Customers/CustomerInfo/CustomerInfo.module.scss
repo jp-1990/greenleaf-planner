@@ -1,0 +1,168 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 400px;
+  max-height: 80%;
+  background-color: #fbfbfb;
+  border-radius: 3px;
+  overflow: scroll;
+  .titlebox {
+    display: flex;
+    align-content: center;
+    width: 90%;
+    padding: 20px 20px 15px 20px;
+    .letter {
+      position: relative;
+      border-radius: 50%;
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      color: white;
+      background-color: blue;
+      span {
+        position: absolute;
+        font-size: 1.5rem;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    h5 {
+      margin: 0 10px;
+      padding: 10px 0;
+      line-height: 100%;
+    }
+  }
+  i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .details {
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    .contactDetails {
+      display: flex;
+      flex-direction: column;
+    }
+    .contractDetails {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .delete {
+    color: #860000;
+    margin: 20px;
+    margin-left: auto;
+  }
+}
+
+.infoBox {
+  padding: 10px;
+  .titleRow {
+    display: flex;
+    margin: 0 0 10px 0;
+    .title {
+      margin: 0;
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: rgb(54, 54, 54);
+    }
+    i {
+      position: static;
+      margin-left: 4%;
+      margin-top: 3px;
+      font-size: 1.2rem;
+      color: rgb(110, 110, 110);
+    }
+  }
+  .content {
+    margin: 5px 0 5px 0;
+    color: rgb(80, 80, 80);
+    line-height: 1.3;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    max-width: 700px;
+    .titlebox {
+      margin: 10px 20px 0 20px;
+    }
+    .details {
+      padding: 10px 50px;
+      flex-direction: row;
+      .contactDetails {
+        width: 50%;
+      }
+      .contractDetails {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .container {
+    max-width: 1200px;
+    padding: 10px;
+    .titlebox {
+      margin: 10px 20px 0 20px;
+      .letter {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+        span {
+          font-size: 2rem;
+        }
+      }
+      h5 {
+        font-size: 2.4rem;
+      }
+    }
+    i {
+      font-size: 2.5rem;
+      top: 15px;
+      right: 15px;
+    }
+    .details {
+      padding: 10px 50px;
+      flex-direction: row;
+      .contactDetails {
+        width: 50%;
+      }
+      .contractDetails {
+        width: 50%;
+      }
+    }
+    .delete {
+      font-size: 1.4rem;
+      margin: 30px;
+      margin-left: auto;
+    }
+  }
+
+  .infoBox {
+    padding: 20px;
+    .titleRow {
+      .title {
+        font-size: 2rem;
+      }
+      i {
+        font-size: 1.6rem;
+      }
+    }
+    .content {
+      margin: 5px 0 5px 0;
+      color: rgb(80, 80, 80);
+      line-height: 1.3;
+      font-size: 1.5rem;
+    }
+  }
+}
