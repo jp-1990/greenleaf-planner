@@ -1,8 +1,14 @@
 import React from 'react';
 import classes from './CustomerList.module.scss';
 import Customer from './Customer/Customer';
+import {useCustomers} from '../../../Context/CustomersContext'
 
-const CustomerList = () => {
+const CustomerList = ({setModalState}) => {
+  const customers=useCustomers().sort((a,b)=>{
+    if (a.name<b.name)return -1
+    return 1
+  })
+
   // generate hsl css color
   const randomPastelColor = () =>
     `hsl(${Math.floor(Math.random() * 24) * 16},70%,60%)`;
@@ -19,21 +25,20 @@ const CustomerList = () => {
   const getPastelColors = colorArray();
 
   // generate array of customers
-  const customerArray = [];
-  for (let i = 0; i < 24; i++) {
-    customerArray.push(
-      <Customer
-        key={i}
-        style={{
-          backgroundColor: getPastelColors[i],
-        }}
-      />
-    );
-  }
+  const customerArray = customers.map((el,i)=>{
+    return <Customer
+    key={i}
+    style={{
+      backgroundColor: getPastelColors[Math.floor(Math.random()*24)],
+    }}
+    details={el}
+    setModalState={setModalState}
+  />
+  })
 
   return (
     <div className={classes.customerList}>
-      <p>Customers (93)</p>
+      <p>{`Customers (${customers.length})`}</p>
       <div className={classes.customers}>{customerArray}</div>
     </div>
   );

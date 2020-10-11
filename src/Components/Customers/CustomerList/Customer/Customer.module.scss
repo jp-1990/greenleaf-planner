@@ -1,6 +1,7 @@
 .customer {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   .letter {
     position: relative;
     border-radius: 50%;

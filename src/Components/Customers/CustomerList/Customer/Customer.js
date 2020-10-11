@@ -1,14 +1,14 @@
 import React from 'react';
 import classes from './Customer.module.scss';
 
-const Customer = ({ style }) => {
-  const name = 'Churchfield Green';
-  const homeNum = '01263 720227';
-  const mobNum = '07389 433567';
-  const email = 'churchfieldgreen@gmail.com';
+const Customer = ({ style, details, setModalState }) => {
+  const name = details.name;
+  const homeNum = details.home;
+  const mobNum = details.mobile;
+  const email = details.email;
 
   return (
-    <div className={classes.customer}>
+    <div className={classes.customer} onClick={()=>setModalState(details.id)}>
       <div className={classes.letter} style={style}>
         <span>{name.substring(0, 1)}</span>
       </div>

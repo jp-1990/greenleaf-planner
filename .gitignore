@@ -9,6 +9,9 @@ node_modules
 # testing
 /coverage
 
+#dev data
+/src/assets/customer_list/
+
 # production
 /build
 
