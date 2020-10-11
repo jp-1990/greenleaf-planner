@@ -1,11 +1,17 @@
 import React from 'react';
 import classes from './Search.module.scss';
 
-const Search = () => {
+const Search = ({setSearch}) => {
+  
+  const handleSearch=(e)=>{
+    setSearch(e.target.value)
+    console.log(e.target.value);
+  }
+
   return (
     <div className={classes.search}>
       <i className='material-icons'>search</i>
-      <input placeholder='Search...'></input>
+    <input placeholder='Search...' onChange={handleSearch}></input>
     </div>
   );
 };

@@ -49,8 +49,6 @@ const CustomerInfo = ({modalState, setModalState}) => {
     // contract 
     const setContract=activeCustomer.contractDetails.split('\n')
     contract = setContract.map(el=>el.trim())
-
-    console.log(contract);
   }
 
   

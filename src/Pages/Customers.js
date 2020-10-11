@@ -9,14 +9,15 @@ import {CustomersProvider} from '../Context/CustomersContext'
 
 const Customers = () => {
   const [modalState, setModalState]=useState(false)
+  const [search, setSearch] = useState(null)
   return (
     <>
       <Nav active='customers' />
       <div>
         <CustomersProvider>
           <AddCustomer />
-          <Search />
-          <CustomerList setModalState={setModalState} />
+          <Search setSearch={setSearch}/>
+          <CustomerList search={search} setModalState={setModalState} />
           <Modal state={modalState} setState={setModalState}>
             <CustomerInfo modalState={modalState} setModalState={setModalState}/>
           </Modal>

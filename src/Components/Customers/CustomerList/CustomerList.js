@@ -3,7 +3,7 @@ import classes from './CustomerList.module.scss';
 import Customer from './Customer/Customer';
 import {useCustomers} from '../../../Context/CustomersContext'
 
-const CustomerList = ({setModalState}) => {
+const CustomerList = ({search, setModalState}) => {
   const customers=useCustomers().sort((a,b)=>{
     if (a.name<b.name)return -1
     return 1
@@ -25,20 +25,26 @@ const CustomerList = ({setModalState}) => {
   const getPastelColors = colorArray();
 
   // generate array of customers
+  let counter=0
   const customerArray = customers.map((el,i)=>{
-    return <Customer
-    key={i}
-    style={{
-      backgroundColor: getPastelColors[Math.floor(Math.random()*24)],
-    }}
-    details={el}
-    setModalState={setModalState}
-  />
+    if(el.name.toLowerCase().includes(search) || !search){
+      counter++
+      return <Customer
+      key={i}
+      style={{
+        backgroundColor: getPastelColors[Math.floor(Math.random()*24)],
+      }}
+      details={el}
+      setModalState={setModalState}
+    />
+    } else{
+      return null
+    }
   })
 
   return (
     <div className={classes.customerList}>
-      <p>{`Customers (${customers.length})`}</p>
+      <p>{`Customers (${counter})`}</p>
       <div className={classes.customers}>{customerArray}</div>
     </div>
   );
