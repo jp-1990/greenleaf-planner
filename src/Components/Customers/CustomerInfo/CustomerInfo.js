@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import classes from './CustomerInfo.module.scss'
 import Address from './Address/Address'
 import Contact from './Contact/Contact'
@@ -7,6 +7,19 @@ import Contract from './Contract/Contract'
 import { useCustomers } from '../../../Context/CustomersContext'
 
 const CustomerInfo = ({modalState, setModalState}) => {
+  const [addressEdit, setAddressEdit]=useState(false)
+  const [contactEdit, setContactEdit]=useState(false)
+  const [frequencyEdit, setFrequencyEdit]=useState(false)
+  const [contractEdit, setContractEdit]=useState(false)
+
+  useEffect(()=>{
+    setAddressEdit(false)
+    setContactEdit(false)
+    setFrequencyEdit(false)
+    setContractEdit(false)
+  },[modalState])
+
+
   const customers=useCustomers()[0]
   // find the customer active in the modal
   const activeCustomer= customers.find(el=>{
@@ -85,12 +98,12 @@ const CustomerInfo = ({modalState, setModalState}) => {
         <i onClick={()=>setModalState(prev=>!prev)} className='material-icons'>clear</i>
         <div className={classes.details}>
           <div className={classes.contactDetails}>
-            <Address address={addressJsx} /> 
-            <Contact numbers={numbersJsx} email={email} />
+            <Address edit={addressEdit} setEdit={setAddressEdit} address={addressJsx} /> 
+            <Contact edit={contactEdit} setEdit={setContactEdit} numbers={numbersJsx} email={email} />
           </div>
           <div className={classes.contractDetails}>
-            <Frequency frequency={`${frequency} days`} />
-            <Contract contract={contractJsx} />
+            <Frequency edit={frequencyEdit} setEdit={setFrequencyEdit} frequency={`${frequency} days`} />
+            <Contract edit={contractEdit} setEdit={setContractEdit} contractJsx={contractJsx} contract={contract} />
           </div>
         </div>
       <span className={classes.delete}>delete customer</span>

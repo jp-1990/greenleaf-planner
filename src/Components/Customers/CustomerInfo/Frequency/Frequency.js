@@ -1,16 +1,49 @@
 import React from 'react'
 import classes from '../CustomerInfo.module.scss'
 
-const Frequency = ({frequency}) => {
-  return (
+const Frequency = ({frequency, edit, setEdit}) => {
+  
+  // handle clicks
+  const handleEditClick=()=>{
+    setEdit(prev=>!prev)
+  }
+
+  const handleCancel=()=>{
+    setEdit(false)
+  }
+
+  const handleConfirm=()=>{
+    return null
+  }
+
+  // standard view
+  const defaultJsx=(
     <div className={classes.infoBox}>
       <div className={classes.titleRow}>
         <h6 className={classes.title}>Visit frequency</h6>
-        <i className='material-icons'>edit</i>
+        <i className='material-icons' onClick={handleEditClick}>edit</i>
       </div>
       <p className={classes.content}>{frequency}</p>
     </div>
   )
+
+  // editing view
+  const editJsx=(
+    <div className={classes.infoBox} style={{backgroundColor:'white'}}>
+      <div className={classes.titleRow}>
+        <h6 className={classes.title}>Visit frequency</h6>
+      </div>
+      <div className={classes.edit}>
+          <input placeholder='Visit frequency in days...'></input><br /><br />    
+          <div className={classes.actions}>
+            <i onClick={handleCancel} className={`${classes.clear} material-icons`}>clear</i>
+            <i onClick={handleConfirm} className={`${classes.confirm} material-icons`}>check</i>
+          </div>  
+        </div>
+    </div>
+  )
+
+  return edit?editJsx:defaultJsx
 }
 
 export default Frequency

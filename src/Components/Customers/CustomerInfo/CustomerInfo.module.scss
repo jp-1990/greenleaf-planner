@@ -8,7 +8,7 @@
   width: 95%;
   max-width: 400px;
   max-height: 80%;
-  background-color: #fbfbfb;
+  background-color: #f3f3f3;
   border-radius: 3px;
   overflow: scroll;
   z-index: 1100;
@@ -17,6 +17,7 @@
     align-content: center;
     width: 90%;
     padding: 20px 20px 15px 20px;
+    cursor: context-menu;
     .letter {
       position: relative;
       border-radius: 50%;
@@ -49,6 +50,7 @@
     padding: 0 10px;
     display: flex;
     flex-direction: column;
+    border-radius: 3px;
     .contactDetails {
       display: flex;
       flex-direction: column;
@@ -62,11 +64,14 @@
     color: #860000;
     margin: 20px;
     margin-left: auto;
+    cursor: pointer;
   }
 }
 
 .infoBox {
   padding: 10px;
+  border-radius: 3px;
+  cursor: context-menu;
   .titleRow {
     display: flex;
     margin: 0 0 10px 0;
@@ -89,22 +94,89 @@
     color: rgb(80, 80, 80);
     line-height: 1.3;
   }
+
+  .edit {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border-radius: 3px;
+    margin-top: 15px;
+    input {
+      width: 78%;
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgb(80, 80, 80);
+      border: 1px solid rgb(243, 243, 243) !important;
+      box-shadow: none !important;
+      margin: 2px 0;
+      padding: 5px;
+      height: 1rem;
+      &:focus {
+        border: none !important;
+        box-shadow: none !important;
+      }
+      &::placeholder {
+        color: rgb(80, 80, 80);
+      }
+    }
+    textarea {
+      width: 78%;
+      max-width: 78%;
+      min-width: 78%;
+      min-height: 170px;
+      border: none;
+      border: 1px solid rgb(243, 243, 243) !important;
+      background-color: white;
+      color: rgb(80, 80, 80) !important;
+      font-weight: 300;
+      font-size: 1rem;
+      padding: 5px 10px;
+      line-height: 1.5rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      right: 0px;
+      top: 35%;
+      transform: translateY(-50%);
+      i {
+        position: relative;
+        top: auto;
+        right: auto;
+        color: white;
+        padding: 2px;
+        border-radius: 50%;
+        margin: 3px 0;
+        font-size: 1.8rem;
+      }
+      .clear {
+        background-color: #860000;
+      }
+      .confirm {
+        background-color: #007613;
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 993px) {
   .container {
-    max-width: 700px;
+    max-width: 800px;
     .titlebox {
       margin: 10px 20px 0 20px;
     }
     .details {
       padding: 10px 50px;
       flex-direction: row;
+      justify-content: space-between;
       .contactDetails {
-        width: 50%;
+        width: 48%;
       }
       .contractDetails {
-        width: 50%;
+        width: 48%;
       }
     }
   }
@@ -136,12 +208,6 @@
     .details {
       padding: 10px 50px;
       flex-direction: row;
-      .contactDetails {
-        width: 50%;
-      }
-      .contractDetails {
-        width: 50%;
-      }
     }
     .delete {
       font-size: 1.4rem;
@@ -165,6 +231,24 @@
       color: rgb(80, 80, 80);
       line-height: 1.3;
       font-size: 1.5rem;
+    }
+    .edit {
+      input {
+        font-size: 1.5rem;
+        height: 1.5rem;
+        padding: 8px;
+      }
+      .actions {
+        i {
+          margin: 5px 0;
+          font-size: 2.5rem;
+        }
+      }
+      textarea {
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+        min-height: 210px;
+      }
     }
   }
 }
