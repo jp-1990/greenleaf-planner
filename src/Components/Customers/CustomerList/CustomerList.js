@@ -4,7 +4,7 @@ import Customer from './Customer/Customer';
 import {useCustomers} from '../../../Context/CustomersContext'
 
 const CustomerList = ({search, setModalState}) => {
-  const customers=useCustomers().sort((a,b)=>{
+  const customers=useCustomers()[0].sort((a,b)=>{
     if (a.name<b.name)return -1
     return 1
   })

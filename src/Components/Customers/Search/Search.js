@@ -5,7 +5,6 @@ const Search = ({setSearch}) => {
   
   const handleSearch=(e)=>{
     setSearch(e.target.value)
-    console.log(e.target.value);
   }
 
   return (

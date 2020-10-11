@@ -1194,10 +1194,10 @@ export const useCustomers = ()=>{
 }
 
 export const CustomersProvider = ({children})=>{
-  const customerList=useState(JSON.parse(customerData))[0]
+  const [customerList,setCustomerList]=useState(JSON.parse(customerData))
 
   return (
-    <CustomersContext.Provider value={customerList}>
+    <CustomersContext.Provider value={[customerList,setCustomerList]}>
       {children}
     </CustomersContext.Provider>
   )

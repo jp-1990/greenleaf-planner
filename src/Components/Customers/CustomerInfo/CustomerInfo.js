@@ -7,7 +7,7 @@ import Contract from './Contract/Contract'
 import { useCustomers } from '../../../Context/CustomersContext'
 
 const CustomerInfo = ({modalState, setModalState}) => {
-  const customers=useCustomers()
+  const customers=useCustomers()[0]
   // find the customer active in the modal
   const activeCustomer= customers.find(el=>{
     return el.id===modalState
