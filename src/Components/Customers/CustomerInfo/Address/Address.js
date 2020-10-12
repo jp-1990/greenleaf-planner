@@ -40,8 +40,8 @@ const Address = ({address, edit, setEdit}) => {
           <input placeholder='County...'></input>  
           <input placeholder='Post code...'></input>
           <div className={classes.actions}>
-            <i onClick={handleCancel} className={`${classes.clear} material-icons`}>clear</i>
-            <i onClick={handleConfirm} className={`${classes.confirm} material-icons`}>check</i>
+            <span onClick={handleCancel} className={classes.cancel}>cancel</span>
+            <span onClick={handleConfirm} className={classes.accept}>accept</span>
           </div>  
         </div>
     </div>

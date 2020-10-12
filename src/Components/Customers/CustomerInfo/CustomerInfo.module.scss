@@ -47,7 +47,7 @@
     cursor: pointer;
   }
   .details {
-    padding: 0 10px;
+    padding: 0px 10px;
     display: flex;
     flex-direction: column;
     border-radius: 3px;
@@ -69,7 +69,7 @@
 }
 
 .infoBox {
-  padding: 10px;
+  padding: 20px;
   border-radius: 3px;
   cursor: context-menu;
   .titleRow {
@@ -137,26 +137,24 @@
     }
     .actions {
       display: flex;
-      flex-direction: column;
-      position: absolute;
-      right: 0px;
-      top: 35%;
-      transform: translateY(-50%);
-      i {
-        position: relative;
-        top: auto;
-        right: auto;
-        color: white;
-        padding: 2px;
-        border-radius: 50%;
-        margin: 3px 0;
-        font-size: 1.8rem;
+      justify-content: space-around;
+      padding: 10px 0 0 0;
+      width: 60%;
+      margin-left: 20%;
+
+      .cancel {
+        color: #860000;
+        border: 1px solid #860000;
+        border-radius: 5px;
+        padding: 2px 10px;
+        cursor: pointer;
       }
-      .clear {
-        background-color: #860000;
-      }
-      .confirm {
-        background-color: #007613;
+      .accept {
+        color: #007613;
+        border: 1px solid #007613;
+        border-radius: 5px;
+        padding: 2px 10px;
+        cursor: pointer;
       }
     }
   }
@@ -217,7 +215,7 @@
   }
 
   .infoBox {
-    padding: 20px;
+    padding: 30px;
     .titleRow {
       .title {
         font-size: 2rem;
@@ -239,9 +237,14 @@
         padding: 8px;
       }
       .actions {
-        i {
-          margin: 5px 0;
-          font-size: 2.5rem;
+        padding: 20px 0 0 0;
+        width: 50%;
+        margin-left: 25%;
+        .cancel {
+          font-size: 1.5rem;
+        }
+        .accept {
+          font-size: 1.5rem;
         }
       }
       textarea {

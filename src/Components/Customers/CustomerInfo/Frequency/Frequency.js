@@ -34,10 +34,10 @@ const Frequency = ({frequency, edit, setEdit}) => {
         <h6 className={classes.title}>Visit frequency</h6>
       </div>
       <div className={classes.edit}>
-          <input placeholder='Visit frequency in days...'></input><br /><br />    
+          <input placeholder='Visit frequency in days...'></input>  
           <div className={classes.actions}>
-            <i onClick={handleCancel} className={`${classes.clear} material-icons`}>clear</i>
-            <i onClick={handleConfirm} className={`${classes.confirm} material-icons`}>check</i>
+          <span onClick={handleCancel} className={classes.cancel}>cancel</span>
+            <span onClick={handleConfirm} className={classes.accept}>accept</span>
           </div>  
         </div>
     </div>
