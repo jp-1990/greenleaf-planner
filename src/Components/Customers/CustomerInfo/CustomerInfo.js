@@ -86,12 +86,22 @@ const CustomerInfo = ({modalState, setModalState}) => {
     )
   })
 
+  // create new customer
+  const createNewCustomerHandler=()=>{
+    console.log('created customer');
+  }
 
-  return (
+  // delete customer
+  const deleteCustomerHandler=()=>{
+    console.log('deleted customer');
+  }
+
+  // info box if an active customer is found from modalstate
+  const existingCustomerInfo = (
     <div className={classes.container}>
         <div className={classes.titlebox}>
           <div className={classes.letter}>
-  <span>{name?name.substring(0,1):null}</span>
+            <span>{name?name.substring(0,1):null}</span>
           </div>
           <h5 className='truncate'>{name}</h5>
         </div>
@@ -106,8 +116,37 @@ const CustomerInfo = ({modalState, setModalState}) => {
             <Contract edit={contractEdit} setEdit={setContractEdit} contractJsx={contractJsx} contract={contract} />
           </div>
         </div>
-      <span className={classes.delete}>delete customer</span>
+      <span onClick={deleteCustomerHandler} className={classes.delete}>delete customer</span>
       </div>
+  )
+
+  const createNewCustomer = (
+    <div className={classes.container}>
+        <div className={classes.createTitle}>
+          <h5>Name</h5>
+          <input placeholder='Customer name...'></input>
+        </div>
+        <div className={classes.details}>
+          <div className={classes.contactDetails}>
+            <Address edit={addressEdit} setEdit={setAddressEdit} address={addressJsx} modalState={modalState}/> 
+            <Contact edit={contactEdit} setEdit={setContactEdit} numbers={numbersJsx} email={email} modalState={modalState}/>
+          </div>
+          <div className={classes.contractDetails}>
+            <Frequency edit={frequencyEdit} setEdit={setFrequencyEdit} frequency={`${frequency} days`} modalState={modalState}/>
+            <Contract edit={contractEdit} setEdit={setContractEdit} contractJsx={contractJsx} contract={contract} modalState={modalState}/>
+          </div>
+        </div>
+        <div className={classes.createOptions}>
+          <span onClick={createNewCustomerHandler} className={classes.create}>create new customer</span>
+          <span onClick={()=>setModalState(prev=>!prev)} className={classes.cancelCreate}>cancel</span>
+        </div>
+    </div>
+  )
+
+  return (
+    <>{activeCustomer?
+   existingCustomerInfo:createNewCustomer}
+      </>
   )
 }
 

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import classes from '../CustomerInfo.module.scss'
 
-const Contract = ({contract, contractJsx, edit, setEdit}) => {
+const Contract = ({contract, contractJsx, edit, setEdit, modalState}) => {
   const [contractText ,setContractText] = useState(contract.join(', '))
   
   useEffect(()=>{
@@ -43,16 +43,16 @@ const Contract = ({contract, contractJsx, edit, setEdit}) => {
         <h6 className={classes.title}>Contract Details</h6>
       </div>
       <div className={classes.edit}>
-          <textarea value={contractText} onChange={handleTextEdit}></textarea>  
-          <div className={classes.actions}>
-          <span onClick={handleCancel} className={classes.cancel}>cancel</span>
+        <textarea value={contractText} onChange={handleTextEdit}></textarea>  
+          {modalState==='create'?null:<div className={classes.actions}>
+            <span onClick={handleCancel} className={classes.cancel}>cancel</span>
             <span onClick={handleConfirm} className={classes.accept}>accept</span>
-          </div>  
+          </div>}
         </div>
     </div>
   )
 
-  return edit?editJsx:defaultJsx
+  return edit||modalState==='create'?editJsx:defaultJsx
 }
 
 export default Contract

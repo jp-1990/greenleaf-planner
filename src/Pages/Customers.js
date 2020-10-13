@@ -15,7 +15,7 @@ const Customers = () => {
       <Nav active='customers' />
       <div>
         <CustomersProvider>
-          <AddCustomer />
+          <AddCustomer setModalState={setModalState}/>
           <Search setSearch={setSearch}/>
           <CustomerList search={search} setModalState={setModalState} />
           <Modal state={modalState} setState={setModalState}>

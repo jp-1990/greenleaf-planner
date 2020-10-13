@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from '../CustomerInfo.module.scss'
 
-const Frequency = ({frequency, edit, setEdit}) => {
+const Frequency = ({frequency, edit, setEdit, modalState}) => {
   
   // handle clicks
   const handleEditClick=()=>{
@@ -34,16 +34,16 @@ const Frequency = ({frequency, edit, setEdit}) => {
         <h6 className={classes.title}>Visit frequency</h6>
       </div>
       <div className={classes.edit}>
-          <input placeholder='Visit frequency in days...'></input>  
-          <div className={classes.actions}>
+        <input placeholder='Visit frequency in days...'></input>  
+        {modalState==='create'?null:<div className={classes.actions}>
           <span onClick={handleCancel} className={classes.cancel}>cancel</span>
-            <span onClick={handleConfirm} className={classes.accept}>accept</span>
-          </div>  
-        </div>
+          <span onClick={handleConfirm} className={classes.accept}>accept</span>
+        </div>}  
+      </div>
     </div>
   )
 
-  return edit?editJsx:defaultJsx
+  return edit||modalState==='create'?editJsx:defaultJsx
 }
 
 export default Frequency

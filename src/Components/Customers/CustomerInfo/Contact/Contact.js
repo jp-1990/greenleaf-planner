@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from '../CustomerInfo.module.scss'
 
-const Contact = ({numbers,email, edit, setEdit}) => {
+const Contact = ({numbers,email, edit, setEdit, modalState}) => {
 
   // click handlers
   const handleEditClick=()=>{
@@ -38,15 +38,15 @@ const Contact = ({numbers,email, edit, setEdit}) => {
           <input placeholder='Home number...'></input>  
           <input placeholder='Mobile number...'></input> 
           <input placeholder='Email address...'></input>  
-          <div className={classes.actions}>
-          <span onClick={handleCancel} className={classes.cancel}>cancel</span>
+          {modalState==='create'?null:<div className={classes.actions}>
+            <span onClick={handleCancel} className={classes.cancel}>cancel</span>
             <span onClick={handleConfirm} className={classes.accept}>accept</span>
-          </div>  
+          </div> } 
         </div>
     </div>
   )
 
-  return edit?editJsx:defaultJsx
+  return edit||modalState==='create'?editJsx:defaultJsx
 }
 
 

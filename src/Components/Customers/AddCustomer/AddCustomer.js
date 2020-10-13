@@ -1,9 +1,10 @@
 import React from 'react';
 import classes from './AddCustomer.module.scss';
 
-const AddCustomer = () => {
+const AddCustomer = ({setModalState}) => {
+
   return (
-    <div className={classes.add}>
+    <div onClick={()=>setModalState('create')} className={classes.add}>
       <i className='material-icons'>add_circle</i>
       <p>Add customer...</p>
     </div>
