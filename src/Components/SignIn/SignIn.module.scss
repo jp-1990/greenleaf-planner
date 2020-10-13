@@ -1,0 +1,73 @@
+.login {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
+  min-width: 256px;
+  max-width: 400px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  .inputFields {
+    margin: 20px 0 30px 0;
+    .email {
+      span {
+        font-weight: 300;
+        font-size: 1.8rem;
+      }
+    }
+    .password {
+      margin-top: 10px;
+      span {
+        font-weight: 300;
+        font-size: 1.8rem;
+      }
+    }
+  }
+  .signin {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 300;
+    width: 30%;
+    min-width: 110px;
+    margin: 6px 0 10% 0;
+    color: #007613;
+    border: 1px solid #007614;
+    border-radius: 10px;
+    padding: 1px 10px 4px 10px;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .login {
+    .inputFields {
+      .email {
+        span {
+          font-size: 2.6rem;
+        }
+        input {
+          font-size: 1.5rem;
+        }
+      }
+      .password {
+        span {
+          font-size: 2.6rem;
+        }
+        input {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    .signin {
+      font-size: 1.8rem;
+      width: 40%;
+    }
+  }
+}

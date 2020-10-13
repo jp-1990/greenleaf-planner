@@ -7,7 +7,7 @@ import Customers from './Pages/Customers';
 import Home from './Pages/Home';
 import Landing from './Pages/Landing';
 import Planner from './Pages/Planner';
-import SignIn from './Pages/SignIn';
+import Login from './Pages/Login';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <div className='App'>
         <Switch>
           <Route path='/' exact component={Landing} />
-          <Route path='/signin' exact component={SignIn} />
+          <Route path='/signin' exact component={Login} />
           <Route path='/home' exact component={Home} />
           <Route path='/planner' exact component={Planner} />
           <Route path='/customers' exact component={Customers} />
