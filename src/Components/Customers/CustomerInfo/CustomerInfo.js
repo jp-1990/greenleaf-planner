@@ -34,35 +34,34 @@ const CustomerInfo = ({modalState, setModalState}) => {
   let frequency
   let contract=[]
 
-  if(activeCustomer){
-    // name 
-    name= activeCustomer.name
+  // name 
+  name= activeCustomer.name
 
-    //address
-    const setAddress=[activeCustomer.addressLine1,activeCustomer.addressLine2,activeCustomer.town,activeCustomer.county,activeCustomer.postcode]
-    
-    setAddress.forEach(el=>{
-      if(el){
-        address.push(el)
-      }
-    })
+  //address
+  const setAddress=[activeCustomer.addressLine1,activeCustomer.addressLine2,activeCustomer.town,activeCustomer.county,activeCustomer.postcode]
+  
+  setAddress.forEach(el=>{
+    if(el){
+      address.push(el)
+    }
+  })
 
-    // numbers 
-    const setNumbers=[activeCustomer.home,activeCustomer.mobile]
-    
-    setNumbers.forEach(el=>{
-      if(el){
-        numbers.push(el)
-      }
-    })
+  // numbers 
+  const setNumbers=[activeCustomer.home,activeCustomer.mobile]
+  
+  setNumbers.forEach(el=>{
+    if(el){
+      numbers.push(el)
+    }
+  })
 
-    email= activeCustomer.email
-    frequency= activeCustomer.frequency
+  email= activeCustomer.email
+  frequency= activeCustomer.frequency
 
-    // contract 
-    const setContract=activeCustomer.contractDetails.split('\n')
-    contract = setContract.map(el=>el.trim())
-  }
+  // contract 
+  const setContract=activeCustomer.contractDetails.split('\n')
+  contract = setContract.map(el=>el.trim())
+  
 
   
   // address jsx for render
@@ -85,11 +84,6 @@ const CustomerInfo = ({modalState, setModalState}) => {
       <span key={i}>{el}<br /></span>
     )
   })
-
-  // create new customer
-  const createNewCustomerHandler=()=>{
-    console.log('created customer');
-  }
 
   // delete customer
   const deleteCustomerHandler=()=>{
@@ -121,26 +115,7 @@ const CustomerInfo = ({modalState, setModalState}) => {
   )
 
   const createNewCustomer = (
-    <div className={classes.container}>
-        <div className={classes.createTitle}>
-          <h5>Name</h5>
-          <input placeholder='Customer name...'></input>
-        </div>
-        <div className={classes.details}>
-          <div className={classes.contactDetails}>
-            <Address edit={addressEdit} setEdit={setAddressEdit} address={addressJsx} modalState={modalState}/> 
-            <Contact edit={contactEdit} setEdit={setContactEdit} numbers={numbersJsx} email={email} modalState={modalState}/>
-          </div>
-          <div className={classes.contractDetails}>
-            <Frequency edit={frequencyEdit} setEdit={setFrequencyEdit} frequency={`${frequency} days`} modalState={modalState}/>
-            <Contract edit={contractEdit} setEdit={setContractEdit} contractJsx={contractJsx} contract={contract} modalState={modalState}/>
-          </div>
-        </div>
-        <div className={classes.createOptions}>
-          <span onClick={createNewCustomerHandler} className={classes.create}>create new customer</span>
-          <span onClick={()=>setModalState(prev=>!prev)} className={classes.cancelCreate}>cancel</span>
-        </div>
-    </div>
+    null
   )
 
   return (

@@ -1,0 +1,423 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 400px;
+  max-height: 80%;
+  background-color: #f3f3f3;
+  border-radius: 3px;
+  overflow: scroll;
+  z-index: 1100;
+
+  h4 {
+    margin-left: 8%;
+    margin-top: 5%;
+    font-size: 1.8rem;
+    color: rgb(54, 54, 54);
+  }
+
+  .titlebox {
+    display: flex;
+    align-content: center;
+    width: 90%;
+    padding: 20px 20px 15px 20px;
+    cursor: context-menu;
+    .letter {
+      position: relative;
+      border-radius: 50%;
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      color: white;
+      background-color: blue;
+      span {
+        position: absolute;
+        font-size: 1.5rem;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    h5 {
+      margin: 0 10px;
+      padding: 10px 0;
+      line-height: 100%;
+    }
+  }
+  .createTitle {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin: 10px 3% 0 3%;
+    padding: 20px;
+    input {
+      width: 96%;
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgb(80, 80, 80);
+      border: 1px solid rgb(243, 243, 243) !important;
+      border-radius: 3px;
+      box-shadow: none !important;
+      margin: 2px 0;
+      padding: 5px;
+      height: 1rem;
+      &:focus {
+        border: 1px solid rgb(135, 202, 135) !important;
+        box-shadow: none !important;
+      }
+      &::placeholder {
+        color: rgb(80, 80, 80);
+      }
+    }
+    h5 {
+      margin: 0 0 10px 0;
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: rgb(54, 54, 54);
+    }
+  }
+
+  i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  .close {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    cursor: pointer;
+  }
+
+  .details {
+    padding: 0px 3%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    .contactDetails {
+      display: flex;
+      flex-direction: column;
+    }
+    .contractDetails {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .delete {
+    color: #860000;
+    margin: 20px;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  .createOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
+    margin: 20px 0;
+    margin-left: 1%;
+    text-align: center;
+    .create {
+      background-color: white;
+      text-align: center;
+      font-size: 1.1rem;
+      width: 65%;
+      margin: 6px 0;
+      color: #007613;
+      border: 1px solid #007613;
+      border-radius: 5px;
+      padding: 1px 10px 4px 10px;
+      cursor: pointer;
+    }
+    .cancelCreate {
+      background-color: white;
+      text-align: center;
+      width: 65%;
+      margin: 6px 0;
+      color: #860000;
+      border: 1px solid #860000;
+      border-radius: 5px;
+      padding: 1px 10px 4px 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.infoBox {
+  padding: 20px;
+  border-radius: 3px;
+  cursor: context-menu;
+  .titleRow {
+    display: flex;
+    margin: 0 0 10px 0;
+    .title {
+      margin: 0;
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: rgb(54, 54, 54);
+    }
+    i {
+      position: static;
+      margin-left: 4%;
+      margin-top: 3px;
+      font-size: 1.2rem;
+      color: rgb(110, 110, 110);
+    }
+  }
+  .content {
+    margin: 5px 0 5px 0;
+    color: rgb(80, 80, 80);
+    line-height: 1.3;
+  }
+
+  .edit {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border-radius: 3px;
+    margin-top: 15px;
+    input {
+      width: 96%;
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgb(80, 80, 80);
+      border: 1px solid rgb(243, 243, 243) !important;
+      border-radius: 3px;
+      box-shadow: none !important;
+      margin: 2px 0;
+      padding: 5px;
+      height: 1rem;
+      &:focus {
+        border: 1px solid rgb(135, 202, 135) !important;
+        box-shadow: none !important;
+      }
+      &::placeholder {
+        color: rgb(80, 80, 80);
+      }
+    }
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 170px;
+      border: none;
+      border: 1px solid rgb(243, 243, 243) !important;
+      background-color: white;
+      color: rgb(80, 80, 80) !important;
+      font-weight: 300;
+      font-size: 1rem;
+      padding: 5px 10px;
+      line-height: 1.5rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      &:focus {
+        outline: none;
+        border: 1px solid rgb(135, 202, 135) !important;
+        box-shadow: none !important;
+      }
+    }
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px 0 0 0;
+      width: 54%;
+      margin-left: 23%;
+
+      .cancel {
+        font-size: 0.9rem;
+        color: #860000;
+        border: 1px solid #860000;
+        border-radius: 5px;
+        padding: 1px 10px 4px 10px;
+        cursor: pointer;
+      }
+      .accept {
+        font-size: 0.9rem;
+        color: #007613;
+        border: 1px solid #007613;
+        border-radius: 5px;
+        padding: 1px 10px 4px 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .container {
+    max-width: 800px;
+    h4 {
+      font-size: 2.5rem;
+    }
+    i {
+      font-size: 2rem;
+    }
+    .titlebox {
+      margin: 10px 20px 0 20px;
+    }
+    .createTitle {
+      width: 88%;
+      margin: 30px 6% 10px 6%;
+      padding: 20px;
+      input {
+        width: 96%;
+        margin: 2px 0;
+        padding: 5px;
+      }
+      h5 {
+        margin: 0 0 10px 0;
+        font-weight: 400;
+        font-size: 1.4rem;
+        color: rgb(54, 54, 54);
+      }
+    }
+    .close {
+      position: absolute;
+      top: 7%;
+      right: 7%;
+      cursor: pointer;
+    }
+
+    .details {
+      padding: 10px 6%;
+      flex-direction: row;
+      justify-content: space-between;
+      .contactDetails {
+        width: 48%;
+      }
+      .contractDetails {
+        width: 48%;
+      }
+    }
+
+    .createOptions {
+      .create {
+        width: 30%;
+        font-size: 1.3rem;
+      }
+      .cancelCreate {
+        width: 30%;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .container {
+    max-width: 1200px;
+    padding: 10px;
+    h4 {
+      font-size: 3.8rem;
+    }
+    .titlebox {
+      margin: 10px 20px 0 20px;
+      .letter {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+        span {
+          font-size: 2rem;
+        }
+      }
+      h5 {
+        font-size: 2.4rem;
+      }
+    }
+    .createTitle {
+      width: 88%;
+      margin: 50px 6% 20px 6%;
+      padding: 30px;
+      input {
+        font-size: 1.5rem;
+        height: 1.5rem;
+        padding: 8px;
+      }
+      h5 {
+        font-size: 2rem;
+      }
+    }
+    i {
+      font-size: 2.5rem;
+      top: 15px;
+      right: 15px;
+    }
+    .close {
+      position: absolute;
+      top: 9%;
+      right: 8%;
+      cursor: pointer;
+    }
+    .details {
+      flex-direction: row;
+    }
+    .delete {
+      font-size: 1.4rem;
+      margin: 30px;
+      margin-left: auto;
+    }
+
+    .createOptions {
+      .create {
+        width: 30%;
+        margin: 10px 0;
+        font-size: 1.8rem;
+      }
+      .cancelCreate {
+        width: 30%;
+        font-size: 1.7rem;
+      }
+    }
+  }
+
+  .infoBox {
+    padding: 30px;
+    .titleRow {
+      .title {
+        font-size: 2rem;
+      }
+      i {
+        font-size: 1.6rem;
+      }
+    }
+    .content {
+      margin: 5px 0 5px 0;
+      color: rgb(80, 80, 80);
+      line-height: 1.3;
+      font-size: 1.5rem;
+    }
+    .edit {
+      input {
+        font-size: 1.5rem;
+        height: 1.5rem;
+        padding: 8px;
+      }
+      .actions {
+        padding: 30px 0 0 0;
+        width: 54%;
+        margin-left: 23%;
+        .cancel {
+          font-size: 1.4rem;
+          padding: 2px 20px 5px 20px;
+        }
+        .accept {
+          font-size: 1.4rem;
+          padding: 2px 20px 5px 20px;
+        }
+      }
+      textarea {
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+        min-height: 210px;
+      }
+    }
+  }
+}

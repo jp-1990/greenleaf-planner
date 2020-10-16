@@ -4,6 +4,7 @@ import AddCustomer from '../Components/Customers/AddCustomer/AddCustomer';
 import Search from '../Components/Customers/Search/Search';
 import CustomerList from '../Components/Customers/CustomerList/CustomerList';
 import CustomerInfo from '../Components/Customers/CustomerInfo/CustomerInfo'
+import CustomerCreate from '../Components/Customers/CustomerCreate/CustomerCreate'
 import Modal from '../Components/Modal/Modal'
 import {CustomersProvider} from '../Context/CustomersContext'
 
@@ -19,7 +20,7 @@ const Customers = () => {
           <Search setSearch={setSearch}/>
           <CustomerList search={search} setModalState={setModalState} />
           <Modal state={modalState} setState={setModalState}>
-            <CustomerInfo modalState={modalState} setModalState={setModalState}/>
+            {modalState?modalState==='create'?<CustomerCreate setModalState={setModalState}/>:<CustomerInfo modalState={modalState} setModalState={setModalState}/>:null}
           </Modal>
         </CustomersProvider>
       </div>
