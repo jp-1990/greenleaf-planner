@@ -1,7 +1,11 @@
 import React, {useState} from 'react'
 import classes from './CustomerCreate.module.scss'
+import {useCustomers} from '../../../Context/CustomersContext'
+import M from 'materialize-css';
 
 const CustomerCreate = ({setModalState}) => {
+  const setUpdateTrigger=useCustomers()[2]
+
   const [name, setName] = useState({
     prefix: '',
     forename:'',
@@ -64,7 +68,12 @@ const CustomerCreate = ({setModalState}) => {
 
   // create new customer handler
   const createNewCustomerHandler=()=>{
-    console.log('created customer');
+    const newCustomer={...name,...address,...contact,...frequency,...contract}
+    console.log(newCustomer);
+
+    setUpdateTrigger(prev=>!prev)
+    setModalState(prev=>!prev)
+    M.toast({html:'Created customer'})
   }
 
   // jsx for name entry

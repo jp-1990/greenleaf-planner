@@ -1195,9 +1195,11 @@ export const useCustomers = ()=>{
 
 export const CustomersProvider = ({children})=>{
   const [customerList,setCustomerList]=useState(JSON.parse(customerData))
+  const [updateTrigger, setUpdateTrigger]=useState(false)
 
+  console.log(updateTrigger);
   return (
-    <CustomersContext.Provider value={[customerList,setCustomerList]}>
+    <CustomersContext.Provider value={[customerList,setCustomerList,setUpdateTrigger]}>
       {children}
     </CustomersContext.Provider>
   )
