@@ -1,8 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import classes from '../CustomerInfo.module.scss'
 
 const Frequency = ({frequency, edit, setEdit}) => {
+  const [visitFrequency, setVisitFrequency] = useState({frequency:''})
   
+  // frequency of visits input handler
+  const handleFrequencyInput=(event,target)=>{
+    const value = event.target.value.replace(/\D/g,'')
+    setVisitFrequency(prev=>{
+      return {...prev, [target]:value}
+    })
+  }
+
   // handle clicks
   const handleEditClick=()=>{
     setEdit(prev=>!prev)
@@ -10,6 +19,7 @@ const Frequency = ({frequency, edit, setEdit}) => {
 
   const handleCancel=()=>{
     setEdit(false)
+    setVisitFrequency({frequency:''})
   }
 
   const handleConfirm=()=>{
@@ -34,7 +44,7 @@ const Frequency = ({frequency, edit, setEdit}) => {
         <h6 className={classes.title}>Visit frequency</h6>
       </div>
       <div className={classes.edit}>
-        <input placeholder='Visit frequency in days...'></input>  
+      <input placeholder='Visit frequency in days...' value={visitFrequency.frequency} onChange={(e)=>handleFrequencyInput(e,'frequency')}></input>  
         <div className={classes.actions}>
           <span onClick={handleCancel} className={classes.cancel}>cancel</span>
           <span onClick={handleConfirm} className={classes.accept}>accept</span>
