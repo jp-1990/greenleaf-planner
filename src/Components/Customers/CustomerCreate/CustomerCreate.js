@@ -2,22 +2,34 @@ import React, {useState} from 'react'
 import classes from './CustomerCreate.module.scss'
 
 const CustomerCreate = ({setModalState}) => {
-  const [address, setAddress] = useState({addressLine1:'',
-                                          addressLine2:'',
-                                          town:'',
-                                          county:'',
-                                          postcode:''})
-  
-  const [contact, setContact] = useState({home:'',
-                                          mobile:'',
-                                          email:''})
-
+  const [name, setName] = useState({
+    prefix: '',
+    forename:'',
+    surname:''
+  })
+  const [address, setAddress] = useState({
+    addressLine1:'',
+    addressLine2:'',
+    town:'',
+    county:'',
+    postcode:''
+  })
+  const [contact, setContact] = useState({
+    home:'',
+    mobile:'',
+    email:''
+  })
   const [frequency, setFrequency] = useState({frequency:''})
-
   const [contract, setContract] = useState({contractDetails:''})
 
-  console.log(address, contact,frequency,contract);
-  
+  // name input handler
+  const handleNameInput=(event, target)=>{
+    const value=event.target.value
+    setName(prev=>{
+      return {...prev, [target]:value}
+    })
+  }
+
   // address input handler
   const handleAddressInput=(event, target)=>{
     const value=event.target.value
@@ -54,6 +66,16 @@ const CustomerCreate = ({setModalState}) => {
   const createNewCustomerHandler=()=>{
     console.log('created customer');
   }
+
+  // jsx for name entry
+  const nameJsx = (
+      <div className={classes.createTitle}>
+        <h5>Name</h5>
+        <input placeholder='Title (e.g. Mr, Mrs, Mx)...' value={name.prefix} onChange={(e)=>handleNameInput(e,'prefix')}></input>
+        <input placeholder='Forename...' value={name.forename} onChange={(e)=>handleNameInput(e,'forename')}></input>
+        <input placeholder='Surname...' value={name.surname} onChange={(e)=>handleNameInput(e,'surname')}></input>
+      </div>
+      )
 
   // jsx for address entry
   const addressJsx=(
@@ -113,10 +135,7 @@ const CustomerCreate = ({setModalState}) => {
   return (
     <div className={classes.container}>
         <h4>Create new customer</h4>
-        <div className={classes.createTitle}>
-          <h5>Name</h5>
-          <input placeholder='Customer name...'></input>
-        </div>
+        {nameJsx}
         <div className={classes.details}>
           <div className={classes.contactDetails}>
             {addressJsx}
