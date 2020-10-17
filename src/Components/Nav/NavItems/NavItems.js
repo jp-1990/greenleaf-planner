@@ -2,8 +2,10 @@ import React from 'react';
 import NavItem from './NavItem/NavItem';
 import { NavLink } from 'react-router-dom';
 import classes from './NavItems.module.scss';
+import { useAuth } from '../../../Context/AuthContext';
 
 const NavItems = (props) => {
+  const { currentUser } = useAuth();
   return (
     <ul id='nav-mobile' className={`${classes[props.styles]} right`}>
       <NavItem scroll={'about'} menuFunc={props.menuFunc}>
@@ -28,7 +30,9 @@ const NavItems = (props) => {
         Contact
       </NavItem>
       <li>
-        <NavLink to='/signin'>Sign In</NavLink>
+        <NavLink to={currentUser ? '/home' : '/signin'}>
+          {currentUser ? 'Home' : 'Sign In'}
+        </NavLink>
       </li>
     </ul>
   );

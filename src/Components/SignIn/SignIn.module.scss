@@ -42,6 +42,26 @@
     border-radius: 10px;
     padding: 1px 10px 4px 10px;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .signinDisabled {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 300;
+    width: 30%;
+    min-width: 110px;
+    margin: 6px 0 10% 0;
+    color: #eeeeee;
+    border: 1px solid #707070;
+    background-color: rgb(180, 180, 180);
+    border-radius: 10px;
+    padding: 1px 10px 4px 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
   }
 }
 

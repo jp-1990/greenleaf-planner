@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 
 const customerData = JSON.stringify(
   [{
@@ -1197,7 +1197,10 @@ export const CustomersProvider = ({children})=>{
   const [customerList,setCustomerList]=useState(JSON.parse(customerData))
   const [updateTrigger, setUpdateTrigger]=useState(false)
 
-  console.log(updateTrigger);
+  useEffect(()=>{
+    console.log(updateTrigger);
+  },[updateTrigger])
+  
   return (
     <CustomersContext.Provider value={[customerList,setCustomerList,setUpdateTrigger]}>
       {children}

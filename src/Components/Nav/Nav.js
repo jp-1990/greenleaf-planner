@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import '../../sass/materialize.scss';
 import classes from './Nav.module.scss';
+import { useAuth } from '../../Context/AuthContext';
 
 const Nav = (props) => {
   const [menuState, setMenuState] = useState('closed');
@@ -9,6 +10,15 @@ const Nav = (props) => {
     window.innerWidth,
     window.innerHeight,
   ]);
+
+  const { currentUser } = useAuth();
+  const { signOut } = useAuth();
+  const history = useHistory();
+  // sign out
+  const signOutHandler = () => {
+    signOut();
+    history.push('/signin');
+  };
 
   // reset width and height on resize
   useEffect(() => {
@@ -50,18 +60,29 @@ const Nav = (props) => {
             id='nav-mobile'
             className={menuState === 'open' ? classes.mobNav : classes.None}
           >
-            <li className={props.active === 'home' ? 'active' : null}>
-              <NavLink to='/home'>Home</NavLink>
-            </li>
-            <li className={props.active === 'planner' ? 'active' : null}>
-              <NavLink to='/planner'>Planner</NavLink>
-            </li>
-            <li className={props.active === 'customers' ? 'active' : null}>
-              <NavLink to='/customers'>Customers</NavLink>
-            </li>
-            <li className={props.active === 'sign in' ? 'active' : null}>
-              <NavLink to='/signin'>Sign In</NavLink>
-            </li>
+            {currentUser ? (
+              <>
+                <li className={props.active === 'home' ? 'active' : null}>
+                  <NavLink to='/home'>Home</NavLink>
+                </li>
+                <li className={props.active === 'planner' ? 'active' : null}>
+                  <NavLink to='/planner'>Planner</NavLink>
+                </li>
+                <li className={props.active === 'customers' ? 'active' : null}>
+                  <NavLink to='/customers'>Customers</NavLink>
+                </li>
+                <li
+                  onClick={signOutHandler}
+                  className={props.active === 'sign out' ? 'active' : null}
+                >
+                  <a href='#!'>Sign out</a>
+                </li>
+              </>
+            ) : (
+              <li className={props.active === 'sign in' ? 'active' : null}>
+                <NavLink to='/signin'>Sign in</NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </>
@@ -73,18 +94,51 @@ const Nav = (props) => {
     return (
       <div className={`${classes.nav} col l10 offset-l2 xl9 offset-xl2`}>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
-          <li className={props.active === 'home' ? `active ${classes.active}` : null}>
-            <NavLink to='/home'>Home</NavLink>
-          </li>
-          <li className={props.active === 'planner' ? `active ${classes.active}` : null}>
-            <NavLink to='/planner'>Planner</NavLink>
-          </li>
-          <li className={props.active === 'customers' ? `active ${classes.active}` : null}>
-            <NavLink to='/customers'>Customers</NavLink>
-          </li>
-          <li className={props.active === 'sign in' ? `active ${classes.active}` : null}>
-            <NavLink to='/signin'>Sign In</NavLink>
-          </li>
+          {currentUser ? (
+            <>
+              <li
+                className={
+                  props.active === 'home' ? `active ${classes.active}` : null
+                }
+              >
+                <NavLink to='/home'>Home</NavLink>
+              </li>
+              <li
+                className={
+                  props.active === 'planner' ? `active ${classes.active}` : null
+                }
+              >
+                <NavLink to='/planner'>Planner</NavLink>
+              </li>
+              <li
+                className={
+                  props.active === 'customers'
+                    ? `active ${classes.active}`
+                    : null
+                }
+              >
+                <NavLink to='/customers'>Customers</NavLink>
+              </li>
+              <li
+                onClick={signOutHandler}
+                className={
+                  props.active === 'sign out'
+                    ? `active ${classes.active}`
+                    : null
+                }
+              >
+                <a href='#!'>Sign out</a>
+              </li>
+            </>
+          ) : (
+            <li
+              className={
+                props.active === 'sign in' ? `active ${classes.active}` : null
+              }
+            >
+              <NavLink to='/signin'>Sign in</NavLink>
+            </li>
+          )}
         </ul>
       </div>
     );
