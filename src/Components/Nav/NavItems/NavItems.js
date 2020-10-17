@@ -31,7 +31,7 @@ const NavItems = (props) => {
       </NavItem>
       <li>
         <NavLink to={currentUser ? '/home' : '/signin'}>
-          {currentUser ? 'Home' : 'Sign In'}
+          {currentUser ? 'Home' : 'Sign in'}
         </NavLink>
       </li>
     </ul>
