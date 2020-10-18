@@ -1,59 +1,69 @@
-import React,{useState} from 'react'
-import classes from '../CustomerInfo.module.scss'
+import React, { useState } from 'react';
+import classes from '../CustomerInfo.module.scss';
 
-const Frequency = ({frequency, edit, setEdit}) => {
-  const [visitFrequency, setVisitFrequency] = useState({frequency:''})
-  
+const Frequency = ({ frequency, edit, setEdit }) => {
+  const [visitFrequency, setVisitFrequency] = useState({ frequency: '' });
+
   // frequency of visits input handler
-  const handleFrequencyInput=(event,target)=>{
-    const value = event.target.value.replace(/\D/g,'')
-    setVisitFrequency(prev=>{
-      return {...prev, [target]:value}
-    })
-  }
+  const handleFrequencyInput = (event, target) => {
+    const value = event.target.value.replace(/\D/g, '');
+    setVisitFrequency((prev) => {
+      return { ...prev, [target]: value };
+    });
+  };
 
   // handle clicks
-  const handleEditClick=()=>{
-    setEdit(prev=>!prev)
-  }
+  const handleEditClick = () => {
+    setEdit((prev) => !prev);
+  };
 
-  const handleCancel=()=>{
-    setEdit(false)
-    setVisitFrequency({frequency:''})
-  }
+  const handleCancel = () => {
+    setEdit(false);
+    setVisitFrequency({ frequency: '' });
+  };
 
-  const handleConfirm=()=>{
-    return null
-  }
+  const handleConfirm = () => {
+    return null;
+  };
 
   // standard view
-  const defaultJsx=(
+  const defaultJsx = (
     <div className={classes.infoBox}>
       <div className={classes.titleRow}>
         <h6 className={classes.title}>Visit frequency</h6>
-        <i className='material-icons' onClick={handleEditClick}>edit</i>
+        <i className='material-icons' onClick={handleEditClick}>
+          edit
+        </i>
       </div>
-      <p className={classes.content}>{frequency}</p>
+      <p className={classes.content}>{frequency} days</p>
     </div>
-  )
+  );
 
   // editing view
-  const editJsx=(
-    <div className={classes.infoBox} style={{backgroundColor:'white'}}>
+  const editJsx = (
+    <div className={classes.infoBox} style={{ backgroundColor: 'white' }}>
       <div className={classes.titleRow}>
         <h6 className={classes.title}>Visit frequency</h6>
       </div>
       <div className={classes.edit}>
-      <input placeholder='Visit frequency in days...' value={visitFrequency.frequency} onChange={(e)=>handleFrequencyInput(e,'frequency')}></input>  
+        <input
+          placeholder='Visit frequency in days...'
+          value={visitFrequency.frequency}
+          onChange={(e) => handleFrequencyInput(e, 'frequency')}
+        ></input>
         <div className={classes.actions}>
-          <span onClick={handleCancel} className={classes.cancel}>cancel</span>
-          <span onClick={handleConfirm} className={classes.accept}>accept</span>
-        </div>  
+          <span onClick={handleCancel} className={classes.cancel}>
+            cancel
+          </span>
+          <span onClick={handleConfirm} className={classes.accept}>
+            accept
+          </span>
+        </div>
       </div>
     </div>
-  )
+  );
 
-  return edit?editJsx:defaultJsx
-}
+  return edit ? editJsx : defaultJsx;
+};
 
-export default Frequency
+export default Frequency;

@@ -4,7 +4,6 @@ import classes from './DaySelect.module.scss';
 
 const DaySelect = ({ color, activeDay, setActiveDay }) => {
   const daysJsx = days.map((el, i) => {
-    console.log(color);
     return (
       <p
         key={el}
