@@ -12,6 +12,14 @@ const CustomerInfo = ({ modalState, setModalState }) => {
   const [frequencyEdit, setFrequencyEdit] = useState(false);
   const [contractEdit, setContractEdit] = useState(false);
 
+  const { customerList } = useCustomers();
+  // find the customer active in the modal
+  const [activeCustomer, setActiveCustomer] = useState(
+    customerList.find((el) => {
+      return el.id === modalState;
+    })
+  );
+
   useEffect(() => {
     setAddressEdit(false);
     setContactEdit(false);
@@ -19,11 +27,13 @@ const CustomerInfo = ({ modalState, setModalState }) => {
     setContractEdit(false);
   }, [modalState]);
 
-  const { customerList } = useCustomers();
-  // find the customer active in the modal
-  const activeCustomer = customerList.find((el) => {
-    return el.id === modalState;
-  });
+  useEffect(() => {
+    setActiveCustomer(
+      customerList.find((el) => {
+        return el.id === modalState;
+      })
+    );
+  }, [customerList, modalState]);
 
   // delete customer
   const deleteCustomerHandler = () => {
@@ -48,6 +58,7 @@ const CustomerInfo = ({ modalState, setModalState }) => {
       <div className={classes.details}>
         <div className={classes.contactDetails}>
           <Address
+            id={modalState}
             edit={addressEdit}
             setEdit={setAddressEdit}
             address={{
@@ -59,6 +70,7 @@ const CustomerInfo = ({ modalState, setModalState }) => {
             }}
           />
           <Contact
+            id={modalState}
             edit={contactEdit}
             setEdit={setContactEdit}
             numbers={{
@@ -70,11 +82,13 @@ const CustomerInfo = ({ modalState, setModalState }) => {
         </div>
         <div className={classes.contractDetails}>
           <Frequency
+            id={modalState}
             edit={frequencyEdit}
             setEdit={setFrequencyEdit}
             frequency={activeCustomer.frequency || ''}
           />
           <Contract
+            id={modalState}
             edit={contractEdit}
             setEdit={setContractEdit}
             contract={activeCustomer.contractDetails || ''}

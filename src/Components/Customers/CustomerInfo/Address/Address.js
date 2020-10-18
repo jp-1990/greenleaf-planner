@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classes from '../CustomerInfo.module.scss';
+import { database } from '../../../../firebase';
 
-const Address = ({ address, edit, setEdit }) => {
+const Address = ({ id, address, edit, setEdit }) => {
   const [editAddress, setEditAddress] = useState({
     addressLine1: address.addressLine1,
     addressLine2: address.addressLine2,
@@ -45,17 +46,18 @@ const Address = ({ address, edit, setEdit }) => {
   const handleCancel = () => {
     setEdit(false);
     setEditAddress({
-      addressLine1: '',
-      addressLine2: '',
-      town: '',
-      county: '',
-      postcode: '',
+      addressLine1: address.addressLine1,
+      addressLine2: address.addressLine2,
+      town: address.town,
+      county: address.county,
+      postcode: address.postcode,
     });
   };
 
   // handler to confirm changes
   const handleConfirm = () => {
-    return null;
+    database.ref('customers').child(id).update(editAddress);
+    setEdit(false);
   };
 
   // standard view
