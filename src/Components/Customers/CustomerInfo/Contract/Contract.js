@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import classes from '../CustomerInfo.module.scss';
+import { database } from '../../../../firebase';
 
-const Contract = ({ contract, edit, setEdit }) => {
+const Contract = ({ id, contract, edit, setEdit }) => {
   // contract
+  console.log(contract);
   const contractArray = contract.split('\n');
   const contractOutput = contractArray.map((el) => el.trim());
 
-  const [editContract, setEditContract] = useState(contractOutput.join('\n'));
+  const [editContract, setEditContract] = useState({
+    contractDetails: contractOutput.join('\n'),
+  });
 
   // contract jsx for render
   const contractJsx = contractOutput.map((el, i) => {
@@ -24,16 +28,20 @@ const Contract = ({ contract, edit, setEdit }) => {
   };
 
   const handleCancel = () => {
-    setEditContract(contractOutput.join('\n'));
+    setEditContract({ contractDetails: contractOutput.join('\n') });
     setEdit(false);
   };
 
   const handleConfirm = () => {
-    return null;
+    database
+      .ref('customers')
+      .child(id)
+      .update({ contractDetails: editContract.contractDetails });
+    setEdit(false);
   };
 
   const handleTextEdit = (event) => {
-    setEditContract(event.target.value);
+    setEditContract({ contractDetails: event.target.value });
   };
 
   // standard view
@@ -50,13 +58,17 @@ const Contract = ({ contract, edit, setEdit }) => {
   );
 
   // editing view
+  console.log(editContract.contractDetails);
   const editJsx = (
     <div className={classes.infoBox} style={{ backgroundColor: 'white' }}>
       <div className={classes.titleRow}>
         <h6 className={classes.title}>Contract Details</h6>
       </div>
       <div className={classes.edit}>
-        <textarea value={editContract} onChange={handleTextEdit}></textarea>
+        <textarea
+          value={editContract.contractDetails}
+          onChange={handleTextEdit}
+        ></textarea>
         <div className={classes.actions}>
           <span onClick={handleCancel} className={classes.cancel}>
             cancel

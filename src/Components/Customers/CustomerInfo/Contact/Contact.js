@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classes from '../CustomerInfo.module.scss';
+import { database } from '../../../../firebase';
 
-const Contact = ({ numbers, email, edit, setEdit }) => {
+const Contact = ({ id, numbers, email, edit, setEdit }) => {
   const [contact, setContact] = useState({
     home: numbers.home,
     mobile: numbers.mobile,
@@ -48,7 +49,8 @@ const Contact = ({ numbers, email, edit, setEdit }) => {
   };
 
   const handleConfirm = () => {
-    return null;
+    database.ref('customers').child(id).update(contact);
+    setEdit(false);
   };
 
   // standard view

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classes from '../CustomerInfo.module.scss';
+import { database } from '../../../../firebase';
 
-const Frequency = ({ frequency, edit, setEdit }) => {
+const Frequency = ({ id, frequency, edit, setEdit }) => {
   const [visitFrequency, setVisitFrequency] = useState({ frequency: '' });
 
   // frequency of visits input handler
@@ -23,7 +24,8 @@ const Frequency = ({ frequency, edit, setEdit }) => {
   };
 
   const handleConfirm = () => {
-    return null;
+    database.ref('customers').child(id).update(visitFrequency);
+    setEdit(false);
   };
 
   // standard view
