@@ -11,6 +11,13 @@
   }
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
 @media only screen and (min-width: 600px) {
   .customerList {
     width: 90%;

@@ -19,9 +19,9 @@ const CustomerInfo = ({ modalState, setModalState }) => {
     setContractEdit(false);
   }, [modalState]);
 
-  const customers = useCustomers()[0];
+  const { customerList } = useCustomers();
   // find the customer active in the modal
-  const activeCustomer = customers.find((el) => {
+  const activeCustomer = customerList.find((el) => {
     return el.id === modalState;
   });
 
