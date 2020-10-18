@@ -7,7 +7,7 @@ import { dateFromString } from '../GlobalFunctions/dateOperations';
 
 const testVisit = () => {
   return dateFromString(
-    `${Math.floor(Math.random() * 6) + 28}/9/2020`
+    `${Math.floor(Math.random() * 6) + 18}/10/2020`
   ).toLocaleDateString();
 };
 

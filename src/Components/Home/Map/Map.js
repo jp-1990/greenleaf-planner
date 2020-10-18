@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import classes from './Map.module.scss';
 
-const Map = ({ settings, setSettings }) => {
+const Map = ({ color, settings, setSettings }) => {
   mapboxgl.accessToken =
     'pk.eyJ1IjoianAxOTkwIiwiYSI6ImNrZnZrM3pxcTBibmwycnA3NXNnbm9rNWgifQ.ST9pl9KeOpuNQyX8Y-jTcA';
 
@@ -18,7 +18,7 @@ const Map = ({ settings, setSettings }) => {
   return (
     <div
       id='map'
-      style={{ border: '1px solid red' }}
+      style={{ border: `1px solid ${color}` }}
       className={classes.map}
     ></div>
   );

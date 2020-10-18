@@ -6,7 +6,7 @@ import { capitaliseFirstLetters } from '../../../GlobalFunctions/stringOperation
 import { useJobs } from '../../../Context/JobsContext';
 import { useWeeks } from '../../../Context/WeeksContext';
 
-const AllocatedJobs = ({ details, setDetails, day, week, employee }) => {
+const AllocatedJobs = ({ color, details, setDetails, day, week, employee }) => {
   const jobs = useJobs()[0];
   const weeks = useWeeks();
 
@@ -107,13 +107,18 @@ const AllocatedJobs = ({ details, setDetails, day, week, employee }) => {
   if (day + 1 > buildDate.day) buildDate.month += 1;
 
   const date = `${buildDate.day}/${buildDate.month}/${buildDate.year}`;
-  const assignedJobs = new Jobs(jobs, date, employee);
+  const assignedJobs = new Jobs(jobs, date, employee.number);
 
   return (
-    <div className={classes.jobs} style={{ border: '1px solid red' }}>
-      <i className={`${classes.person} material-icons`}>person</i>
+    <div className={classes.jobs} style={{ border: `1px solid ${color}` }}>
+      <i
+        className={`${classes.person} material-icons`}
+        style={{ color: color }}
+      >
+        person
+      </i>
       <div className={classes.titleBox}>
-        <h5>Nick</h5>
+        <h5>{employee.name}</h5>
       </div>
       <div className={classes.timeEst}>{totalTime(assignedJobs.rawJobs)}</div>
       <div className={classes.jobContent}>{assignedJobs.jsx}</div>

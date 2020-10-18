@@ -25,7 +25,6 @@ const SignIn = () => {
       await signIn(email, password);
       setLoading(false);
       history.push('/home');
-      console.log('signed in');
     } catch {
       M.toast({ html: 'Failed to sign in, check email and password' });
     }

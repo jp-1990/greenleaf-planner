@@ -8,6 +8,7 @@ import DaySelect from '../Components/Home/DaySelect/DaySelect';
 import Map from '../Components/Home/Map/Map';
 import AllocatedJobs from '../Components/Home/AllocatedJobs/AllocatedJobs';
 import { currentDate } from '../GlobalFunctions/dateOperations';
+import { useAuth } from '../Context/AuthContext';
 
 const Home = () => {
   const [selectedWeek, setSelectedWeek] = useState(1);
@@ -18,14 +19,14 @@ const Home = () => {
     lat: 52.630331,
     zoom: 10,
   });
-
-  // const colors = {
-  //   Nick: '#f44336',
-  //   Zack: '#ffc107',
-  //   Neil: '#00bcd4',
-  //   James: '#0d47a1',
-  //   Alan: '#00c853',
-  // };
+  const { currentUser } = useAuth();
+  const colors = {
+    Nick: '#f44336',
+    Zack: '#ffc107',
+    Neil: '#00bcd4',
+    James: '#0d47a1',
+    Alan: '#00c853',
+  };
 
   return (
     <>
@@ -37,15 +38,29 @@ const Home = () => {
               activeWeek={selectedWeek}
               setActiveWeek={setSelectedWeek}
             />
-            <DaySelect activeDay={selectedDay} setActiveDay={setSelectedDay} />
+            <DaySelect
+              color={colors[currentUser.displayName]}
+              activeDay={selectedDay}
+              setActiveDay={setSelectedDay}
+            />
             <div className='container' style={{ display: 'flex' }}>
-              <Map settings={mapSettings} setSettings={setMapSettings} />
+              <Map
+                color={colors[currentUser.displayName]}
+                settings={mapSettings}
+                setSettings={setMapSettings}
+              />
               <AllocatedJobs
+                color={colors[currentUser.displayName]}
                 details={displayDetails}
                 setDetails={setDisplayDetails}
                 day={selectedDay}
                 week={selectedWeek}
-                employee={0}
+                employee={{
+                  number: Object.keys(colors).findIndex(
+                    (el) => el === currentUser.displayName
+                  ),
+                  name: currentUser.displayName,
+                }}
               />
             </div>
           </WeeksProvider>
