@@ -4,7 +4,6 @@ import { database } from '../../../../firebase';
 
 const Contract = ({ id, contract, edit, setEdit }) => {
   // contract
-  console.log(contract);
   const contractArray = contract.split('\n');
   const contractOutput = contractArray.map((el) => el.trim());
 
@@ -58,7 +57,6 @@ const Contract = ({ id, contract, edit, setEdit }) => {
   );
 
   // editing view
-  console.log(editContract.contractDetails);
   const editJsx = (
     <div className={classes.infoBox} style={{ backgroundColor: 'white' }}>
       <div className={classes.titleRow}>
