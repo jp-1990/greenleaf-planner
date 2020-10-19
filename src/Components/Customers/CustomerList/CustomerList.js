@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classes from './CustomerList.module.scss';
 import Customer from './Customer/Customer';
 import { useCustomers } from '../../../Context/CustomersContext';
@@ -7,7 +7,7 @@ const CustomerList = ({ search, setModalState }) => {
   const { customerList } = useCustomers();
 
   customerList.sort((a, b) => {
-    if (a.name < b.name) return -1;
+    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
     return 1;
   });
   const { loading } = useCustomers();
