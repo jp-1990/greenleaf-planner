@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { debounce } from 'lodash';
 import '../../../sass/materialize.scss';
 import classes from './WeekSelectorCSS/WeekCarousel.module.scss';
 import M from 'materialize-css';
@@ -24,13 +25,17 @@ const WeekCarousel = () => {
       indicators: false,
       numVisible: 7,
       noWrap: true,
-      onCycleTo: () => {
-        const instance = M.Carousel.getInstance(
-          document.querySelector('.weeks')
-        );
-        setActiveWeek(instance.center);
-        setActiveMonth(weeksArray[instance.center].month);
-      },
+      onCycleTo: debounce(
+        () => {
+          const instance = M.Carousel.getInstance(
+            document.querySelector('.weeks')
+          );
+          setActiveWeek(instance.center);
+          setActiveMonth(weeksArray[instance.center].month);
+        },
+        900,
+        { leading: false, trailing: true }
+      ),
     });
   }, []);
 
