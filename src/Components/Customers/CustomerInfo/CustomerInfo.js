@@ -5,6 +5,8 @@ import Contact from './Contact/Contact';
 import Frequency from './Frequency/Frequency';
 import Contract from './Contract/Contract';
 import { useCustomers } from '../../../Context/CustomersContext';
+import { database } from '../../../firebase';
+import M from 'materialize-css';
 
 const CustomerInfo = ({ modalState, setModalState }) => {
   const [addressEdit, setAddressEdit] = useState(false);
@@ -12,7 +14,7 @@ const CustomerInfo = ({ modalState, setModalState }) => {
   const [frequencyEdit, setFrequencyEdit] = useState(false);
   const [contractEdit, setContractEdit] = useState(false);
 
-  const { customerList } = useCustomers();
+  const { customerList, setUpdateTrigger } = useCustomers();
   // find the customer active in the modal
   const [activeCustomer, setActiveCustomer] = useState(
     customerList.find((el) => {
@@ -37,7 +39,10 @@ const CustomerInfo = ({ modalState, setModalState }) => {
 
   // delete customer
   const deleteCustomerHandler = () => {
-    console.log('deleted customer');
+    database.ref('customers').child(modalState).remove();
+    setUpdateTrigger((prev) => !prev);
+    setModalState(false);
+    M.toast({ html: `${activeCustomer.name} successfully deleted` });
   };
 
   // info box if an active customer is found from modalstate

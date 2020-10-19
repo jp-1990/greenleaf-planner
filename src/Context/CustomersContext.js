@@ -18,8 +18,6 @@ export const CustomersProvider = ({ children }) => {
   const [customerList, setCustomerList] = useState([]);
   const [updateTrigger, setUpdateTrigger] = useState(false);
 
-  useEffect(() => {}, [updateTrigger]);
-
   useEffect(() => {
     const output = [];
     const getCustomers = async () => {
@@ -32,7 +30,7 @@ export const CustomersProvider = ({ children }) => {
       setLoading(false);
     };
     getCustomers();
-  }, []);
+  }, [updateTrigger]);
 
   customers.on('child_changed', (data) => {
     setCustomerList((prev) => {

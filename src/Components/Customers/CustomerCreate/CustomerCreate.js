@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import classes from './CustomerCreate.module.scss';
 import M from 'materialize-css';
 import { database } from '../../../firebase';
+import { useCustomers } from '../../../Context/CustomersContext';
 
 const CustomerCreate = ({ setModalState }) => {
   const [name, setName] = useState({
     prefix: '',
     forename: '',
-    surname: '',
+    name: '',
   });
   const [address, setAddress] = useState({
     addressLine1: '',
@@ -23,6 +24,7 @@ const CustomerCreate = ({ setModalState }) => {
   });
   const [frequency, setFrequency] = useState({ frequency: '' });
   const [contract, setContract] = useState({ contractDetails: '' });
+  const { setUpdateTrigger } = useCustomers();
 
   // name input handler
   const handleNameInput = (event, target) => {
@@ -74,9 +76,9 @@ const CustomerCreate = ({ setModalState }) => {
       ...frequency,
       ...contract,
     };
-
     newCustomerRef.set({ ...newCustomer, id: newCustomerRef.key });
 
+    setUpdateTrigger((prev) => !prev);
     setModalState((prev) => !prev);
     M.toast({ html: 'Created customer' });
   };
@@ -97,8 +99,8 @@ const CustomerCreate = ({ setModalState }) => {
       ></input>
       <input
         placeholder='Surname...'
-        value={name.surname}
-        onChange={(e) => handleNameInput(e, 'surname')}
+        value={name.name}
+        onChange={(e) => handleNameInput(e, 'name')}
       ></input>
     </div>
   );
