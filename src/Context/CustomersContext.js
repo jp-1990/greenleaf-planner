@@ -23,7 +23,7 @@ export const CustomersProvider = ({ children }) => {
     const getCustomers = async () => {
       await customers.once('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
-          output.push({ ...childSnapshot.val(), id: childSnapshot.key });
+          output.push({ ...childSnapshot.val() });
         });
       });
       setCustomerList(output);

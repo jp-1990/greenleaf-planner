@@ -86,7 +86,7 @@ class Jobs {
 }
 
 const AssignedJobs = (props) => {
-  const jobs = useJobs()[0];
+  const { jobList } = useJobs();
 
   const totalTime = (assignedJobs) => {
     let result = 0;
@@ -109,7 +109,7 @@ const AssignedJobs = (props) => {
 
     const date = `${buildDate.day}/${buildDate.month}/${buildDate.year}`;
 
-    const assignedJobs = new Jobs(jobs, date, i);
+    const assignedJobs = new Jobs(jobList, date, i);
 
     return (
       <div key={el} className={classes.jobs}>

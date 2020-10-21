@@ -74,7 +74,7 @@ class JobList {
 
 const SelectedWeek = () => {
   const [day, setDay] = useState(0);
-  const jobs = useJobs()[0];
+  const { jobList } = useJobs();
 
   const colors = {
     Nick: '#f44336',
@@ -92,6 +92,7 @@ const SelectedWeek = () => {
       indicators: true,
       noWrap: true,
       onCycleTo: () => {
+        console.log('caroousel');
         const instance = M.Carousel.getInstance(
           document.querySelector('.selectedWeek')
         );
@@ -130,6 +131,7 @@ const SelectedWeek = () => {
   const weeksArray = useWeeks();
   const activeWeek = useSelectedWeek()[0];
 
+  const start = Date.now();
   // get jobs for the selected week
   let incrementMonth = 1;
   let monthChanged = false;
@@ -156,12 +158,12 @@ const SelectedWeek = () => {
       }
 
       return new JobList(
-        jobs,
+        jobList,
         `${el}/${month + incrementMonth}/${yearChanged ? year + 1 : year}`
       );
     }
   );
-
+  const end = Date.now();
   // generate day components for mon-sat
   const daysOfWeek = days.map((el, i) => {
     return (
@@ -175,6 +177,7 @@ const SelectedWeek = () => {
     );
   });
 
+  console.log((end - start) / 1000);
   return (
     <>
       <div className='container'>

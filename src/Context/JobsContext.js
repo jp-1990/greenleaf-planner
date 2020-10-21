@@ -1,86 +1,77 @@
-import React, { useContext, useState } from 'react';
-import { dateFromString } from '../GlobalFunctions/dateOperations';
-
-// ==========================================================================
-// test data
-// ==========================================================================
-
-const testVisit = () => {
-  return dateFromString(
-    `${Math.floor(Math.random() * 6) + 18}/10/2020`
-  ).toLocaleDateString();
-};
-
-const customerNames = [
-  'churchfield green',
-  'spicer',
-  'mercer',
-  'kendrick',
-  'richmond',
-  'patient',
-  'regal',
-  'sutherland court',
-  'dormy house',
-  'gray',
-];
-
-const jobLocations = [
-  'mundesley',
-  'overstand',
-  'norwich',
-  'cromer',
-  'north walsham',
-  'holt',
-  'sheringham',
-  'worstead',
-  'aylsham',
-];
-
-const testData = [];
-const generateCutomers = (day) => {
-  for (let i = 0; i < Math.floor(Math.random() * 61 + 10); i++) {
-    testData.push({
-      name: customerNames[Math.floor(Math.random() * 9)],
-      id: `${i}${day}`,
-      location: jobLocations[Math.floor(Math.random() * 8)],
-      rebook: Math.floor(Math.random() * 14) + 7,
-      prevVisit: '01/09/2020',
-      nextVisit: testVisit(),
-      assigned: Math.floor(Math.random() * 5),
-      time: Math.floor(Math.random() * 170) + 10,
-      notes: 'Grass cutting, hedging',
-      address: '405 Somestreet, Norwich, Norfolk',
-    });
-  }
-};
-
-const testDays = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-testDays.forEach((el) => {
-  generateCutomers(el);
-});
-
-// ==========================================================================
+import React, { useContext, useState, useEffect } from 'react';
+import { database } from '../firebase';
 
 const JobsContext = React.createContext();
-
 export const useJobs = () => {
   return useContext(JobsContext);
 };
 
+// database ref
+const jobsDatabase = database.ref('jobs/2020');
+
 export const JobsProvider = ({ children }) => {
-  const [jobs, setJobs] = useState(testData);
+  const [jobList, setJobList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [updateTrigger, setUpdateTrigger] = useState(false);
+
+  useEffect(() => {
+    const output = [];
+    const getJobsList = async () => {
+      await jobsDatabase.once('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          output.push({ ...childSnapshot.val() });
+        });
+      });
+      setJobList(output);
+      setLoading(false);
+    };
+    getJobsList();
+  }, [updateTrigger]);
+
+  jobsDatabase.on('child_changed', (data) => {
+    setJobList((prev) => {
+      const newData = [...prev];
+      const index = newData.findIndex((el) => el.id === data.val().id);
+      newData[index] = data.val();
+      return newData;
+    });
+  });
+
+  const value = {
+    jobList,
+    setJobList,
+    setUpdateTrigger,
+    loading,
+  };
+
+  const loadingStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '400px',
+  };
+
+  const loadingJsx = (
+    <div style={loadingStyle}>
+      <div className='preloader-wrapper big active'>
+        <div className='spinner-layer spinner-green-only'>
+          <div className='circle-clipper left'>
+            <div className='circle'></div>
+          </div>
+          <div className='gap-patch'>
+            <div className='circle'></div>
+          </div>
+          <div className='circle-clipper right'>
+            <div className='circle'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <JobsContext.Provider value={[jobs, setJobs]}>
-      {children}
+    <JobsContext.Provider value={value}>
+      {jobList.length === 0 ? loadingJsx : children}
     </JobsContext.Provider>
   );
 };

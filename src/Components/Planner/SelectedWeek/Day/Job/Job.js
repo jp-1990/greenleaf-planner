@@ -11,15 +11,17 @@ const Job = (props) => {
   const [complete, setComplete] = useState(false);
   const [menuStyle, setMenuStyle] = useState('default');
   const [iconColor, setIconColor] = useState('#000000');
-  const [jobs, setJobs] = useJobs();
+  const { jobList } = useJobs();
 
   // if assigned, icon color should be that of relevant employee
   useEffect(() => {
     const colors = Object.values(props.colors).map((el) => el);
     const newColor =
-      colors[jobs[jobs.findIndex((el) => el['id'] === props.id)]['assigned']];
+      colors[
+        jobList[jobList.findIndex((el) => el['id'] === props.id)]['assigned']
+      ];
     setIconColor(newColor);
-  }, [props.colors, props.id, jobs]);
+  }, [props.colors, props.id, jobList]);
 
   // toggle menu
   const dropdownHandler = () => {
@@ -27,39 +29,39 @@ const Job = (props) => {
     setMenuToggle((prevState) => !prevState);
   };
 
-  // send job to next/prev day
-  const moveJobHandler = (operator) => {
-    const newDate = incrementDay(props.nextVisit, operator);
+  // // send job to next/prev day
+  // const moveJobHandler = (operator) => {
+  //   const newDate = incrementDay(props.nextVisit, operator);
 
-    const newState = [...jobs];
-    newState[
-      newState.findIndex((el) => el['id'] === props.id)
-    ].nextVisit = newDate;
-    newState[newState.findIndex((el) => el['id'] === props.id)].assigned = -1;
+  //   const newState = [...jobList];
+  //   newState[
+  //     newState.findIndex((el) => el['id'] === props.id)
+  //   ].nextVisit = newDate;
+  //   newState[newState.findIndex((el) => el['id'] === props.id)].assigned = -1;
 
-    setJobs(newState);
-  };
+  //   setJobs(newState);
+  // };
 
-  // assign job to employee
-  const assignJobHandler = (name, index) => {
-    setJobs((prev) => {
-      const newState = [...prev];
-      newState[newState.findIndex((el) => el['id'] === props.id)][
-        'assigned'
-      ] = index;
-      return newState;
-    });
+  // // assign job to employee
+  // const assignJobHandler = (name, index) => {
+  //   setJobs((prev) => {
+  //     const newState = [...prev];
+  //     newState[newState.findIndex((el) => el['id'] === props.id)][
+  //       'assigned'
+  //     ] = index;
+  //     return newState;
+  //   });
 
-    setIconColor(props.colors[name]);
+  //   setIconColor(props.colors[name]);
 
-    M.toast({
-      html: `${capitaliseFirstLetters(props.name)} assigned to ${name} for ${
-        props.day
-      }`,
-      displayLength: 2000,
-    });
-    dropdownHandler();
-  };
+  //   M.toast({
+  //     html: `${capitaliseFirstLetters(props.name)} assigned to ${name} for ${
+  //       props.day
+  //     }`,
+  //     displayLength: 2000,
+  //   });
+  //   dropdownHandler();
+  // };
 
   // rebook job
   const rebookingHandler = () => {
@@ -78,22 +80,22 @@ const Job = (props) => {
     setComplete((prevState) => !prevState);
   };
 
-  // delete job handler
-  const deleteHandler = () => {
-    const newState = [...jobs];
-    newState.splice(
-      newState.findIndex((el) => el.id === props.id),
-      1
-    );
-    setJobs(newState);
+  // // delete job handler
+  // const deleteHandler = () => {
+  //   const newState = [...jobList];
+  //   newState.splice(
+  //     newState.findIndex((el) => el.id === props.id),
+  //     1
+  //   );
+  //   setJobs(newState);
 
-    M.toast({
-      html: `${capitaliseFirstLetters(
-        props.name
-      )} deleted from booking schedule`,
-      displayLength: 2000,
-    });
-  };
+  //   M.toast({
+  //     html: `${capitaliseFirstLetters(
+  //       props.name
+  //     )} deleted from booking schedule`,
+  //     displayLength: 2000,
+  //   });
+  // };
 
   // jsx for menu to assign jobs
   const assignJobMenuJsx = () => {
@@ -101,7 +103,7 @@ const Job = (props) => {
       return (
         <i
           key={el}
-          onClick={() => assignJobHandler(el, i)}
+          onClick={() => null}
           style={{ color: props.colors[el] }}
           className={`material-icons ${classes.personAdd}`}
         >
@@ -124,10 +126,7 @@ const Job = (props) => {
       className={classes.jobCard}
     >
       <div className={classes.top}>
-        <i
-          onClick={() => moveJobHandler('-')}
-          className={`material-icons ${classes.prev}`}
-        >
+        <i onClick={() => null} className={`material-icons ${classes.prev}`}>
           chevron_left
         </i>
         <h6 className='truncate'>{props.name}</h6>
@@ -140,16 +139,10 @@ const Job = (props) => {
             replay
           </i>
         </div>
-        <i
-          onClick={deleteHandler}
-          className={`material-icons ${classes.clear}`}
-        >
+        <i onClick={null} className={`material-icons ${classes.clear}`}>
           clear
         </i>
-        <i
-          onClick={() => moveJobHandler('+')}
-          className={`material-icons ${classes.next}`}
-        >
+        <i onClick={() => null} className={`material-icons ${classes.next}`}>
           chevron_right
         </i>
       </div>
