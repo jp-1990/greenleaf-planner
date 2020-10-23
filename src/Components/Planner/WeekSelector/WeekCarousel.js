@@ -18,7 +18,7 @@ const WeekCarousel = () => {
   const { activeWeek, setActiveWeek } = useSelectedWeek();
 
   useEffect(() => {
-    let elems = document.querySelectorAll('.weeks');
+    let elems = document.querySelector('.weeks');
     M.Carousel.init(elems, {
       fullWidth: false,
       indicators: false,
@@ -40,7 +40,13 @@ const WeekCarousel = () => {
 
   useEffect(() => {
     const instance = M.Carousel.getInstance(document.querySelector('.weeks'));
-    instance.set(activeWeek);
+    // issue with Materialize carousel where navigating back to the page overlays a second
+    // carousel under the first. Could not identify the problem, but scrolling first to
+    // week 28 of the current year, then to current week removes the overlay effect for some reason
+    setTimeout(() => {
+      instance.set(activeWeek);
+    }, 200);
+    instance.set(28);
   }, []);
 
   // create cards based on weeks array
