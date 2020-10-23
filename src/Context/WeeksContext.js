@@ -1,59 +1,57 @@
 import React, { useContext, useState } from 'react';
-import { monthOverflowCheck } from '../GlobalFunctions/dateOperations';
 
 // current year
 const activeYear = new Date(Date.now()).getFullYear();
 
-// get first monday of given month in given year
-const getFirstMonday = (year, month) => {
-  for (let i = 1; i < 8; i++) {
-    if (new Date(year, month, i).getDay() === 1) {
-      return i;
-    }
+// current date (midnight)
+const today = new Date(
+  activeYear,
+  new Date(Date.now()).getMonth(),
+  new Date(Date.now()).getDate()
+);
+
+// get array of all dates in given year
+const getAllDatesInYear = (year) => {
+  const start = new Date(year, 0, 1);
+  const end = new Date(year, 11, 31);
+  const datesArray = [];
+  for (
+    let date = new Date(start);
+    date <= end;
+    date.setDate(date.getDate() + 1)
+  ) {
+    datesArray.push(new Date(date));
   }
+  return datesArray;
 };
 
-// current week of the year
-const curWeek = () => {
-  const start = new Date(activeYear, 0, getFirstMonday(activeYear, 0) - 1);
-  const now = new Date(Date.now());
-  const numberOfDays = Math.floor((now - start) / (24 * 60 * 60 * 1000));
-  return Math.ceil(numberOfDays / 7) + 1;
-};
-
-// populate an array of all the weeks in the given year
-const weeks = (year) => {
-  const result = [];
-  // iterate through months
-  for (let i = 0; i < 12; i++) {
-    // get first monday of the month
-    let monday = getFirstMonday(year, i);
-    //iterate through days in month and add mondays to array
-    for (let j = 1; j <= new Date(year, i + 1, 0).getDate(); j++) {
-      if (j === monday) {
-        result.push({
-          year: year,
-          month: i,
-          dates: {
-            monday: j,
-            tuesday: monthOverflowCheck(j + 1, i, year).date,
-            wednesday: monthOverflowCheck(j + 2, i, year).date,
-            thursday: monthOverflowCheck(j + 3, i, year).date,
-            friday: monthOverflowCheck(j + 4, i, year).date,
-            saturday: monthOverflowCheck(j + 5, i, year).date,
-          },
-        });
-        // add 7 to monday to get the following monday
-        monday += 7;
-      }
-    }
+// create an array of all weeks in the given year
+const weeksInYear = (year) => {
+  const datesArray = getAllDatesInYear(year);
+  const startingIndex = datesArray.findIndex((el) => el.getDay() === 1);
+  const output = [];
+  for (let i = startingIndex; i <= datesArray.length; i += 7) {
+    let weekStart = new Date(datesArray[i]);
+    output.push({
+      monday: datesArray[i],
+      tuesday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+      wednesday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+      thursday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+      friday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+      saturday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+      sunday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+    });
   }
-  return result;
+  return output;
 };
 
 // generate array of weeks from prev, current and next years
 const weeksPrevCurNextYear = (year) => {
-  return [...weeks(year - 1), ...weeks(year), ...weeks(year + 1)];
+  return [
+    ...weeksInYear(year - 1),
+    ...weeksInYear(year),
+    ...weeksInYear(year + 1),
+  ];
 };
 
 const WeeksContext = React.createContext();
@@ -68,12 +66,19 @@ export const useSelectedWeek = () => {
 };
 
 export const WeeksProvider = ({ children }) => {
-  const [activeWeek, setActiveWeek] = useState(50 + curWeek());
   const weeksArray = weeksPrevCurNextYear(activeYear);
+
+  // find current week index in weeksArray
+  const currentWeek = weeksArray.findIndex(
+    (el) =>
+      Object.values(el).findIndex((e) => e.getTime() === today.getTime()) !== -1
+  );
+
+  const [activeWeek, setActiveWeek] = useState(currentWeek);
 
   return (
     <WeeksContext.Provider value={weeksArray}>
-      <SelectedWeekContext.Provider value={[activeWeek, setActiveWeek]}>
+      <SelectedWeekContext.Provider value={{ activeWeek, setActiveWeek }}>
         {children}
       </SelectedWeekContext.Provider>
     </WeeksContext.Provider>

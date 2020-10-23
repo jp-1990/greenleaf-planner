@@ -5,6 +5,7 @@ import SelectedWeek from '../Components/Planner/SelectedWeek/SelectedWeek';
 
 import { WeeksProvider } from '../Context/WeeksContext';
 import { JobsProvider } from '../Context/JobsContext';
+import { StaffProvider } from '../Context/StaffContext';
 
 const Planner = () => {
   return (
@@ -13,7 +14,9 @@ const Planner = () => {
       <WeeksProvider>
         <WeekCarousel />
         <JobsProvider>
-          <SelectedWeek />
+          <StaffProvider>
+            <SelectedWeek />
+          </StaffProvider>
         </JobsProvider>
       </WeeksProvider>
     </>

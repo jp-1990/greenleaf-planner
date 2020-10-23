@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 import '../../../sass/materialize.scss';
-import classes from './WeekSelectorCSS/WeekCarousel.module.scss';
 import M from 'materialize-css';
+import classes from './WeekSelectorCSS/WeekCarousel.module.scss';
 import SelectedMonth from './SelectedMonth';
 import WeekCard from './WeekCard';
 import { useWeeks, useSelectedWeek } from '../../../Context/WeeksContext';
@@ -15,8 +15,7 @@ const WeekCarousel = () => {
 
   const activeYear = new Date(Date.now()).getFullYear();
   const weeksArray = useWeeks();
-  const activeWeek = useSelectedWeek()[0];
-  const setActiveWeek = useSelectedWeek()[1];
+  const { activeWeek, setActiveWeek } = useSelectedWeek();
 
   useEffect(() => {
     let elems = document.querySelectorAll('.weeks');
@@ -31,9 +30,9 @@ const WeekCarousel = () => {
             document.querySelector('.weeks')
           );
           setActiveWeek(instance.center);
-          setActiveMonth(weeksArray[instance.center].month);
+          setActiveMonth(weeksArray[instance.center].monday.getMonth());
         },
-        900,
+        1000,
         { leading: false, trailing: true }
       ),
     });
@@ -49,10 +48,10 @@ const WeekCarousel = () => {
     const result = array.map((el) => {
       return (
         <span
-          key={`${el.month} + ${el.year} + ${el.dates.monday}`}
+          key={el.monday}
           className={`carousel-item ${classes.weekContainer}`}
         >
-          <WeekCard year={el.year} month={el.month} dates={el.dates} />
+          <WeekCard dates={el} />
         </span>
       );
     });
@@ -96,7 +95,10 @@ const WeekCarousel = () => {
         activeMonthHandler={(el) => {
           setActiveMonth(el);
           const index = weeksArray.findIndex((e) => {
-            return e.month === el && e.year === activeYear;
+            return (
+              e.monday.getMonth() === el &&
+              e.monday.getFullYear() === activeYear
+            );
           });
           M.Carousel.getInstance(document.querySelector('.weeks')).set(index);
         }}

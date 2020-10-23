@@ -1,13 +1,14 @@
 import React from 'react';
-import '../../../../../sass/materialize.scss';
+import '../../../../sass/materialize.scss';
 import classes from './AssignedJobs.module.scss';
 import AssignedJob from './AssignedJob/AssignedJob';
 import {
   days,
   dateFromString,
-} from '../../../../../GlobalFunctions/dateOperations';
-import { useJobs } from '../../../../../Context/JobsContext';
-import { capitaliseFirstLetters } from '../../../../../GlobalFunctions/stringOperations';
+} from '../../../../GlobalFunctions/dateOperations';
+import { useJobs } from '../../../../Context/JobsContext';
+import { useStaff } from '../../../../Context/StaffContext';
+import { capitaliseFirstLetters } from '../../../../GlobalFunctions/stringOperations';
 
 class Jobs {
   constructor(jobsArray, date, employee) {
@@ -28,7 +29,7 @@ class Jobs {
   }
 
   setDate() {
-    return (this.date = dateFromString(this.date).toLocaleDateString());
+    return this.date.toLocaleDateString();
   }
 
   setlocations() {
@@ -87,6 +88,7 @@ class Jobs {
 
 const AssignedJobs = (props) => {
   const { jobList } = useJobs();
+  const { colors } = useStaff();
 
   const totalTime = (assignedJobs) => {
     let result = 0;
@@ -98,18 +100,12 @@ const AssignedJobs = (props) => {
       : `Time est. ${Math.floor(result / 60)} hours ${result % 60} mins`;
   };
 
-  const workPlan = Object.keys(props.colors).map((el, i) => {
-    // elements for date, handling weeks that span two months
-    const buildDate = {
-      day: props.week.dates[days[props.day].toLowerCase()],
-      month: props.week.month + 1,
-      year: props.week.year,
-    };
-    if (props.day + 1 > buildDate.day) buildDate.month += 1;
-
-    const date = `${buildDate.day}/${buildDate.month}/${buildDate.year}`;
-
-    const assignedJobs = new Jobs(jobList, date, i);
+  const workPlan = Object.keys(colors).map((el, i) => {
+    const assignedJobs = new Jobs(
+      jobList,
+      props.week[days[props.day].toLowerCase()],
+      i
+    );
 
     return (
       <div key={el} className={classes.jobs}>
@@ -118,10 +114,7 @@ const AssignedJobs = (props) => {
             mail
           </i>
           <h5>{el}</h5>
-          <i
-            style={{ color: `${props.colors[el]}` }}
-            className='material-icons'
-          >
+          <i style={{ color: `${colors[el]}` }} className='material-icons'>
             person
           </i>
         </div>

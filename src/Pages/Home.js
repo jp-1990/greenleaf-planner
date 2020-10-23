@@ -9,6 +9,7 @@ import Map from '../Components/Home/Map/Map';
 import AllocatedJobs from '../Components/Home/AllocatedJobs/AllocatedJobs';
 import { currentDate } from '../GlobalFunctions/dateOperations';
 import { useAuth } from '../Context/AuthContext';
+import { StaffProvider, useStaff } from '../Context/StaffContext';
 
 const Home = () => {
   const [selectedWeek, setSelectedWeek] = useState(1);
@@ -20,13 +21,7 @@ const Home = () => {
     zoom: 10,
   });
   const { currentUser } = useAuth();
-  const colors = {
-    Nick: '#f44336',
-    Zack: '#ffc107',
-    Neil: '#00bcd4',
-    James: '#0d47a1',
-    Alan: '#00c853',
-  };
+  const { colors } = useStaff();
 
   return (
     <>
@@ -34,35 +29,37 @@ const Home = () => {
       <Background>
         <JobsProvider>
           <WeeksProvider>
-            <VisibleWeeks
-              activeWeek={selectedWeek}
-              setActiveWeek={setSelectedWeek}
-            />
-            <DaySelect
-              color={colors[currentUser.displayName]}
-              activeDay={selectedDay}
-              setActiveDay={setSelectedDay}
-            />
-            <div className='container' style={{ display: 'flex' }}>
-              <Map
-                color={colors[currentUser.displayName]}
-                settings={mapSettings}
-                setSettings={setMapSettings}
+            <StaffProvider>
+              <VisibleWeeks
+                activeWeek={selectedWeek}
+                setActiveWeek={setSelectedWeek}
               />
-              <AllocatedJobs
+              <DaySelect
                 color={colors[currentUser.displayName]}
-                details={displayDetails}
-                setDetails={setDisplayDetails}
-                day={selectedDay}
-                week={selectedWeek}
-                employee={{
-                  number: Object.keys(colors).findIndex(
-                    (el) => el === currentUser.displayName
-                  ),
-                  name: currentUser.displayName,
-                }}
+                activeDay={selectedDay}
+                setActiveDay={setSelectedDay}
               />
-            </div>
+              <div className='container' style={{ display: 'flex' }}>
+                <Map
+                  color={colors[currentUser.displayName]}
+                  settings={mapSettings}
+                  setSettings={setMapSettings}
+                />
+                <AllocatedJobs
+                  color={colors[currentUser.displayName]}
+                  details={displayDetails}
+                  setDetails={setDisplayDetails}
+                  day={selectedDay}
+                  week={selectedWeek}
+                  employee={{
+                    number: Object.keys(colors).findIndex(
+                      (el) => el === currentUser.displayName
+                    ),
+                    name: currentUser.displayName,
+                  }}
+                />
+              </div>
+            </StaffProvider>
           </WeeksProvider>
         </JobsProvider>
       </Background>

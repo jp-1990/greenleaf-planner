@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './AssignedJob.module.scss';
-import { capitaliseFirstLetters } from '../../../../../../GlobalFunctions/stringOperations';
-import { useJobs } from '../../../../../../Context/JobsContext';
+import { capitaliseFirstLetters } from '../../../../../GlobalFunctions/stringOperations';
+import { useJobs } from '../../../../../Context/JobsContext';
 
 const AssignedJob = ({ id, title, time, location, notes }) => {
   const [noteValue, setNoteValue] = useState('');

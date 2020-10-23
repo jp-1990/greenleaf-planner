@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Job.module.scss';
 import M from 'materialize-css';
-import { useJobs } from '../../../../../Context/JobsContext';
-import { capitaliseFirstLetters } from '../../../../../GlobalFunctions/stringOperations';
-import { incrementDay } from '../../../../../GlobalFunctions/dateOperations';
+import { useJobs } from '../../../../../../Context/JobsContext';
+import { capitaliseFirstLetters } from '../../../../../../GlobalFunctions/stringOperations';
+import { incrementDay } from '../../../../../../GlobalFunctions/dateOperations';
+import { useStaff } from '../../../../../../Context/StaffContext';
 
 const Job = (props) => {
   const [menuToggle, setMenuToggle] = useState(false);
@@ -12,16 +13,17 @@ const Job = (props) => {
   const [menuStyle, setMenuStyle] = useState('default');
   const [iconColor, setIconColor] = useState('#000000');
   const { jobList } = useJobs();
+  const { colors } = useStaff();
 
   // if assigned, icon color should be that of relevant employee
   useEffect(() => {
-    const colors = Object.values(props.colors).map((el) => el);
+    const colorsValue = Object.values(colors).map((el) => el);
     const newColor =
-      colors[
+      colorsValue[
         jobList[jobList.findIndex((el) => el['id'] === props.id)]['assigned']
       ];
     setIconColor(newColor);
-  }, [props.colors, props.id, jobList]);
+  }, [colors, props.id, jobList]);
 
   // toggle menu
   const dropdownHandler = () => {
@@ -52,7 +54,7 @@ const Job = (props) => {
   //     return newState;
   //   });
 
-  //   setIconColor(props.colors[name]);
+  //   setIconColor(colors[name]);
 
   //   M.toast({
   //     html: `${capitaliseFirstLetters(props.name)} assigned to ${name} for ${
@@ -99,12 +101,12 @@ const Job = (props) => {
 
   // jsx for menu to assign jobs
   const assignJobMenuJsx = () => {
-    return Object.keys(props.colors).map((el, i) => {
+    return Object.keys(colors).map((el, i) => {
       return (
         <i
           key={el}
           onClick={() => null}
-          style={{ color: props.colors[el] }}
+          style={{ color: colors[el] }}
           className={`material-icons ${classes.personAdd}`}
         >
           person

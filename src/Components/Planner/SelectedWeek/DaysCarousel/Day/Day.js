@@ -2,8 +2,8 @@ import React from 'react';
 import Job from './Job/Job';
 import classes from './Day.module.scss';
 
-const Day = (props) => {
-  const jobs = props.jobs.sortedJobs;
+const Day = ({ jobsArray, day }) => {
+  const jobs = jobsArray.sortedJobs;
 
   // merge sorted jobs into one array
   const mergeJobs = (jobs) => {
@@ -48,7 +48,7 @@ const Day = (props) => {
       // if plain text, return that, else return job component
       if (!e.name) {
         return (
-          <p className={`${classes.p}`} key={i}>
+          <p className={`${classes.p}`} key={e + i}>
             <span>{e}</span>
           </p>
         );
@@ -64,8 +64,7 @@ const Day = (props) => {
           nextVisit={e.nextVisit}
           assigned={e.assigned}
           time={e.time}
-          day={props.day}
-          colors={props.colors}
+          day={day}
         ></Job>
       );
     });
@@ -76,13 +75,17 @@ const Day = (props) => {
       className={`carousel-item grey lighten-3 grey-text text-darken-3 ${classes.scrollable}`}
       href='#one!'
     >
-      <div className={classes.row}>
-        <div className={classes.col}>{jobsJsx[0]}</div>
-        <div className={classes.col}>{jobsJsx[1]} </div>
-        <div className={classes.col}>{jobsJsx[2]} </div>
-        <div className={classes.col}>{jobsJsx[3]} </div>
-        <div className={classes.col}>{jobsJsx[4]} </div>
-      </div>
+      {jobsJsx.length === 1 ? (
+        <h2 style={{ marginBottom: '50px', padding: '11%' }}>[ No Jobs ]</h2>
+      ) : (
+        <div className={classes.row}>
+          <div className={classes.col}>{jobsJsx[0]}</div>
+          <div className={classes.col}>{jobsJsx[1]} </div>
+          <div className={classes.col}>{jobsJsx[2]} </div>
+          <div className={classes.col}>{jobsJsx[3]} </div>
+          <div className={classes.col}>{jobsJsx[4]} </div>
+        </div>
+      )}
       <div className='col s12 green lighten-1 green-text text-lighten-1'>.</div>
     </div>
   );
