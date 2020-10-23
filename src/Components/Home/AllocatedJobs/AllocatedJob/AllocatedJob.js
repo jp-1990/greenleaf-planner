@@ -7,13 +7,20 @@ const AllocatedJob = ({
   time,
   id,
   address,
+  numbers,
   notes,
   details,
   setDetails,
 }) => {
   const displayDetails =
     id === details ? (
-      <JobDetails title={title} notes={notes} time={time} contact={address} />
+      <JobDetails
+        title={title}
+        notes={notes}
+        time={time}
+        address={address}
+        numbers={numbers}
+      />
     ) : null;
 
   const displayDetailsHandler = () => {

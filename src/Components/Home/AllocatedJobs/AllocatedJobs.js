@@ -5,10 +5,19 @@ import { dateFromString, days } from '../../../GlobalFunctions/dateOperations';
 import { capitaliseFirstLetters } from '../../../GlobalFunctions/stringOperations';
 import { useJobs } from '../../../Context/JobsContext';
 import { useWeeks } from '../../../Context/WeeksContext';
+import { useStaff } from '../../../Context/StaffContext';
 
-const AllocatedJobs = ({ color, details, setDetails, day, week, employee }) => {
-  const jobs = useJobs()[0];
+const AllocatedJobs = ({ user, details, setDetails, day, week }) => {
+  const { jobList } = useJobs();
   const weeks = useWeeks();
+
+  const { colors } = useStaff();
+  const color = colors[user];
+
+  const employee = {
+    number: Object.keys(colors).findIndex((el) => el === user),
+    name: user,
+  };
 
   class Jobs {
     constructor(jobsArray, date, employee) {
@@ -79,6 +88,7 @@ const AllocatedJobs = ({ color, details, setDetails, day, week, employee }) => {
             title={capitaliseFirstLetters(el.name)}
             time={el.time}
             address={el.address}
+            numbers={el.numbers}
             notes={el.notes}
             details={details}
             setDetails={setDetails}
@@ -98,16 +108,8 @@ const AllocatedJobs = ({ color, details, setDetails, day, week, employee }) => {
       : `Time est. ${Math.floor(result / 60)} hours ${result % 60} mins`;
   };
 
-  // elements for date, handling weeks that span two months
-  const buildDate = {
-    day: weeks[week].dates[days[day].toLowerCase()],
-    month: weeks[week].month + 1,
-    year: weeks[week].year,
-  };
-  if (day + 1 > buildDate.day) buildDate.month += 1;
-
-  const date = `${buildDate.day}/${buildDate.month}/${buildDate.year}`;
-  const assignedJobs = new Jobs(jobs, date, employee.number);
+  const date = weeks[week][days[day].toLowerCase()].toLocaleDateString();
+  const assignedJobs = new Jobs(jobList, date, employee.number);
 
   return (
     <div className={classes.jobs} style={{ border: `1px solid ${color}` }}>

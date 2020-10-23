@@ -1,8 +1,11 @@
 import React from 'react';
 import { days } from '../../../GlobalFunctions/dateOperations';
+import { useStaff } from '../../../Context/StaffContext';
 import classes from './DaySelect.module.scss';
 
-const DaySelect = ({ color, activeDay, setActiveDay }) => {
+const DaySelect = ({ user, activeDay, setActiveDay }) => {
+  const { colors } = useStaff();
+  const color = colors[user];
   const daysJsx = days.map((el, i) => {
     return (
       <p

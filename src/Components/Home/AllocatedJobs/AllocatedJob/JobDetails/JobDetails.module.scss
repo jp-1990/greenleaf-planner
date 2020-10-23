@@ -42,17 +42,37 @@
   .info {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     font-size: 0.9rem;
     min-height: 80px;
-    .contact {
+    .address {
       background-color: white;
       width: 40%;
       padding: 5px;
+      p {
+        margin: 0;
+        padding: 0;
+      }
     }
     .notes {
       background-color: white;
       padding: 5px;
       width: 58%;
+      margin-bottom: -55px;
+      overflow: scroll;
+    }
+    .numbers {
+      margin-top: 2%;
+      width: 40%;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: white;
+      p {
+        padding: 0;
+        margin: 0;
+      }
     }
   }
 }

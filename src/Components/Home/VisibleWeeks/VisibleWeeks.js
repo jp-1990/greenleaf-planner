@@ -15,12 +15,8 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
   const currentWeek = weeksArray.findIndex((el) => {
     let result;
     const today = currentDate();
-    const week = Object.values(el.dates).map((e, i) => {
-      if (i > 0 && Object.values(el.dates)[i - 1] > e) {
-        return new Date(el.year, el.month + 1, e).toLocaleDateString();
-      } else {
-        return new Date(el.year, el.month, e).toLocaleDateString();
-      }
+    const week = Object.values(el).map((e, i) => {
+      return e.toLocaleDateString();
     });
 
     if (
@@ -50,12 +46,12 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
   // generate 3 week cards for prev/cur/next week
   const weeksJsx = relevantWeeks.map((el, i) => {
     // generate days of week with relevant dates
-    const daysJsx = days.map((e) => {
+    const daysJsx = days.map((e, index) => {
       return (
         <div key={e} className={classes.day}>
           <p>{e.substring(0, 3)}</p>
-          <p>{`${el.dates[e.toLowerCase()]}${suffix(
-            el.dates[e.toLowerCase()]
+          <p>{`${Object.values(el)[index].getDate()}${suffix(
+            Object.values(el)[index].getDate()
           )}`}</p>
         </div>
       );
@@ -69,7 +65,7 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
         }`}
         onClick={() => setActiveWeek(currentWeek - 1 + i)}
       >
-        <h4>{months[el.month]}</h4>
+        <h4>{months[el.monday.getMonth()]}</h4>
         <div className={classes.days}>{daysJsx}</div>
       </div>
     );

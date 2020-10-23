@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { useStaff } from './../../../Context/StaffContext';
 import classes from './Map.module.scss';
 
-const Map = ({ color, settings, setSettings }) => {
+const Map = ({ user, settings, setSettings }) => {
   mapboxgl.accessToken =
     'pk.eyJ1IjoianAxOTkwIiwiYSI6ImNrZnZrM3pxcTBibmwycnA3NXNnbm9rNWgifQ.ST9pl9KeOpuNQyX8Y-jTcA';
 
@@ -14,6 +15,9 @@ const Map = ({ color, settings, setSettings }) => {
       zoom: settings.zoom,
     });
   }, [settings]);
+
+  const { colors } = useStaff();
+  const color = colors[user];
 
   return (
     <div

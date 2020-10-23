@@ -1,7 +1,21 @@
 import React from 'react';
 import classes from './JobDetails.module.scss';
 
-const JobDetails = ({ title, notes, time, contact }) => {
+const JobDetails = ({ title, notes, time, address, numbers }) => {
+  const addressJsx = [];
+  address.forEach((el) => {
+    if (el) {
+      addressJsx.push(<p key={el}>{el}</p>);
+    }
+  });
+
+  const numbersJsx = [];
+  numbers.forEach((el) => {
+    if (el) {
+      numbersJsx.push(<p key={el}>{el}</p>);
+    }
+  });
+
   return (
     <div className={`${classes.details} grey lighten-4`}>
       <div className={classes.titleBox}>
@@ -12,8 +26,9 @@ const JobDetails = ({ title, notes, time, contact }) => {
         </div>
       </div>
       <div className={classes.info}>
-        <div className={classes.contact}>{contact}</div>
+        <div className={classes.address}>{addressJsx}</div>
         <div className={classes.notes}>{notes}</div>
+        <div className={classes.numbers}>{numbersJsx}</div>
       </div>
     </div>
   );

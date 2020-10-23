@@ -21,7 +21,6 @@ const Home = () => {
     zoom: 10,
   });
   const { currentUser } = useAuth();
-  const { colors } = useStaff();
 
   return (
     <>
@@ -35,28 +34,22 @@ const Home = () => {
                 setActiveWeek={setSelectedWeek}
               />
               <DaySelect
-                color={colors[currentUser.displayName]}
+                user={currentUser.displayName}
                 activeDay={selectedDay}
                 setActiveDay={setSelectedDay}
               />
               <div className='container' style={{ display: 'flex' }}>
                 <Map
-                  color={colors[currentUser.displayName]}
+                  user={currentUser.displayName}
                   settings={mapSettings}
                   setSettings={setMapSettings}
                 />
                 <AllocatedJobs
-                  color={colors[currentUser.displayName]}
+                  user={currentUser.displayName}
                   details={displayDetails}
                   setDetails={setDisplayDetails}
                   day={selectedDay}
                   week={selectedWeek}
-                  employee={{
-                    number: Object.keys(colors).findIndex(
-                      (el) => el === currentUser.displayName
-                    ),
-                    name: currentUser.displayName,
-                  }}
                 />
               </div>
             </StaffProvider>
