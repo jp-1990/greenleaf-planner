@@ -2,10 +2,7 @@ import React from 'react';
 import '../../../../sass/materialize.scss';
 import classes from './AssignedJobs.module.scss';
 import AssignedJob from './AssignedJob/AssignedJob';
-import {
-  days,
-  dateFromString,
-} from '../../../../GlobalFunctions/dateOperations';
+import { days } from '../../../../GlobalFunctions/dateOperations';
 import { useJobs } from '../../../../Context/JobsContext';
 import { useStaff } from '../../../../Context/StaffContext';
 import { capitaliseFirstLetters } from '../../../../GlobalFunctions/stringOperations';
@@ -29,7 +26,7 @@ class Jobs {
   }
 
   setDate() {
-    return this.date.toLocaleDateString();
+    return (this.date = this.date.toLocaleDateString());
   }
 
   setlocations() {
@@ -86,7 +83,7 @@ class Jobs {
   }
 }
 
-const AssignedJobs = (props) => {
+const AssignedJobs = ({ day, week }) => {
   const { jobList } = useJobs();
   const { colors } = useStaff();
 
@@ -101,11 +98,7 @@ const AssignedJobs = (props) => {
   };
 
   const workPlan = Object.keys(colors).map((el, i) => {
-    const assignedJobs = new Jobs(
-      jobList,
-      props.week[days[props.day].toLowerCase()],
-      i
-    );
+    const assignedJobs = new Jobs(jobList, week[days[day].toLowerCase()], i);
 
     return (
       <div key={el} className={classes.jobs}>

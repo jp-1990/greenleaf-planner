@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DaysNav from './DaysNav/DaysNav';
 import DaysCarousel from './DaysCarousel/DaysCarousel';
 import AssignedJobs from './AssignedJobs/AssignedJobs';
 import { useWeeks, useSelectedWeek } from '../../../Context/WeeksContext';
-import { useJobs } from '../../../Context/JobsContext';
 
 const SelectedWeek = () => {
   const [day, setDay] = useState(0);
