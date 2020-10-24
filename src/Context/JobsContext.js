@@ -31,7 +31,6 @@ export const JobsProvider = ({ children }) => {
   }, [updateTrigger]);
 
   jobsDatabase.on('child_changed', (data) => {
-    console.log(data.val());
     setJobList((prev) => {
       const newData = [...prev];
       const index = newData.findIndex((el) => el.id === data.val().id);

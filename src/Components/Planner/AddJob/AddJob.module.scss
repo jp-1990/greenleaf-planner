@@ -1,0 +1,43 @@
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+
+  i {
+    font-size: 3rem;
+    color: #a5d6a7;
+    margin-left: 8%;
+  }
+  p {
+    padding: 0 10px;
+    font-weight: 300;
+    font-size: 1.8rem;
+    color: grey;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  .add {
+    i {
+      font-size: 4.5rem;
+      margin-left: 0;
+    }
+    p {
+      padding: 0 20px;
+      font-size: 2.5rem;
+    }
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .add {
+    i {
+      font-size: 6rem;
+    }
+    p {
+      font-size: 3.5rem;
+    }
+  }
+}

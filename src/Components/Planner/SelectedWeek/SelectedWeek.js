@@ -11,7 +11,7 @@ const SelectedWeek = () => {
 
   return (
     <>
-      <div className='container'>
+      <div className='container' style={{ marginTop: '20px' }}>
         <DaysNav day={day} setDay={setDay} />
         <DaysCarousel setDay={setDay} />
       </div>
