@@ -1,61 +1,87 @@
 import React, { useState } from 'react';
+import M from 'materialize-css';
 import classes from './AssignedJob.module.scss';
 import { capitaliseFirstLetters } from '../../../../../GlobalFunctions/stringOperations';
 import { useJobs } from '../../../../../Context/JobsContext';
 
-const AssignedJob = ({ id, title, time, location, notes }) => {
-  const [noteValue, setNoteValue] = useState('');
-  const [noteVisible, setNoteVisible] = useState(notes);
-  const setJobs = useJobs()[1];
+const AssignedJob = ({ id, name, time, notes, noteHandlers, nextVisit }) => {
+  const [noteValue, setNoteValue] = useState(notes);
+  const [timeValue, setTimeValue] = useState(time);
+  const { displayNote, setDisplayNote } = noteHandlers;
+  const { jobsDatabaseRef } = useJobs();
+
+  const database = jobsDatabaseRef(
+    new Date(
+      nextVisit.split('/')[2],
+      nextVisit.split('/')[1] - 1,
+      nextVisit.split('/')[0]
+    ).getFullYear()
+  );
+
+  // make sure only one note can be displayed at a time
+  const displayNotesHandler = () => {
+    setDisplayNote((prev) => {
+      if (prev && prev === id) {
+        return false;
+      }
+      return id;
+    });
+  };
 
   const deleteHandler = () => {
-    setJobs((prev) => {
-      const newState = [...prev];
-      newState[newState.findIndex((el) => el['id'] === id)]['assigned'] = -1;
-      newState[newState.findIndex((el) => el['id'] === id)]['notes'] = null;
-      return newState;
-    });
+    database.child(id).update({ assigned: -1 });
+    setTimeout(() => {
+      M.toast({
+        html: `Unassigned ${capitaliseFirstLetters(name)}`,
+        displayLength: 2000,
+      });
+    }, 100);
   };
 
-  const displayNotesHandler = () => {
-    setNoteVisible((prev) => !prev);
-  };
-
+  // update notes and time est for assigned job
   const submitHandler = (event) => {
     event.preventDefault();
-    setJobs((prev) => {
-      const newState = [...prev];
-      newState[newState.findIndex((el) => el['id'] === id)][
-        'notes'
-      ] = noteValue;
-      return newState;
-    });
+    database.child(id).update({ notes: noteValue, time: timeValue * 1 });
     displayNotesHandler();
-  };
 
-  const changeHandler = (event) => {
-    setNoteValue(event.target.value);
+    setTimeout(() => {
+      M.toast({
+        html: `Updated notes and time est. (${capitaliseFirstLetters(name)})`,
+        displayLength: 2000,
+      });
+    }, 100);
   };
 
   return (
     <div className={classes.job}>
       <h6 className='truncate' onClick={displayNotesHandler}>
-        {capitaliseFirstLetters(title)}
+        {capitaliseFirstLetters(name)}
       </h6>
       <div className={classes.time}>
         <i className='material-icons'>query_builder</i>
-        <p>{time}</p>
+        <p>{timeValue}</p>
       </div>
       <i onClick={deleteHandler} className='material-icons'>
         clear
       </i>
-      <div className={`${classes.notes} ${noteVisible ? null : classes.none}`}>
+      <div
+        className={`${classes.notes} ${
+          displayNote === id ? null : classes.none
+        }`}
+      >
         <h6>Notes</h6>
+        <div className={classes.time}>
+          <i className='material-icons'>query_builder</i>
+          <input
+            value={timeValue}
+            onChange={(e) => setTimeValue(e.target.value)}
+          ></input>
+        </div>
         <form onSubmit={submitHandler}>
           <label>
             <textarea
               value={noteValue}
-              onChange={(event) => changeHandler(event)}
+              onChange={(e) => setNoteValue(e.target.value)}
             />
           </label>
           <input type='submit' value='Submit' />

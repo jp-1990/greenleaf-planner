@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../../../sass/materialize.scss';
 import classes from './AssignedJobs.module.scss';
 import AssignedJob from './AssignedJob/AssignedJob';
@@ -8,10 +8,11 @@ import { useStaff } from '../../../../Context/StaffContext';
 import { capitaliseFirstLetters } from '../../../../GlobalFunctions/stringOperations';
 
 class Jobs {
-  constructor(jobsArray, date, employee) {
+  constructor(jobsArray, date, employee, noteHandler) {
     this.jobsArray = jobsArray;
     this.date = date;
     this.employee = employee;
+    this.noteHandler = noteHandler;
     this.init = (() => {
       this.setDate();
       this.setRawJobs();
@@ -73,10 +74,12 @@ class Jobs {
         <AssignedJob
           key={`${el.name}${i}`}
           id={el.id}
-          title={el.name}
+          name={el.name}
           time={el.time}
           location={el.location}
-          notes={false}
+          notes={el.notes}
+          noteHandlers={this.noteHandler}
+          nextVisit={el.nextVisit}
         ></AssignedJob>
       );
     }));
@@ -84,6 +87,7 @@ class Jobs {
 }
 
 const AssignedJobs = ({ day, week }) => {
+  const [displayNote, setDisplayNote] = useState();
   const { jobList } = useJobs();
   const { colors } = useStaff();
 
@@ -98,7 +102,10 @@ const AssignedJobs = ({ day, week }) => {
   };
 
   const workPlan = Object.keys(colors).map((el, i) => {
-    const assignedJobs = new Jobs(jobList, week[days[day].toLowerCase()], i);
+    const assignedJobs = new Jobs(jobList, week[days[day].toLowerCase()], i, {
+      displayNote,
+      setDisplayNote,
+    });
 
     return (
       <div key={el} className={classes.jobs}>

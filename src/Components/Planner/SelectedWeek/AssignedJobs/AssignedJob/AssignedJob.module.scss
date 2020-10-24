@@ -18,13 +18,14 @@
   }
   i {
     font-size: 1.3rem;
+    margin-top: 1px;
     color: #b71c1c;
     font-weight: 500;
     cursor: pointer;
   }
   .time {
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
     align-items: center;
     height: 30px;
     p {
@@ -32,11 +33,16 @@
       margin: 0;
       color: #43a047;
       font-weight: 400;
+      cursor: context-menu;
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
     }
     i {
       color: #43a047;
       font-weight: 500;
-      cursor: auto;
+      cursor: context-menu;
     }
   }
   .notes {
@@ -52,6 +58,39 @@
     h6 {
       padding: 10px 5px;
       cursor: default;
+      font-weight: 300;
+      font-size: 1.3rem;
+    }
+    .time {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 30px;
+      position: absolute;
+      width: 10%;
+      top: 4%;
+      right: 16%;
+
+      input {
+        border: 1px solid white;
+        text-align: center;
+        padding: 0 5px 1px 5px;
+        margin: 0 0 0 8px;
+        color: white;
+        font-weight: 400;
+        height: 20px;
+        width: 30px;
+        cursor: auto;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      i {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 100;
+        cursor: context-menu;
+      }
     }
     form {
       label {
@@ -73,6 +112,7 @@
       border-radius: 3px;
       outline: none;
       border: none;
+      padding: 5px 10px;
       margin: 0 0 3px 0;
       color: rgb(105, 105, 105);
       cursor: pointer;
