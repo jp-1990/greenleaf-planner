@@ -1,29 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import classes from './Job.module.scss';
+import { debounce } from 'lodash';
 import M from 'materialize-css';
 import { useJobs } from '../../../../../../Context/JobsContext';
-import { capitaliseFirstLetters } from '../../../../../../GlobalFunctions/stringOperations';
-import { incrementDay } from '../../../../../../GlobalFunctions/dateOperations';
 import { useStaff } from '../../../../../../Context/StaffContext';
+import { capitaliseFirstLetters } from '../../../../../../GlobalFunctions/stringOperations';
 
-const Job = (props) => {
+const Job = ({
+  name,
+  id,
+  bookedFrom,
+  location,
+  address,
+  rebook,
+  rebooked,
+  prevVisit,
+  nextVisit,
+  numbers,
+  complete,
+  assigned,
+  time,
+  day,
+}) => {
   const [menuToggle, setMenuToggle] = useState(false);
-  const [rebooked, setRebooked] = useState(false);
-  const [complete, setComplete] = useState(false);
+  const [rebookedState, setRebookedState] = useState(rebooked);
+  const [rebookValue, setRebookValue] = useState(rebook);
+  const [completeState, setCompleteState] = useState(complete);
   const [menuStyle, setMenuStyle] = useState('default');
   const [iconColor, setIconColor] = useState('#000000');
-  const { jobList } = useJobs();
+  const { jobList, jobsDatabaseRef, setUpdateTrigger } = useJobs();
   const { colors } = useStaff();
+
+  const database = jobsDatabaseRef(
+    new Date(
+      nextVisit.split('/')[2],
+      nextVisit.split('/')[1] - 1,
+      nextVisit.split('/')[0]
+    ).getFullYear()
+  );
 
   // if assigned, icon color should be that of relevant employee
   useEffect(() => {
     const colorsValue = Object.values(colors).map((el) => el);
     const newColor =
       colorsValue[
-        jobList[jobList.findIndex((el) => el['id'] === props.id)]['assigned']
+        jobList[jobList.findIndex((el) => el['id'] === id)]['assigned']
       ];
     setIconColor(newColor);
-  }, [colors, props.id, jobList]);
+  }, [colors, id, jobList]);
 
   // toggle menu
   const dropdownHandler = () => {
@@ -31,73 +55,152 @@ const Job = (props) => {
     setMenuToggle((prevState) => !prevState);
   };
 
-  // // send job to next/prev day
-  // const moveJobHandler = (operator) => {
-  //   const newDate = incrementDay(props.nextVisit, operator);
+  // send job to next/prev day
+  const moveJobHandler = (increment) => {
+    const newDate = new Date(
+      nextVisit.split('/')[2],
+      nextVisit.split('/')[1] - 1,
+      nextVisit.split('/')[0]
+    );
+    if (
+      new Date(newDate.setDate(newDate.getDate() + increment)).getDay() === 0
+    ) {
+      newDate.setDate(newDate.getDate() + increment);
+    }
 
-  //   const newState = [...jobList];
-  //   newState[
-  //     newState.findIndex((el) => el['id'] === props.id)
-  //   ].nextVisit = newDate;
-  //   newState[newState.findIndex((el) => el['id'] === props.id)].assigned = -1;
+    database.child(id).update({ nextVisit: newDate.toLocaleDateString() });
 
-  //   setJobs(newState);
-  // };
+    setTimeout(() => {
+      M.toast({
+        html: `${capitaliseFirstLetters(
+          name
+        )} moved to ${newDate.toLocaleDateString()}`,
+        displayLength: 2000,
+      });
+    }, 100);
+  };
 
-  // // assign job to employee
-  // const assignJobHandler = (name, index) => {
-  //   setJobs((prev) => {
-  //     const newState = [...prev];
-  //     newState[newState.findIndex((el) => el['id'] === props.id)][
-  //       'assigned'
-  //     ] = index;
-  //     return newState;
-  //   });
+  // assign job to employee
+  const assignJobHandler = (employeeIndex) => {
+    dropdownHandler();
+    setIconColor(Object.values(colors)[employeeIndex]);
 
-  //   setIconColor(colors[name]);
+    database.child(id).update({ assigned: employeeIndex });
 
-  //   M.toast({
-  //     html: `${capitaliseFirstLetters(props.name)} assigned to ${name} for ${
-  //       props.day
-  //     }`,
-  //     displayLength: 2000,
-  //   });
-  //   dropdownHandler();
-  // };
+    setTimeout(() => {
+      M.toast({
+        html: `${capitaliseFirstLetters(name)} ${
+          employeeIndex !== -1
+            ? 'assigned to ' +
+              Object.keys(colors)[employeeIndex] +
+              ' for ' +
+              day
+            : 'unassigned'
+        }`,
+        displayLength: 2000,
+      });
+    }, 100);
+  };
 
   // rebook job
   const rebookingHandler = () => {
-    setRebooked(true);
-    setIconColor('#000000');
-    M.toast({
-      html: `${capitaliseFirstLetters(props.name)} rebooked for ${
-        props.rebook
-      } days from now`,
-      displayLength: 2000,
-    });
+    setRebookedState(true);
+
+    const curVisit = new Date(
+      nextVisit.split('/')[2],
+      nextVisit.split('/')[1] - 1,
+      nextVisit.split('/')[0]
+    );
+
+    // new visit date, either user input, or default value
+    const rebookFinalValue = rebookValue > 0 ? rebookValue : rebook;
+    const newVisit = new Date(
+      curVisit.setDate(curVisit.getDate() + rebookFinalValue)
+    );
+
+    // if target is Sunday, book for Monday instead
+    let modifiedRebookValue = rebookValue;
+    if (newVisit.getDay() === 0) {
+      newVisit.setDate(newVisit.getDate() + 1);
+      modifiedRebookValue += 1;
+    }
+
+    // data to send
+    const rebookObject = {
+      id: null,
+      bookedFrom: id,
+      address: address,
+      assigned: -1,
+      location: location,
+      name: name,
+      nextVisit: newVisit.toLocaleDateString(),
+      notes: '',
+      numbers: numbers,
+      prevVisit: nextVisit,
+      rebook: rebook,
+      rebooked: false,
+      time: time,
+    };
+
+    // database ref
+    const rebookRef = jobsDatabaseRef(newVisit.getFullYear()).push();
+    rebookRef.set({ ...rebookObject, id: rebookRef.key });
+
+    database.child(id).update({ rebooked: true });
+    setUpdateTrigger((prev) => !prev);
+
+    setTimeout(() => {
+      M.toast({
+        html: `${capitaliseFirstLetters(
+          name
+        )} rebooked for ${modifiedRebookValue} day(s) from now`,
+        displayLength: 2000,
+      });
+    }, 100);
   };
 
   // job complete toggle
-  const completeHandler = () => {
-    setComplete((prevState) => !prevState);
-  };
+  const completeHandler = debounce(
+    () => {
+      database.child(id).update({ complete: !completeState });
 
-  // // delete job handler
-  // const deleteHandler = () => {
-  //   const newState = [...jobList];
-  //   newState.splice(
-  //     newState.findIndex((el) => el.id === props.id),
-  //     1
-  //   );
-  //   setJobs(newState);
+      setCompleteState((prevState) => {
+        return !prevState;
+      });
 
-  //   M.toast({
-  //     html: `${capitaliseFirstLetters(
-  //       props.name
-  //     )} deleted from booking schedule`,
-  //     displayLength: 2000,
-  //   });
-  // };
+      setTimeout(() => {
+        M.toast({
+          html: `${capitaliseFirstLetters(name)} ${
+            completeState ? `unmarked as complete` : `marked as complete`
+          }`,
+          displayLength: 2000,
+        });
+      }, 100);
+    },
+    1000,
+    { leading: false, trailing: true }
+  );
+
+  // delete job handler
+  const deleteHandler = debounce(
+    () => {
+      if (bookedFrom) {
+        database.child(bookedFrom).update({ rebooked: false });
+      }
+      database.child(id).remove();
+
+      setUpdateTrigger((prev) => !prev);
+
+      setTimeout(() => {
+        M.toast({
+          html: `Job for ${capitaliseFirstLetters(name)} deleted`,
+          displayLength: 2000,
+        });
+      }, 100);
+    },
+    1000,
+    { leading: false, trailing: true }
+  );
 
   // jsx for menu to assign jobs
   const assignJobMenuJsx = () => {
@@ -105,7 +208,7 @@ const Job = (props) => {
       return (
         <i
           key={el}
-          onClick={() => null}
+          onClick={() => assignJobHandler(i)}
           style={{ color: colors[el] }}
           className={`material-icons ${classes.personAdd}`}
         >
@@ -118,7 +221,7 @@ const Job = (props) => {
   return (
     <div
       style={
-        complete
+        completeState
           ? {
               border: '1px solid #43a047',
               boxShadow: '0 0 3px #2e7d32',
@@ -128,33 +231,61 @@ const Job = (props) => {
       className={classes.jobCard}
     >
       <div className={classes.top}>
-        <i onClick={() => null} className={`material-icons ${classes.prev}`}>
+        <i
+          onClick={
+            rebookedState || completeState ? null : () => moveJobHandler(-1)
+          }
+          className={`material-icons ${classes.prev}`}
+        >
           chevron_left
         </i>
-        <h6 className='truncate'>{props.name}</h6>
+        <h6 className='truncate'>{name}</h6>
         <div className={classes.rebook}>
-          <span>{props.rebook}</span>
+          {rebookedState ? (
+            <span>{rebookValue}</span>
+          ) : (
+            <input
+              value={rebookValue}
+              onChange={(e) => setRebookValue(e.target.value * 1)}
+            ></input>
+          )}
           <i
-            onClick={rebooked ? null : rebookingHandler}
+            onClick={rebookedState ? null : rebookingHandler}
             className='material-icons'
           >
             replay
           </i>
         </div>
-        <i onClick={null} className={`material-icons ${classes.clear}`}>
+        <i
+          onClick={rebookedState || completeState ? null : deleteHandler}
+          className={`material-icons ${classes.clear}`}
+        >
           clear
         </i>
-        <i onClick={() => null} className={`material-icons ${classes.next}`}>
+        <i
+          onClick={
+            rebookedState || completeState ? null : () => moveJobHandler(1)
+          }
+          className={`material-icons ${classes.next}`}
+        >
           chevron_right
         </i>
       </div>
       <div className={classes.bottom}>
         <i
-          style={{ color: iconColor }}
-          onClick={rebooked ? null : dropdownHandler}
+          style={menuToggle ? { color: '#000000' } : { color: iconColor }}
+          onClick={() => {
+            if (!rebookedState || !completeState) {
+              dropdownHandler();
+            }
+            if (menuToggle) {
+              assignJobHandler(-1);
+              dropdownHandler();
+            }
+          }}
           className={`material-icons ${classes.person}`}
         >
-          person_add
+          {!iconColor ? 'person_add' : 'person'}
         </i>
         <div
           className={
@@ -166,8 +297,10 @@ const Job = (props) => {
           <i className={`material-icons ${classes.arrow}`}>chevron_right</i>
           {assignJobMenuJsx()}
         </div>
-        <span className={`${rebooked ? classes.rebooked : null}`}>
-          {rebooked ? `REBOOKED` : `Last visit: ${props.prevVisit}`}
+        <span
+          className={`${rebookedState && rebooked ? classes.rebooked : null}`}
+        >
+          {rebookedState && rebooked ? `REBOOKED` : `Last visit: ${prevVisit}`}
         </span>
         <i
           onClick={completeHandler}

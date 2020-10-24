@@ -6,8 +6,10 @@ export const useJobs = () => {
   return useContext(JobsContext);
 };
 
+const year = new Date(Date.now()).getFullYear();
 // database ref
-const jobsDatabase = database.ref('jobs/2020');
+const jobsDatabaseRef = (extension) => database.ref('jobs/' + extension);
+const jobsDatabase = jobsDatabaseRef(year);
 
 export const JobsProvider = ({ children }) => {
   const [jobList, setJobList] = useState([]);
@@ -29,6 +31,7 @@ export const JobsProvider = ({ children }) => {
   }, [updateTrigger]);
 
   jobsDatabase.on('child_changed', (data) => {
+    console.log(data.val());
     setJobList((prev) => {
       const newData = [...prev];
       const index = newData.findIndex((el) => el.id === data.val().id);
@@ -40,8 +43,10 @@ export const JobsProvider = ({ children }) => {
   const value = {
     jobList,
     setJobList,
+    updateTrigger,
     setUpdateTrigger,
     loading,
+    jobsDatabaseRef,
   };
 
   const loadingStyle = {

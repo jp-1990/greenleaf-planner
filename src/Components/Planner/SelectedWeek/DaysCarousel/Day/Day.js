@@ -58,12 +58,17 @@ const Day = ({ jobsArray, day }) => {
           key={`${e.name}${i}`}
           name={e.name}
           id={e.id}
+          bookedFrom={e.bookedFrom}
           location={e.location}
+          address={e.address}
           rebook={e.rebook}
+          rebooked={e.rebooked}
           prevVisit={e.prevVisit}
           nextVisit={e.nextVisit}
           assigned={e.assigned}
+          numbers={e.numbers}
           time={e.time}
+          complete={e.complete === undefined ? false : e.complete}
           day={day}
         ></Job>
       );
@@ -75,7 +80,7 @@ const Day = ({ jobsArray, day }) => {
       className={`carousel-item grey lighten-3 grey-text text-darken-3 ${classes.scrollable}`}
       href='#one!'
     >
-      {jobsJsx.length === 1 ? (
+      {jobsJsx[0].length === 0 ? (
         <h2 style={{ marginBottom: '50px', padding: '11%' }}>[ No Jobs ]</h2>
       ) : (
         <div className={classes.row}>

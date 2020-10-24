@@ -51,6 +51,7 @@
       height: 30px;
       font-size: 1.2rem;
       text-transform: capitalize;
+      cursor: context-menu;
     }
 
     .rebook {
@@ -63,13 +64,24 @@
       border-radius: 5px;
       font-size: 1rem;
       padding: 3px 6px;
-      width: 52px;
+      width: 58px;
       height: 24px;
 
       i {
         font-size: 1.2rem;
       }
 
+      input {
+        align-self: center;
+        margin-left: 1px;
+        border: none;
+        margin-bottom: 2px;
+        &:focus {
+          border: none;
+          outline: none;
+          box-shadow: none;
+        }
+      }
       span {
         align-self: center;
         margin-left: 1px;
