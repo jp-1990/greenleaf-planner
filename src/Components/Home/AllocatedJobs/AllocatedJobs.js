@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AllocatedJob from './AllocatedJob/AllocatedJob';
 import classes from './AllocatedJobs.module.scss';
 import { dateFromString, days } from '../../../GlobalFunctions/dateOperations';
@@ -7,7 +7,8 @@ import { useJobs } from '../../../Context/JobsContext';
 import { useWeeks } from '../../../Context/WeeksContext';
 import { useStaff } from '../../../Context/StaffContext';
 
-const AllocatedJobs = ({ user, details, setDetails, day, week }) => {
+const AllocatedJobs = ({ user, day, week }) => {
+  const [displayDetails, setDisplayDetails] = useState();
   const { jobList } = useJobs();
   const weeks = useWeeks();
 
@@ -90,8 +91,8 @@ const AllocatedJobs = ({ user, details, setDetails, day, week }) => {
             address={el.address}
             numbers={el.numbers}
             notes={el.notes}
-            details={details}
-            setDetails={setDetails}
+            details={displayDetails}
+            setDetails={setDisplayDetails}
           ></AllocatedJob>
         );
       }));

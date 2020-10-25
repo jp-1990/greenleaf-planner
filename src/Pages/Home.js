@@ -9,17 +9,11 @@ import Map from '../Components/Home/Map/Map';
 import AllocatedJobs from '../Components/Home/AllocatedJobs/AllocatedJobs';
 import { currentDate } from '../GlobalFunctions/dateOperations';
 import { useAuth } from '../Context/AuthContext';
-import { StaffProvider, useStaff } from '../Context/StaffContext';
+import { StaffProvider } from '../Context/StaffContext';
 
 const Home = () => {
   const [selectedWeek, setSelectedWeek] = useState(1);
   const [selectedDay, setSelectedDay] = useState(currentDate().day - 1);
-  const [displayDetails, setDisplayDetails] = useState();
-  const [mapSettings, setMapSettings] = useState({
-    lng: 1.296901,
-    lat: 52.630331,
-    zoom: 10,
-  });
   const { currentUser } = useAuth();
 
   return (
@@ -41,13 +35,11 @@ const Home = () => {
               <div className='container' style={{ display: 'flex' }}>
                 <Map
                   user={currentUser.displayName}
-                  settings={mapSettings}
-                  setSettings={setMapSettings}
+                  day={selectedDay}
+                  week={selectedWeek}
                 />
                 <AllocatedJobs
                   user={currentUser.displayName}
-                  details={displayDetails}
-                  setDetails={setDisplayDetails}
                   day={selectedDay}
                   week={selectedWeek}
                 />
