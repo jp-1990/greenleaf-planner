@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "customers": {
+      ".read": "root.child('users').child(auth.uid).child('accessLevel').val()>0",
+      ".write": "root.child('users').child(auth.uid).child('accessLevel').val()>1",
+    },
+    "jobs": {
+      ".read": "root.child('users').child(auth.uid).child('accessLevel').val()>0",
+      ".write": "root.child('users').child(auth.uid).child('accessLevel').val()>1",
+    },
+    "users": {
+      ".write": "root.child('users').child(auth.uid).child('accessLevel').val()==10",
+      "$user_id": {
+        ".read": "$user_id===auth.uid"
+      }
+    }
+  }
+}
