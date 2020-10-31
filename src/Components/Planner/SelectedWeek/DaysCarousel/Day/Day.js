@@ -1,8 +1,10 @@
 import React from 'react';
 import Job from './Job/Job';
 import classes from './Day.module.scss';
+import { useScreenWidth } from '../../../../../Context/ScreenWidthContext';
 
 const Day = ({ jobsArray, day }) => {
+  const { width } = useScreenWidth();
   const jobs = jobsArray.sortedJobs;
 
   // merge sorted jobs into one array
@@ -17,12 +19,24 @@ const Day = ({ jobsArray, day }) => {
   };
   const mergedJobs = mergeJobs(jobs);
 
+  // calculate number of columns based on screen size
+  const numberOfColumns = (width) => {
+    if (width >= 1770) return 5;
+    if (width >= 1430) return 4;
+    if (width >= 1050) return 3;
+    if (width >= 993) return 2;
+    if (width >= 850) return 3;
+    if (width >= 550) return 2;
+    if (width < 550) return 1;
+  };
+  const columnQuantity = numberOfColumns(width);
+
   // divide array into an even-ish number for each column of the selected week div
   const jobColumns = (jobs) => {
     // calc number per column, min 6
     const perColumn =
-      Math.ceil((jobs.length + 3) / 5) > 6
-        ? Math.ceil((jobs.length + 3) / 5)
+      Math.ceil((jobs.length + 3) / columnQuantity) > 6
+        ? Math.ceil((jobs.length + 3) / columnQuantity)
         : 6;
     const columns = [[]];
 
@@ -75,6 +89,20 @@ const Day = ({ jobsArray, day }) => {
     });
   });
 
+  // generate the correct number of columns for screen width
+  const columnsJsx = [];
+  for (let i = 0; i <= columnQuantity - 1; i++) {
+    columnsJsx.push(
+      <div
+        key={i}
+        className={classes.col}
+        style={{ width: `${100 / columnQuantity}%` }}
+      >
+        {jobsJsx[i]}
+      </div>
+    );
+  }
+
   return (
     <div
       className={`carousel-item grey lighten-3 grey-text text-darken-3 ${classes.scrollable}`}
@@ -83,13 +111,7 @@ const Day = ({ jobsArray, day }) => {
       {jobsJsx[0].length === 0 ? (
         <h2 style={{ marginBottom: '50px', padding: '11%' }}>[ No Jobs ]</h2>
       ) : (
-        <div className={classes.row}>
-          <div className={classes.col}>{jobsJsx[0]}</div>
-          <div className={classes.col}>{jobsJsx[1]} </div>
-          <div className={classes.col}>{jobsJsx[2]} </div>
-          <div className={classes.col}>{jobsJsx[3]} </div>
-          <div className={classes.col}>{jobsJsx[4]} </div>
-        </div>
+        <div className={classes.row}>{columnsJsx}</div>
       )}
       <div className='col s12 green lighten-1 green-text text-lighten-1'>.</div>
     </div>

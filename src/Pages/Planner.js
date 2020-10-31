@@ -10,27 +10,31 @@ import { WeeksProvider } from '../Context/WeeksContext';
 import { JobsProvider } from '../Context/JobsContext';
 import { StaffProvider } from '../Context/StaffContext';
 import { CustomersProvider } from '../Context/CustomersContext';
+import { ScreenWidthProvider } from '../Context/ScreenWidthContext';
 
 const Planner = () => {
   const [modalState, setModalState] = useState(false);
+
   return (
     <>
       <Nav active='planner' />
       <WeeksProvider>
-        <WeekCarousel />
-        <AddJob setModalState={setModalState} />
-        <JobsProvider>
-          <CustomersProvider>
-            <Modal state={modalState} setState={setModalState}>
-              {modalState === 'createjob' ? (
-                <CreateJob setModalState={setModalState} />
-              ) : null}
-            </Modal>
-          </CustomersProvider>
-          <StaffProvider>
-            <SelectedWeek />
-          </StaffProvider>
-        </JobsProvider>
+        <ScreenWidthProvider>
+          <WeekCarousel />
+          <AddJob setModalState={setModalState} />
+          <JobsProvider>
+            <CustomersProvider>
+              <Modal state={modalState} setState={setModalState}>
+                {modalState === 'createjob' ? (
+                  <CreateJob setModalState={setModalState} />
+                ) : null}
+              </Modal>
+            </CustomersProvider>
+            <StaffProvider>
+              <SelectedWeek />
+            </StaffProvider>
+          </JobsProvider>
+        </ScreenWidthProvider>
       </WeeksProvider>
     </>
   );

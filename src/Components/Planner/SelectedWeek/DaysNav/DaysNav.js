@@ -1,9 +1,12 @@
 import React from 'react';
 import M from 'materialize-css';
 import { days } from '../../../../GlobalFunctions/dateOperations';
+import { useScreenWidth } from '../../../../Context/ScreenWidthContext';
 import classes from './DaysNav.module.scss';
 
 const DaysNav = ({ day, setDay }) => {
+  const { width } = useScreenWidth();
+
   const selectDayHandler = (index) => {
     // hack to get around weird carousel behaviour where going from index 5 to 0
     // causes index 0 to display behind index 5. Any other combination highlighted
@@ -30,13 +33,13 @@ const DaysNav = ({ day, setDay }) => {
           onClick={() => selectDayHandler(i)}
           className={`${classes.day} ${classes.active}`}
         >
-          {el}
+          {width < 600 ? el.substring(0, 3) : el}
         </p>
       );
     }
     return (
       <p key={el} onClick={() => selectDayHandler(i)} className={classes.day}>
-        {el}
+        {width < 600 ? el.substring(0, 3) : el}
       </p>
     );
   });

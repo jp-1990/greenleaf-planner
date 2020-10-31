@@ -164,8 +164,7 @@ const CreateJob = ({ setModalState }) => {
 
   return (
     <div className={classes.container}>
-      <h4>Create new job</h4>
-      {null}
+      <h4>Create New Job</h4>
       <div className={classes.details}>
         <div className={classes.customerSearch}>
           {customerSearchJsx}
@@ -178,13 +177,13 @@ const CreateJob = ({ setModalState }) => {
       </div>
       <div className={classes.createOptions}>
         <span onClick={createNewJob} className={classes.create}>
-          create new job
+          Create New Job
         </span>
         <span
           onClick={() => setModalState((prev) => !prev)}
           className={classes.cancelCreate}
         >
-          cancel
+          Cancel
         </span>
       </div>
     </div>

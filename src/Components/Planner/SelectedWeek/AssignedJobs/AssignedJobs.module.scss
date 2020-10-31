@@ -1,13 +1,15 @@
 .assignedJobs {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
   padding: 40px 0 80px 0;
 
   .jobs {
     width: 19%;
     display: flex;
     flex-direction: column;
-
+    min-width: 220px;
+    margin: 0.5%;
     padding: 10px;
     border-radius: 5px;
     background-color: #eeeeee;
@@ -31,7 +33,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 300px;
+      min-height: 100px;
 
       .location {
         display: flex;
@@ -44,6 +46,16 @@
           font-weight: 400;
           text-align: left;
         }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 499px) {
+  .assignedJobs {
+    .jobs {
+      .jobContent {
+        min-height: 300px;
       }
     }
   }

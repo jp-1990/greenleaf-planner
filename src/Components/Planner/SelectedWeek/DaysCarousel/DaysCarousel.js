@@ -90,6 +90,7 @@ const DaysCarousel = ({ setDay }) => {
         setDay(instance.center);
       }, 300),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // get jobs for the selected week

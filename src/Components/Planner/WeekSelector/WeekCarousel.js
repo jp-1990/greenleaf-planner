@@ -20,9 +20,9 @@ const WeekCarousel = () => {
   useEffect(() => {
     let elems = document.querySelector('.weeks');
     M.Carousel.init(elems, {
-      fullWidth: false,
       indicators: false,
       numVisible: 7,
+      fullWidth: false,
       noWrap: true,
       onCycleTo: debounce(
         () => {
@@ -80,7 +80,7 @@ const WeekCarousel = () => {
   return (
     <div className='container'>
       <div style={{ margin: 0 }} className='row'>
-        <div className={`col s2 offset-s5 ${classes.titleBox}`}>
+        <div className={`col s12 ${classes.titleBox}`}>
           <i onClick={prevWeekHandler} className='material-icons'>
             chevron_left
           </i>
@@ -91,7 +91,11 @@ const WeekCarousel = () => {
         </div>
       </div>
       <div
-        style={{ maxHeight: '300px', perspective: '700px' }}
+        style={{
+          maxHeight: '300px',
+          perspective: '700px',
+          marginBottom: '10px',
+        }}
         className='carousel weeks'
       >
         {weekCards}

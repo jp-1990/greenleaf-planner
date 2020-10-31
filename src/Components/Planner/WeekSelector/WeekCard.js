@@ -1,8 +1,10 @@
 import React from 'react';
 import classes from './WeekSelectorCSS/WeekCard.module.scss';
 import { months, days, suffix } from '../../../GlobalFunctions/dateOperations';
+import { useScreenWidth } from '../../../Context/ScreenWidthContext';
 
 const WeekCard = ({ dates }) => {
+  const { width } = useScreenWidth();
   // populate days in the week on card
   const daysOnCard = days.map((el, i) => {
     return (
@@ -29,9 +31,13 @@ const WeekCard = ({ dates }) => {
             <p className={classes.dateSpan}>{`${dates.monday.getDate()}${suffix(
               dates.monday.getDate()
             )} ${
-              months[dates.monday.getMonth()]
+              width < 600
+                ? months[dates.monday.getMonth()].substring(0, 3)
+                : months[dates.monday.getMonth()]
             } - ${dates.sunday.getDate()}${suffix(dates.sunday.getDate())} ${
-              months[dates.sunday.getMonth()]
+              width < 600
+                ? months[dates.sunday.getMonth()].substring(0, 3)
+                : months[dates.sunday.getMonth()]
             }`}</p>
           </div>
           <div
