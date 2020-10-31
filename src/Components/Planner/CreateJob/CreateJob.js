@@ -99,7 +99,7 @@ const CreateJob = ({ setModalState }) => {
   // generate array of customers
   let counter = 0;
   const customerArray = customerList.map((el, i) => {
-    if (el.name.toLowerCase().includes(search) || !search) {
+    if (el.name.toLowerCase().includes(search.toLowerCase()) || !search) {
       counter++;
       return (
         <div
