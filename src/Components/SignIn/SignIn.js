@@ -24,7 +24,9 @@ const SignIn = () => {
       setLoading(true);
       await signIn(email, password);
       setLoading(false);
-      history.push('/home');
+      setTimeout(() => {
+        history.push('/home');
+      }, 300);
     } catch {
       M.toast({ html: 'Failed to sign in, check email and password' });
     }

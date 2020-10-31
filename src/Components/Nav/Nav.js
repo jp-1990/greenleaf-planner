@@ -11,12 +11,13 @@ const Nav = (props) => {
     window.innerHeight,
   ]);
 
-  const { currentUser } = useAuth();
+  const { currentUser, setCurrentUser } = useAuth();
   const { signOut } = useAuth();
   const history = useHistory();
   // sign out
   const signOutHandler = () => {
     signOut();
+    setCurrentUser(null);
     history.push('/signin');
   };
 
@@ -60,17 +61,25 @@ const Nav = (props) => {
             id='nav-mobile'
             className={menuState === 'open' ? classes.mobNav : classes.None}
           >
-            {currentUser ? (
+            {currentUser && currentUser.accessLevel > 0 ? (
               <>
                 <li className={props.active === 'home' ? 'active' : null}>
                   <NavLink to='/home'>Home</NavLink>
                 </li>
-                <li className={props.active === 'planner' ? 'active' : null}>
-                  <NavLink to='/planner'>Planner</NavLink>
-                </li>
-                <li className={props.active === 'customers' ? 'active' : null}>
-                  <NavLink to='/customers'>Customers</NavLink>
-                </li>
+                {currentUser.accessLevel > 1 ? (
+                  <>
+                    <li
+                      className={props.active === 'planner' ? 'active' : null}
+                    >
+                      <NavLink to='/planner'>Planner</NavLink>
+                    </li>
+                    <li
+                      className={props.active === 'customers' ? 'active' : null}
+                    >
+                      <NavLink to='/customers'>Customers</NavLink>
+                    </li>
+                  </>
+                ) : null}
                 <li
                   onClick={signOutHandler}
                   className={props.active === 'sign out' ? 'active' : null}
@@ -94,7 +103,7 @@ const Nav = (props) => {
     return (
       <div className={`${classes.nav} col l10 offset-l2 xl9 offset-xl2`}>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
-          {currentUser ? (
+          {currentUser && currentUser.accessLevel > 0 ? (
             <>
               <li
                 className={
@@ -103,22 +112,28 @@ const Nav = (props) => {
               >
                 <NavLink to='/home'>Home</NavLink>
               </li>
-              <li
-                className={
-                  props.active === 'planner' ? `active ${classes.active}` : null
-                }
-              >
-                <NavLink to='/planner'>Planner</NavLink>
-              </li>
-              <li
-                className={
-                  props.active === 'customers'
-                    ? `active ${classes.active}`
-                    : null
-                }
-              >
-                <NavLink to='/customers'>Customers</NavLink>
-              </li>
+              {currentUser.accessLevel > 1 ? (
+                <>
+                  <li
+                    className={
+                      props.active === 'planner'
+                        ? `active ${classes.active}`
+                        : null
+                    }
+                  >
+                    <NavLink to='/planner'>Planner</NavLink>
+                  </li>
+                  <li
+                    className={
+                      props.active === 'customers'
+                        ? `active ${classes.active}`
+                        : null
+                    }
+                  >
+                    <NavLink to='/customers'>Customers</NavLink>
+                  </li>
+                </>
+              ) : null}
               <li
                 onClick={signOutHandler}
                 className={

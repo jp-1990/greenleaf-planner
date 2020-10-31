@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { auth } from '../firebase';
+import { auth, database } from '../firebase';
 
 const AuthContext = React.createContext();
 
@@ -21,7 +21,18 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+      if (user) {
+        database
+          .ref('/users/' + user.uid)
+          .once('value')
+          .then((snapshot) => {
+            setCurrentUser({
+              user: user,
+              accessLevel: snapshot.val().accessLevel,
+            });
+            setLoading(false);
+          });
+      }
       setLoading(false);
     });
     return unsubscribe;
@@ -29,6 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    setCurrentUser,
     signIn,
     signOut,
   };

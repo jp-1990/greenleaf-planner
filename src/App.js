@@ -9,7 +9,8 @@ import Home from './Pages/Home';
 import Landing from './Pages/Landing';
 import Planner from './Pages/Planner';
 import Login from './Pages/Login';
-import { PrivateRoute } from './Pages/PrivateRoute';
+import { Level1AuthRoute } from './Pages/Level1AuthRoutes';
+import { Level2AuthRoute } from './Pages/Level2AuthRoutes';
 
 function App() {
   return (
@@ -19,9 +20,9 @@ function App() {
           <Switch>
             <Route path='/' exact component={Landing} />
             <Route path='/signin' exact component={Login} />
-            <PrivateRoute path='/home' exact component={Home} />
-            <PrivateRoute path='/planner' exact component={Planner} />
-            <PrivateRoute path='/customers' exact component={Customers} />
+            <Level1AuthRoute path='/home' exact component={Home} />
+            <Level2AuthRoute path='/planner' exact component={Planner} />
+            <Level2AuthRoute path='/customers' exact component={Customers} />
             <Route path='/' render={() => <div>404</div>} />
           </Switch>
         </AuthProvider>

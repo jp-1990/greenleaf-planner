@@ -28,18 +28,18 @@ const Home = () => {
                 setActiveWeek={setSelectedWeek}
               />
               <DaySelect
-                user={currentUser.displayName}
+                user={currentUser.user.displayName}
                 activeDay={selectedDay}
                 setActiveDay={setSelectedDay}
               />
               <div className='container' style={{ display: 'flex' }}>
                 <Map
-                  user={currentUser.displayName}
+                  user={currentUser.user.displayName}
                   day={selectedDay}
                   week={selectedWeek}
                 />
                 <AllocatedJobs
-                  user={currentUser.displayName}
+                  user={currentUser.user.displayName}
                   day={selectedDay}
                   week={selectedWeek}
                 />
