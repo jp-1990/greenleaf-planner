@@ -7,7 +7,7 @@ import { useWeeks } from '../../../Context/WeeksContext';
 import { days } from '../../../GlobalFunctions/dateOperations';
 import classes from './Map.module.scss';
 
-const Map = ({ user, day, week }) => {
+const Map = ({ user, day, week, screenWidth }) => {
   const { colors } = useStaff();
   const weeks = useWeeks();
   const color = colors[user];
@@ -85,12 +85,12 @@ const Map = ({ user, day, week }) => {
 
             map.fitBounds(bounds, {
               padding: {
-                top: 150,
-                bottom: 150,
-                left: 100,
-                right: 100,
+                top: screenWidth < 800 ? 50 : 150,
+                bottom: screenWidth < 800 ? 50 : 150,
+                left: screenWidth < 800 ? 50 : 100,
+                right: screenWidth < 800 ? 50 : 100,
               },
-              maxZoom: 14,
+              maxZoom: screenWidth < 800 ? 12 : 14,
             });
           };
           addMarker();
@@ -105,7 +105,7 @@ const Map = ({ user, day, week }) => {
       });
       map.remove();
     };
-  }, [jobs]);
+  }, [jobs, screenWidth]);
 
   return (
     <div

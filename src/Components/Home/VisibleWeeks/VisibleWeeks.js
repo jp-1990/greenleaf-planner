@@ -7,9 +7,12 @@ import {
   suffix,
 } from '../../../GlobalFunctions/dateOperations';
 import { useWeeks } from '../../../Context/WeeksContext';
+import { useStaff } from '../../../Context/StaffContext';
 
-const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
+const VisibleWeeks = ({ activeWeek, setActiveWeek, screenWidth, user }) => {
   const weeksArray = useWeeks();
+  const { colors } = useStaff();
+  const color = colors[user];
 
   // find the index of the current week of the year
   const currentWeek = weeksArray.findIndex((el) => {
@@ -43,8 +46,8 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
     weeksArray[currentWeek + 1],
   ];
 
-  // generate 3 week cards for prev/cur/next week
-  const weeksJsx = relevantWeeks.map((el, i) => {
+  // generate 3 week cards for prev/cur/next week for bigger screens
+  const standardWeeksJsx = relevantWeeks.map((el, i) => {
     // generate days of week with relevant dates
     const daysJsx = days.map((e, index) => {
       return (
@@ -71,7 +74,54 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek }) => {
     );
   });
 
-  return <div className={`${classes.weeks} container`}>{weeksJsx}</div>;
+  // generate 3 week cards for prev/cur/next week for smaller screens
+  const mobileWeeksJsx = relevantWeeks.map((el, i) => {
+    // generate days of week with relevant dates
+    const daysJsx = () => {
+      return (
+        <>
+          <div className={classes.day}>
+            <p>
+              {`${Object.values(el)[0].getDate()}${suffix(
+                Object.values(el)[0].getDate()
+              )} ${months[el.monday.getMonth()].substring(0, 3)}
+              -
+              ${Object.values(el)[5].getDate()}${suffix(
+                Object.values(el)[5].getDate()
+              )} ${months[el.saturday.getMonth()].substring(0, 3)}`}
+            </p>
+          </div>
+        </>
+      );
+    };
+
+    return (
+      <div
+        key={i}
+        className={`${classes.week} ${
+          activeWeek === currentWeek - 1 + i ? classes.active : null
+        }`}
+        style={
+          activeWeek === currentWeek - 1 + i
+            ? {
+                border: `1px solid ${color}90`,
+                boxShadow: `0px 0px 4px ${color}`,
+              }
+            : null
+        }
+        onClick={() => setActiveWeek(currentWeek - 1 + i)}
+      >
+        <h4>{months[el.monday.getMonth()]}</h4>
+        <div className={classes.days}>{daysJsx()}</div>
+      </div>
+    );
+  });
+
+  return (
+    <div className={`${classes.weeks}`}>
+      {screenWidth < 600 ? mobileWeeksJsx : standardWeeksJsx}
+    </div>
+  );
 };
 
 export default VisibleWeeks;

@@ -21,9 +21,7 @@ const DaySelect = ({ user, activeDay, setActiveDay }) => {
     );
   });
 
-  return (
-    <div className={`${classes.days} container grey lighten-4`}>{daysJsx}</div>
-  );
+  return <div className={`${classes.days}`}>{daysJsx}</div>;
 };
 
 export default DaySelect;

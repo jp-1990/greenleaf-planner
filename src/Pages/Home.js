@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from '../Components/Nav/Nav';
 import Background from '../Components/Home/Background/Background';
 import { WeeksProvider } from '../Context/WeeksContext';
@@ -15,6 +15,16 @@ const Home = () => {
   const [selectedWeek, setSelectedWeek] = useState(1);
   const [selectedDay, setSelectedDay] = useState(currentDate().day - 1);
   const { currentUser } = useAuth();
+  const [width, setWidth] = useState(window.innerWidth);
+
+  // reset width and height on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  });
 
   return (
     <>
@@ -26,17 +36,27 @@ const Home = () => {
               <VisibleWeeks
                 activeWeek={selectedWeek}
                 setActiveWeek={setSelectedWeek}
+                screenWidth={width}
+                user={currentUser.user.displayName}
               />
               <DaySelect
                 user={currentUser.user.displayName}
                 activeDay={selectedDay}
                 setActiveDay={setSelectedDay}
               />
-              <div className='container' style={{ display: 'flex' }}>
+              <div
+                className='container'
+                style={
+                  width < 800
+                    ? { display: 'flex', flexDirection: 'column' }
+                    : { display: 'flex', flexDirection: 'row' }
+                }
+              >
                 <Map
                   user={currentUser.user.displayName}
                   day={selectedDay}
                   week={selectedWeek}
+                  screenWidth={width}
                 />
                 <AllocatedJobs
                   user={currentUser.user.displayName}

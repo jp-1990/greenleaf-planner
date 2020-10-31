@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './SignIn.module.scss';
 import { useAuth } from '../../Context/AuthContext';
 import { useHistory } from 'react-router-dom';
@@ -8,8 +8,14 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, currentUser } = useAuth();
   const history = useHistory();
+
+  useEffect(() => {
+    if (currentUser) {
+      history.push('/home');
+    }
+  });
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
