@@ -25,7 +25,8 @@ const SignIn = () => {
     setPassword(event.target.value);
   };
 
-  const signInHandler = async () => {
+  const signInHandler = async (e) => {
+    e.preventDefault();
     try {
       setLoading(true);
       await signIn(email, password);
@@ -34,38 +35,47 @@ const SignIn = () => {
         history.push('/home');
       }, 300);
     } catch {
+      setLoading(false);
       M.toast({ html: 'Failed to sign in, check email and password' });
     }
   };
 
   return (
-    <div className={classes.login}>
-      <div className={classes.inputFields}>
-        <div className={classes.email}>
-          <span>Email</span>
-          <input
-            onChange={(e) => emailChangeHandler(e)}
-            value={email}
-            placeholder='you@example.com'
-          ></input>
+    <form onSubmit={signInHandler}>
+      <div className={classes.login}>
+        <div className={classes.inputFields}>
+          <div className={classes.email}>
+            <label>Email</label>
+            <input
+              type='email'
+              onChange={(e) => emailChangeHandler(e)}
+              value={email}
+              placeholder='you@example.com'
+              autoComplete='on'
+              required
+            ></input>
+          </div>
+          <div className={classes.password}>
+            <label>Password</label>
+            <input
+              type='password'
+              onChange={(e) => passwordChangeHandler(e)}
+              value={password}
+              placeholder='**********'
+              autoComplete='off'
+              required
+            ></input>
+          </div>
         </div>
-        <div className={classes.password}>
-          <span>Password</span>
-          <input
-            type='password'
-            onChange={(e) => passwordChangeHandler(e)}
-            value={password}
-            placeholder='**********'
-          ></input>
-        </div>
+        <button
+          type='submit'
+          disabled={loading ? true : false}
+          className={loading ? classes.signinDisabled : classes.signin}
+        >
+          Sign in
+        </button>
       </div>
-      <span
-        onClick={loading ? null : signInHandler}
-        className={loading ? classes.signinDisabled : classes.signin}
-      >
-        Sign in
-      </span>
-    </div>
+    </form>
   );
 };
 

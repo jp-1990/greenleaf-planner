@@ -13,14 +13,14 @@
   .inputFields {
     margin: 20px 0 30px 0;
     .email {
-      span {
+      label {
         font-weight: 300;
         font-size: 1.8rem;
       }
     }
     .password {
       margin-top: 10px;
-      span {
+      label {
         font-weight: 300;
         font-size: 1.8rem;
       }
@@ -40,7 +40,7 @@
     color: #007613;
     border: 1px solid #007614;
     border-radius: 10px;
-    padding: 1px 10px 4px 10px;
+    padding: 4px 10px 8px 10px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
   }
@@ -59,7 +59,7 @@
     border: 1px solid #707070;
     background-color: rgb(180, 180, 180);
     border-radius: 10px;
-    padding: 1px 10px 4px 10px;
+    padding: 4px 10px 8px 10px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
   }
