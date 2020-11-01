@@ -105,7 +105,7 @@ const VisibleWeeks = ({ activeWeek, setActiveWeek, screenWidth, user }) => {
           activeWeek === currentWeek - 1 + i
             ? {
                 border: `1px solid ${color}90`,
-                boxShadow: `0px 0px 4px ${color}`,
+                boxShadow: `0px 0px 1px ${color}`,
               }
             : null
         }
