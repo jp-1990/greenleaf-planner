@@ -3,6 +3,7 @@ import classes from './CreateJob.module.scss';
 import M from 'materialize-css';
 import { useCustomers } from '../../../Context/CustomersContext';
 import { useJobs } from '../../../Context/JobsContext';
+import Validate from '../../../GlobalFunctions/dataValidation';
 
 const CreateJob = ({ setModalState }) => {
   const [notes, setNotes] = useState('');
@@ -40,6 +41,13 @@ const CreateJob = ({ setModalState }) => {
       (el) => el.name.toLowerCase() === search.toLowerCase()
     );
 
+    // validate date input
+    const validateDate = Validate.futureDate(info.nextVisit);
+    if (!!info.nextVisit && !validateDate.result) {
+      M.toast({ html: validateDate.message });
+      return;
+    }
+
     // date default
     const defaultDate = () => {
       const output = new Date(Date.now());
@@ -63,13 +71,16 @@ const CreateJob = ({ setModalState }) => {
       id: null,
       location: selectedCustomer.town,
       name: selectedCustomer.name,
-      nextVisit: info.nextVisit || defaultDate().toLocaleDateString(),
+      nextVisit:
+        validateDate.result || !!info.nextVisit
+          ? info.nextVisit
+          : defaultDate().toLocaleDateString(),
       notes: notes,
       numbers: [selectedCustomer.home, selectedCustomer.mobile],
       prevVisit: '',
       rebook: selectedCustomer.frequency,
       rebooked: false,
-      time: info.time * 1 || 30,
+      time: Number.isNaN(+info.time) || info.time === '' ? 30 : +info.time,
     };
 
     const newJobRef = database.push();
