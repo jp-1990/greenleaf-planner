@@ -15,7 +15,16 @@ const CreateJob = ({ setModalState }) => {
   const { customerList } = useCustomers();
   const { jobsDatabaseRef, setUpdateTrigger } = useJobs();
 
-  const database = jobsDatabaseRef(new Date(Date.now()).getFullYear());
+  // first monday of the year from the next visit prop
+  const firstMonday = (date) => {
+    let output;
+    for (let i = 0; i < 7; i++) {
+      if (new Date(date.split('/')[2], 0, i).getDay() === 1) {
+        output = new Date(date.split('/')[2], 0, i);
+      }
+    }
+    return output;
+  };
 
   // info input handler
   const handleInfoInput = (event, target) => {
@@ -83,6 +92,34 @@ const CreateJob = ({ setModalState }) => {
       time: Number.isNaN(+info.time) || info.time === '' ? 30 : +info.time,
     };
 
+    if (
+      new Date(
+        newJobObject.nextVisit.split('/')[2],
+        +newJobObject.nextVisit.split('/')[1] - 1,
+        newJobObject.nextVisit.split('/')[0]
+      ).getDay() === 0
+    ) {
+      newJobObject.nextVisit = new Date(
+        newJobObject.nextVisit.split('/')[2],
+        +newJobObject.nextVisit.split('/')[1] - 1,
+        +newJobObject.nextVisit.split('/')[0] + 1
+      ).toLocaleDateString();
+    }
+
+    // build database ref to ensure job goes in correct database year
+    let database;
+    if (
+      firstMonday(newJobObject.nextVisit).getTime() >
+      new Date(
+        newJobObject.nextVisit.split('/')[2],
+        +newJobObject.nextVisit.split('/')[1] - 1,
+        newJobObject.nextVisit.split('/')[0]
+      ).getTime()
+    ) {
+      database = jobsDatabaseRef(newJobObject.nextVisit.split('/')[2] - 1);
+    } else {
+      database = jobsDatabaseRef(newJobObject.nextVisit.split('/')[2]);
+    }
     const newJobRef = database.push();
     newJobRef.set({ ...newJobObject, id: newJobRef.key });
 
