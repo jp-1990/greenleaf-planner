@@ -41,7 +41,14 @@ const AssignedJob = ({ id, name, time, notes, noteHandlers, nextVisit }) => {
   // update notes and time est for assigned job
   const submitHandler = (event) => {
     event.preventDefault();
-    database.child(id).update({ notes: noteValue, time: timeValue * 1 });
+
+    // validate time value
+    if (Number.isNaN(+timeValue)) {
+      M.toast({ html: `Invalid estimated time entry` });
+      return;
+    }
+
+    database.child(id).update({ notes: noteValue, time: +timeValue });
     displayNotesHandler();
 
     setTimeout(() => {
