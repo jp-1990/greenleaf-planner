@@ -18,6 +18,7 @@ export const JobsProvider = ({ children }) => {
 
   useEffect(() => {
     const output = [];
+
     const getJobsList = async () => {
       await jobsDatabase.once('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
@@ -28,6 +29,8 @@ export const JobsProvider = ({ children }) => {
       setLoading(false);
     };
     getJobsList();
+
+    return () => jobsDatabase.off();
   }, [updateTrigger]);
 
   jobsDatabase.on('child_changed', (data) => {
