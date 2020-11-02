@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from '../CustomerInfo.module.scss';
+import M from 'materialize-css';
 import { database } from '../../../../firebase';
 
 const Contact = ({ id, numbers, email, edit, setEdit }) => {
@@ -49,6 +50,13 @@ const Contact = ({ id, numbers, email, edit, setEdit }) => {
   };
 
   const handleConfirm = () => {
+    // validate email address
+    const emailRegex = /\S+@\S+\.\S+/;
+    const emailResult = emailRegex.test(contact.email);
+    if (!emailResult) {
+      M.toast({ html: 'Invalid email format' });
+      return;
+    }
     database.ref('customers').child(id).update(contact);
     setEdit(false);
   };

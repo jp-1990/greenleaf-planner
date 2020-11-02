@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from '../CustomerInfo.module.scss';
+import M from 'materialize-css';
 import { database } from '../../../../firebase';
 
 const Address = ({ id, address, edit, setEdit }) => {
@@ -56,6 +57,13 @@ const Address = ({ id, address, edit, setEdit }) => {
 
   // handler to confirm changes
   const handleConfirm = () => {
+    // validate post code
+    const postcodeRegex = /^([A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/;
+    const postcodeResult = postcodeRegex.test(editAddress.postcode);
+    if (!postcodeResult) {
+      M.toast({ html: 'Invalid post code' });
+      return;
+    }
     database.ref('customers').child(id).update(editAddress);
     setEdit(false);
   };

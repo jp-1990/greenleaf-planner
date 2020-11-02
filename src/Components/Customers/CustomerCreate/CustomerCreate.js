@@ -68,6 +68,26 @@ const CustomerCreate = ({ setModalState }) => {
 
   // create new customer handler
   const createNewCustomerHandler = () => {
+    // validate post code
+    const postcodeRegex = /^([A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/;
+    const postcodeResult = postcodeRegex.test(address.postcode.toUpperCase());
+    if (!postcodeResult) {
+      M.toast({ html: 'Invalid post code' });
+      return;
+    }
+    // validate email address
+    const emailRegex = /\S+@\S+\.\S+/;
+    const emailResult = emailRegex.test(contact.email);
+    if (!emailResult) {
+      M.toast({ html: 'Invalid email format' });
+      return;
+    }
+
+    // validate visit frequency
+    if (Number.isNaN(+frequency.frequency) || +frequency.frequency === 0) {
+      M.toast({ html: 'Invalid visit frequency' });
+      return;
+    }
     const newCustomerRef = database.ref('customers').push();
     const newCustomer = {
       ...name,

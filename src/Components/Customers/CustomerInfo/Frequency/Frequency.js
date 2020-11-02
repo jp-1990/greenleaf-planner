@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from '../CustomerInfo.module.scss';
+import M from 'materialize-css';
 import { database } from '../../../../firebase';
 
 const Frequency = ({ id, frequency, edit, setEdit }) => {
@@ -24,6 +25,14 @@ const Frequency = ({ id, frequency, edit, setEdit }) => {
   };
 
   const handleConfirm = () => {
+    // validate visit frequency
+    if (
+      Number.isNaN(+visitFrequency.frequency) ||
+      +visitFrequency.frequency === 0
+    ) {
+      M.toast({ html: 'Invalid visit frequency' });
+      return;
+    }
     database.ref('customers').child(id).update(visitFrequency);
     setEdit(false);
   };
