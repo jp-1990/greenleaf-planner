@@ -19,6 +19,7 @@ const Job = ({
   numbers,
   complete,
   assigned,
+  notes,
   time,
   day,
 }) => {
@@ -30,6 +31,44 @@ const Job = ({
   const [iconColor, setIconColor] = useState('#000000');
   const { jobList, jobsDatabaseRef, setUpdateTrigger } = useJobs();
   const { colors } = useStaff();
+
+  // first monday of the year from the next visit prop
+  const firstMonday = (date) => {
+    let output;
+    for (let i = 0; i < 7; i++) {
+      if (new Date(date.split('/')[2], 0, i).getDay() === 1) {
+        output = new Date(date.split('/')[2], 0, i);
+      }
+    }
+    return output;
+  };
+
+  // build database ref based on relevent week of the year
+  const databaseYear = (date, increment) => {
+    // date from next visit prop
+    const targetDate = new Date(
+      date.split('/')[2],
+      date.split('/')[1] - 1,
+      date.split('/')[0]
+    );
+
+    // the relevant year in the database based on full weeks
+    const relevantYear = () => {
+      if (targetDate.getTime() < firstMonday(date).getTime() && increment < 0)
+        return targetDate.getFullYear() - 1;
+      if (
+        targetDate.getTime() >= new Date(date.split('/')[2], 0, 1).getTime() &&
+        targetDate.getTime() < firstMonday(date).getTime()
+      ) {
+        return targetDate.getFullYear() - 1;
+      }
+      if (targetDate.getTime() === firstMonday(date).getTime() && increment > 0)
+        return targetDate.getFullYear();
+      return targetDate.getFullYear();
+    };
+
+    return relevantYear();
+  };
 
   const database = jobsDatabaseRef(
     new Date(
@@ -62,13 +101,84 @@ const Job = ({
       nextVisit.split('/')[1] - 1,
       nextVisit.split('/')[0]
     );
+    // if target day is sunday, increment again
     if (
       new Date(newDate.setDate(newDate.getDate() + increment)).getDay() === 0
     ) {
       newDate.setDate(newDate.getDate() + increment);
     }
 
-    database.child(id).update({ nextVisit: newDate.toLocaleDateString() });
+    // get correct database year for update
+    const targetYear = databaseYear(newDate.toLocaleDateString(), increment);
+    const database = jobsDatabaseRef(targetYear);
+
+    // if still in the same database year, update, otherwise delete and rebook in relevant database year
+    if (
+      newDate.getTime() < firstMonday(newDate.toLocaleDateString()).getTime() &&
+      increment < 0
+    ) {
+      // data to send
+      const rebookObject = {
+        id: null,
+        bookedFrom: bookedFrom || '',
+        address: address,
+        assigned: -1,
+        location: location,
+        name: name,
+        nextVisit: newDate.toLocaleDateString(),
+        notes: notes,
+        numbers: numbers,
+        prevVisit: prevVisit,
+        rebook: rebook,
+        rebooked: false,
+        time: time,
+      };
+
+      // database ref
+      const ref = jobsDatabaseRef(targetYear).push();
+      ref.set({ ...rebookObject, id: ref.key });
+
+      // delete entry from next year
+      jobsDatabaseRef(targetYear + 1)
+        .child(id)
+        .remove();
+
+      setUpdateTrigger((prev) => !prev);
+    } else if (
+      newDate.getTime() ===
+        firstMonday(newDate.toLocaleDateString()).getTime() &&
+      increment > 0
+    ) {
+      // data to send
+      const rebookObject = {
+        id: null,
+        bookedFrom: bookedFrom || '',
+        address: address,
+        assigned: -1,
+        location: location,
+        name: name,
+        nextVisit: newDate.toLocaleDateString(),
+        notes: notes,
+        numbers: numbers,
+        prevVisit: prevVisit,
+        rebook: rebook,
+        rebooked: false,
+        time: time,
+      };
+
+      // database ref
+      const ref = jobsDatabaseRef(targetYear).push();
+      ref.set({ ...rebookObject, id: ref.key });
+
+      // delete from previous year in database
+      jobsDatabaseRef(targetYear - 1)
+        .child(id)
+        .remove();
+
+      setUpdateTrigger((prev) => !prev);
+    } else {
+      database.child(id).update({ nextVisit: newDate.toLocaleDateString() });
+    }
 
     setTimeout(() => {
       M.toast({
@@ -84,6 +194,8 @@ const Job = ({
   const assignJobHandler = (employeeIndex) => {
     dropdownHandler();
     setIconColor(Object.values(colors)[employeeIndex]);
+
+    const database = jobsDatabaseRef(databaseYear(nextVisit, 0));
 
     database.child(id).update({ assigned: employeeIndex });
 
@@ -143,10 +255,22 @@ const Job = ({
     };
 
     // database ref
-    const rebookRef = jobsDatabaseRef(newVisit.getFullYear()).push();
+    const rebookRef = jobsDatabaseRef(
+      databaseYear(newVisit.toLocaleDateString())
+    ).push();
     rebookRef.set({ ...rebookObject, id: rebookRef.key });
 
-    database.child(id).update({ rebooked: true });
+    // find host job and mark as rebooked
+    if (
+      firstMonday(newVisit.toLocaleDateString()).getTime() >= newVisit.getTime()
+    ) {
+      jobsDatabaseRef(+newVisit.toLocaleDateString().split('/')[2] - 1)
+        .child(id)
+        .update({ rebooked: true });
+    } else {
+      database.child(id).update({ rebooked: true });
+    }
+
     setUpdateTrigger((prev) => !prev);
 
     setTimeout(() => {

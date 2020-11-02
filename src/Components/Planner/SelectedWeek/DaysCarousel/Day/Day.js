@@ -82,6 +82,7 @@ const Day = ({ jobsArray, day }) => {
           assigned={e.assigned}
           numbers={e.numbers}
           time={e.time}
+          notes={e.notes}
           complete={e.complete === undefined ? false : e.complete}
           day={day}
         ></Job>
