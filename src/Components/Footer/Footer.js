@@ -5,17 +5,17 @@ const Footer = () => {
   const address = () => {
     return (
       <p className='grey-text text-lighten-4'>
-        17 Simpson Close <br /> North Walsham <br /> NR28 0HZ
+        92 Simpson Close <br /> North Walsham <br /> NR28 0HZ
       </p>
     );
   };
 
-  const email = ['lowthers', 'gardening', 'services', '@', 'gmail', '.com'];
+  const email = ['lowthers', 'garden', 'ing', '@', 'gmail', '.com'];
 
   const contact = () => {
     return (
       <p className='grey-text text-lighten-4'>
-        07799 311550 <br /> {email[0]}
+        07788 314550 <br /> {email[0]}
         <span style={{ display: 'none' }}>8sk23n4</span>
         {email[1]}
         <span style={{ display: 'none' }}>8sk23n4</span>

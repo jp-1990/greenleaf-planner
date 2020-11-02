@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Contact.module.scss';
 
 const Contact = () => {
-  const email = ['lowthers', 'gardening', 'services', '@', 'gmail', '.com'];
+  const email = ['lowthers', 'garden', 'ing', '@', 'gmail', '.com'];
   return (
     <section className={classes.contact} id='contact'>
       <div className='container'>
@@ -22,7 +22,7 @@ const Contact = () => {
           <div className={`col s12 m8 offset-m2 ${classes.details}`}>
             <h4>Speak to Alan</h4>
             <ul>
-              <li>07799 311550</li>
+              <li>07788 314550</li>
               <li style={{ color: '#f4f4f4' }}>{`.`}</li>
               <li className={classes.email}>
                 {email[0]}
