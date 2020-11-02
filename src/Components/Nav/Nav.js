@@ -63,18 +63,32 @@ const Nav = (props) => {
           >
             {currentUser && currentUser.accessLevel > 0 ? (
               <>
-                <li className={props.active === 'home' ? 'active' : null}>
+                <li
+                  className={
+                    props.active === 'home'
+                      ? `${classes.widenActive} active`
+                      : null
+                  }
+                >
                   <NavLink to='/home'>Home</NavLink>
                 </li>
                 {currentUser.accessLevel > 1 ? (
                   <>
                     <li
-                      className={props.active === 'planner' ? 'active' : null}
+                      className={
+                        props.active === 'planner'
+                          ? `${classes.widenActive} active`
+                          : null
+                      }
                     >
                       <NavLink to='/planner'>Planner</NavLink>
                     </li>
                     <li
-                      className={props.active === 'customers' ? 'active' : null}
+                      className={
+                        props.active === 'customers'
+                          ? `${classes.widenActive} active`
+                          : null
+                      }
                     >
                       <NavLink to='/customers'>Customers</NavLink>
                     </li>
@@ -82,13 +96,23 @@ const Nav = (props) => {
                 ) : null}
                 <li
                   onClick={signOutHandler}
-                  className={props.active === 'sign out' ? 'active' : null}
+                  className={
+                    props.active === 'sign out'
+                      ? `${classes.widenActive} active`
+                      : null
+                  }
                 >
                   <a href='#!'>Sign out</a>
                 </li>
               </>
             ) : (
-              <li className={props.active === 'sign in' ? 'active' : null}>
+              <li
+                className={
+                  props.active === 'sign in'
+                    ? `${classes.widenActive} active`
+                    : null
+                }
+              >
                 <NavLink to='/signin'>Sign in</NavLink>
               </li>
             )}

@@ -1,6 +1,11 @@
 .scrollable {
   overflow: auto !important;
-  padding: 15px 0 80px 0;
+  padding: 15px 0px 0px 0px !important;
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 80px;
+  }
 }
 
 .row {
