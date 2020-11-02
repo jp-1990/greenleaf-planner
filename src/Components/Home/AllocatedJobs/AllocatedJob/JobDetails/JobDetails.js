@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './JobDetails.module.scss';
 
-const JobDetails = ({ title, notes, time, address, numbers }) => {
+const JobDetails = ({ title, notes, time, address, numbers, setDetails }) => {
   const addressJsx = [];
   address.forEach((el) => {
     if (el) {
@@ -17,7 +17,10 @@ const JobDetails = ({ title, notes, time, address, numbers }) => {
   });
 
   return (
-    <div className={`${classes.details} grey lighten-4`}>
+    <div
+      className={`${classes.details} grey lighten-4`}
+      onClick={() => setDetails(null)}
+    >
       <div className={classes.titleBox}>
         <h5 className='grey-text text-darken-2'>{title}</h5>
         <div className={classes.time}>

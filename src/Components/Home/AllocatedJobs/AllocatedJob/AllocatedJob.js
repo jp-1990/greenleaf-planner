@@ -20,6 +20,7 @@ const AllocatedJob = ({
         time={time}
         address={address}
         numbers={numbers}
+        setDetails={setDetails}
       />
     ) : null;
 
