@@ -9,12 +9,15 @@ import Home from './Pages/Home';
 import Landing from './Pages/Landing';
 import Planner from './Pages/Planner';
 import Login from './Pages/Login';
+import ResetToTop from './Components/ResetToTop/ResetToTop';
 import { Level1AuthRoute } from './Pages/Level1AuthRoutes';
 import { Level2AuthRoute } from './Pages/Level2AuthRoutes';
+import ScrollToTop from './Components/ResetToTop/ResetToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className='App'>
         <AuthProvider>
           <Switch>
