@@ -27,7 +27,7 @@ This project enhanced my understanding of React, using Context hooks and UseEffe
 
 I chose to use Firebase as the database to save time as well as add another technology to my repertoire. Authentication-wise I had no issues, however if I was to build a similar project in future I might look into alternatives to the Realtime Database option due to its very limited querying functionality. In its current state, this app would become very expensive at scale purely based on the database usage.
 
-Materialize seemed like a good framework option for fast styling, and I can see the benefit to such methods. However, in this use case I found myself fighting against its existing styling rules a lot of the time, to the point where some section do not use it at all. This project was not a good use case for the strengths of styling frameworks.
+Materialize seemed like a good framework option for fast styling, and I can see the benefit to such methods. However, in this use case I found myself fighting against its existing styling rules a lot of the time, to the point where some sections do not use it at all. This project was not a good use case for the strengths of styling frameworks.
 
 ## Features
 
