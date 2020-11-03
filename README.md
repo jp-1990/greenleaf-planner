@@ -1,7 +1,7 @@
 # Lowthers Planner
 A client-side rendered React SPA, utilising a Firebase backend, built using Create React App. 
 
-![](https://imgur.com/a/Af7t7UT)  
+![](lowthers_showcase.gif)  
 **Hosted on Firebase**  
 https://planner-dev-ad6e8.firebaseapp.com/
 
