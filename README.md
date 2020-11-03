@@ -17,7 +17,7 @@ alan1234
 
 ## Summary
 
-This project solves a real business problem. An antiquated planning and booking system made planning a daily schedule and rebooking clients a time consuming, and error-prone, process. The previous system involved pen and paper, and individual diaries for different members of staff. In order to organise the schedule the manager needed all staff diaries, plus a master diary for rebooking repeat jobs.
+This project solves a real business problem. An antiquated planning and booking system made planning a daily schedule and rebooking clients a time consuming and error-prone process. The previous system involved pen and paper, and individual diaries for different members of staff. In order to organise the schedule the manager needed all staff diaries, plus a master diary for rebooking repeat jobs.
 
 On top of a client-facing landing page, this implementation relies on a Firebase Realtime Database to update data almost instantly across all logged in users. This means a manager can be logged in and assign jobs to staff, which they immediately see on their device, along with any updates or changes needed during the working day. This lowers planning time significantly, as well as allowing for more streamlined flexibility over the course of a working day.
 
