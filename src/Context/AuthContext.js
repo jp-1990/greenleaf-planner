@@ -19,6 +19,17 @@ export const AuthProvider = ({ children }) => {
     return auth.signOut();
   };
 
+  // Write a new user to the database (must also have an account, and displayname set on the account)
+  // const writeUser = (userId, displayName, email, role, accessLevel) => {
+  //   database.ref('users/' + userId).set({
+  //     accessLevel: accessLevel,
+  //     displayName: displayName,
+  //     email: email,
+  //     role: role,
+  //   });
+  //   console.log('added', userId, displayName, email, role, accessLevel);
+  // };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {

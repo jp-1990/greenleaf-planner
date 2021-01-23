@@ -14,7 +14,7 @@ const Hero = () => {
   return (
     <section className={classes.hero} id='hero'>
       <div className={classes.herotextbox}>
-        <h1>Lowthers</h1>
+        <h1>Greenleaf</h1>
         <h2>Gardening Services</h2>
         <a
           onClick={() => scrollHandler('about')}

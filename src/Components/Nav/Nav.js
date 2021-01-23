@@ -200,7 +200,7 @@ const Nav = (props) => {
               to='/'
               className={`${classes.logo} brand-logo col s2 offset-s2 l1 offset-l1`}
             >
-              Lowthers
+              Greenleaf
             </Link>
           </div>
           {widthHeight[0] < 993 ? mobileNavJsx() : standardNavJsx()}

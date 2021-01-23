@@ -1,19 +1,19 @@
-# Lowthers Planner
+# Greenleaf Planner
 
 A client-side rendered React SPA, utilising a Firebase backend, built using Create React App.
 
-![](lowthers_showcase.gif)  
+![](greenleaf_showcase.gif)  
 **Hosted on Firebase**  
 https://planner-dev-ad6e8.firebaseapp.com/
 
 **Sign in options**  
-Staff:  
+Manager:  
 james@gmail.com  
 james1234
 
-Manager:  
-alan@gmail.com  
-alan1234
+Staff:  
+dan@gmail.com  
+dan1234
 
 ## Summary
 

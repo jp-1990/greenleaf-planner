@@ -8,10 +8,10 @@ export const useStaff = () => {
 export const StaffProvider = ({ children }) => {
   const colors = {
     Nick: '#f44336',
-    Zack: '#ffc107',
-    Neil: '#00bcd4',
+    Mason: '#ffc107',
+    Will: '#00bcd4',
     James: '#0d47a1',
-    Alan: '#00c853',
+    Dan: '#00c853',
   };
 
   const value = {

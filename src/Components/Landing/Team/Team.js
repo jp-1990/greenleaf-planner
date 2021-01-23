@@ -3,13 +3,13 @@ import classes from './Team.module.scss';
 
 const Team = () => {
   const staffHeadshots = [
-    'alan',
     'james',
-    'nick',
+    'mimi',
     'ryan',
-    'gareth',
-    'zack',
-    'neil',
+    'mason',
+    'nick',
+    'dan',
+    'will',
   ];
 
   const headshotsJsx = staffHeadshots.map((el) => {
@@ -35,13 +35,13 @@ const Team = () => {
           <h2>The Team</h2>
           <div className='col s12 m10 offset-m1'>
             <p>
-              Established in 2002, Lowthers Gardening Services has been steadily
-              growing in size. Originally a one-man operation, we now boast a
-              team of seven capable gardeners dedicated to fulfilling our
-              customers' needs. Our ethos revolves around providing a bespoke
-              service for each customer, maintaining a focus on your individual
-              needs allowing you to relax and leave the work to us with full
-              confidence.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              arcu justo, facilisis nec odio eu, blandit rhoncus lorem. Nullam
+              vitae commodo nisi. Nulla vitae nibh ac urna lobortis malesuada
+              sit amet et erat. Ut sed lorem ut massa gravida vestibulum.
+              Integer iaculis metus bibendum egestas bibendum. Vivamus
+              venenatis, nunc at pellentesque tincidunt, quam nisi pellentesque
+              mauris, at volutpat justo nisl suscipit purus.
             </p>
           </div>
         </div>

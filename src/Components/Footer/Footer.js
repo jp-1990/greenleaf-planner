@@ -5,17 +5,17 @@ const Footer = () => {
   const address = () => {
     return (
       <p className='grey-text text-lighten-4'>
-        92 Simpson Close <br /> North Walsham <br /> NR28 0HZ
+        32 Smithson Road <br /> Norwich <br /> NR12 9HZ
       </p>
     );
   };
 
-  const email = ['lowthers', 'garden', 'ing', '@', 'gmail', '.com'];
+  const email = ['greenleaf', 'garden', 'ing', '@', 'gmail', '.com'];
 
   const contact = () => {
     return (
       <p className='grey-text text-lighten-4'>
-        07788 314550 <br /> {email[0]}
+        07789 314750 <br /> {email[0]}
         <span style={{ display: 'none' }}>8sk23n4</span>
         {email[1]}
         <span style={{ display: 'none' }}>8sk23n4</span>
@@ -36,7 +36,7 @@ const Footer = () => {
       <div className='container'>
         <div className='row'>
           <div className='col s12 m10 l8'>
-            <h5 className='white-text'>Lowthers Gardening Services Ltd.</h5>
+            <h5 className='white-text'>Greenleaf Gardening Services Ltd.</h5>
             {address()}
             {contact()}
           </div>

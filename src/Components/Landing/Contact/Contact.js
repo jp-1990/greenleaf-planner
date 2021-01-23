@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Contact.module.scss';
 
 const Contact = () => {
-  const email = ['lowthers', 'garden', 'ing', '@', 'gmail', '.com'];
+  const email = ['greenleaf', 'garden', 'ing', '@', 'gmail', '.com'];
   return (
     <section className={classes.contact} id='contact'>
       <div className='container'>
@@ -10,19 +10,19 @@ const Contact = () => {
           <div className={`${classes.intro} col s12 m10 offset-m1`}>
             <h2>Contact</h2>
             <p>
-              Established in 2002, Lowthers Gardening Services has been steadily
-              growing in size. Originally a one-man operation, we now boast a
-              team of seven capable gardeners dedicated to fulfilling our
-              customers' needs. Our ethos revolves around providing a bespoke
-              service for each customer, maintaining a focus on your individual
-              needs allowing you to relax and leave the work to us with full
-              confidence.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              arcu justo, facilisis nec odio eu, blandit rhoncus lorem. Nullam
+              vitae commodo nisi. Nulla vitae nibh ac urna lobortis malesuada
+              sit amet et erat. Ut sed lorem ut massa gravida vestibulum.
+              Integer iaculis metus bibendum egestas bibendum. Vivamus
+              venenatis, nunc at pellentesque tincidunt, quam nisi pellentesque
+              mauris, at volutpat justo nisl suscipit purus.
             </p>
           </div>
           <div className={`col s12 m8 offset-m2 ${classes.details}`}>
-            <h4>Speak to Alan</h4>
+            <h4>Speak to James</h4>
             <ul>
-              <li>07788 314550</li>
+              <li>07789 314750</li>
               <li style={{ color: '#f4f4f4' }}>{`.`}</li>
               <li className={classes.email}>
                 {email[0]}

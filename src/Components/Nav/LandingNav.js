@@ -121,7 +121,7 @@ const LandingNav = () => {
             })
           }
         >
-          Lowthers
+          Greenleaf
         </a>
         {widthHeight[0] < 993 ? mobileNavJsx() : standardNavJsx()}
       </div>

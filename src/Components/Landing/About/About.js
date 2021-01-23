@@ -11,12 +11,13 @@ const About = () => {
         <div className='col s12 m10 offset-m1'>
           <h2>About Us</h2>
           <p className='long-copy'>
-            Established in 2002, Lowthers Gardening Services has been steadily
-            growing in size. Originally a one-man operation, we now boast a team
-            of seven capable gardeners dedicated to fulfilling our customers'
-            needs. Our ethos revolves around providing a bespoke service for
-            each customer, maintaining a focus on your individual needs allowing
-            you to relax and leave the work to us with full confidence.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec arcu
+            justo, facilisis nec odio eu, blandit rhoncus lorem. Nullam vitae
+            commodo nisi. Nulla vitae nibh ac urna lobortis malesuada sit amet
+            et erat. Ut sed lorem ut massa gravida vestibulum. Integer iaculis
+            metus bibendum egestas bibendum. Vivamus venenatis, nunc at
+            pellentesque tincidunt, quam nisi pellentesque mauris, at volutpat
+            justo nisl suscipit purus.
           </p>
         </div>
       </div>
@@ -25,10 +26,11 @@ const About = () => {
           <Grass />
           <h3>Maintenance</h3>
           <p>
-            We provide options for general garden maintenance, from grass
-            cutting all the way up to full garden management. This can include
-            weeding, hedge cutting, pruning, general planting, and anything else
-            involved with keeping your garden the envy of the neighbourhood.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec arcu
+            justo, facilisis nec odio eu, blandit rhoncus lorem. Nullam vitae
+            commodo nisi. Nulla vitae nibh ac urna lobortis malesuada sit amet
+            et erat. Ut sed lorem ut massa gravida vestibulum. Integer iaculis
+            metus bibendum egestas bibendum.
           </p>
         </div>
         <div className={`col s12 m10 offset-m1 l4 ${classes.card}`}>
@@ -36,10 +38,11 @@ const About = () => {
 
           <h3>Tree work</h3>
           <p>
-            We are insured and qualified to tackle small tree work in a safe and
-            professional manner. We also have a relationship with a local tree
-            surgery business with which we can introduce you, in the event that
-            your job is beyond our level of insurance and qualification.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec arcu
+            justo, facilisis nec odio eu, blandit rhoncus lorem. Nullam vitae
+            commodo nisi. Nulla vitae nibh ac urna lobortis malesuada sit amet
+            et erat. Ut sed lorem ut massa gravida vestibulum. Integer iaculis
+            metus bibendum egestas bibendum.
           </p>
         </div>
         <div className={`col s12 m10 offset-m1 l4 ${classes.card}`}>
@@ -47,10 +50,11 @@ const About = () => {
 
           <h3>Landscaping</h3>
           <p>
-            We have a dedicated landscaping team who will be happy to work with
-            you to make your vision a reality. The process starts with
-            discussions, measurements, and where applicable, a computer
-            generated design. Once the plan has been finalised, work will begin.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec arcu
+            justo, facilisis nec odio eu, blandit rhoncus lorem. Nullam vitae
+            commodo nisi. Nulla vitae nibh ac urna lobortis malesuada sit amet
+            et erat. Ut sed lorem ut massa gravida vestibulum. Integer iaculis
+            metus bibendum egestas bibendum.
           </p>
         </div>
       </div>
