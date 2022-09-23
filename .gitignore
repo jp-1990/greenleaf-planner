@@ -11,6 +11,7 @@ node_modules
 
 #dev data
 /src/assets/customer_list/
+/test-data
 
 # production
 /build

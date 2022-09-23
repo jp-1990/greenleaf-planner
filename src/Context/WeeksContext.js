@@ -31,16 +31,18 @@ const weeksInYear = (year) => {
   const startingIndex = datesArray.findIndex((el) => el.getDay() === 1);
   const output = [];
   for (let i = startingIndex; i <= datesArray.length; i += 7) {
-    let weekStart = new Date(datesArray[i]);
-    output.push({
-      monday: datesArray[i],
-      tuesday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
-      wednesday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
-      thursday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
-      friday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
-      saturday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
-      sunday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
-    });
+    if (datesArray[i]) {
+      let weekStart = new Date(datesArray[i]);
+      output.push({
+        monday: datesArray[i],
+        tuesday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+        wednesday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+        thursday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+        friday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+        saturday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+        sunday: new Date(weekStart.setDate(weekStart.getDate() + 1)),
+      });
+    }
   }
   return output;
 };
