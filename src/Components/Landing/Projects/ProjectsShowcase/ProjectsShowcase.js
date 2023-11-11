@@ -18,7 +18,9 @@ const ProjectsShowcase = () => {
       <li>
         <figure className={classes.photo}>
           <img
-            src={require(`../../../../assets/images/${el}_thumb500px.jpg`)}
+            src={
+              require(`../../../../assets/images/${el}_thumb500px.jpg`).default
+            }
             alt={el}
           />
         </figure>

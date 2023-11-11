@@ -17,7 +17,7 @@ const Team = () => {
       <li key={el}>
         <figure className={classes.team__headshots}>
           <img
-            src={require(`../../../assets/images/${el}_thumb.jpg`)}
+            src={require(`../../../assets/images/${el}_thumb.jpg`).default}
             alt={`Headshot of ${el}`}
             height='150px'
             width='150px'

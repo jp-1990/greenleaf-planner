@@ -21,7 +21,7 @@ const Tree = () => {
     return (
       <li key={el.image} className={classes.example}>
         <img
-          src={require(`../../../assets/images/${el.image}.jpg`)}
+          src={require(`../../../assets/images/${el.image}.jpg`).default}
           alt={el.image}
           height='180px'
           width='180px'

@@ -25,7 +25,7 @@ const Landscaping = () => {
       <li key={el.title} className={`${classes.stage} col s12 m12 l4`}>
         <h4>{el.title}</h4>
         <img
-          src={require(`../../../assets/images/${el.image}.jpg`)}
+          src={require(`../../../assets/images/${el.image}.jpg`).default}
           alt={el.title}
         />
         <p>{el.description}</p>
@@ -65,7 +65,10 @@ const Landscaping = () => {
               sit amet et erat.
             </p>
             <img
-              src={require('../../../assets/images/landscape_complete1000x750.jpg')}
+              src={
+                require('../../../assets/images/landscape_complete1000x750.jpg')
+                  .default
+              }
               alt='A completed patio project'
             />
           </div>

@@ -31,7 +31,7 @@ const Gardening = () => {
       <li key={el.title} className={`${classes.card}`}>
         <h3>{el.title}</h3>
         <img
-          src={require(`../../../assets/images/${el.img}.jpg`)}
+          src={require(`../../../assets/images/${el.img}.jpg`).default}
           alt={el.title}
           height='300px'
           width='300px'
